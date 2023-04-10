@@ -69,7 +69,7 @@ public class JdbcCollectionDao implements CollectionDao{
 
     @Override
     public List<ComicCollection> listCollectionsByUser(User username) {
-        ArrayList<ComicCollection> collections = new ArrayList<>();
+        List<ComicCollection> collections = new ArrayList<>();
         try {
             String sql = "SELECT collection.collection_id, collection.user_id, collection.collection_name, users.username\n" +
                     "FROM collection\n" +

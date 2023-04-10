@@ -1,0 +1,64 @@
+package com.techelevator.dao;
+
+import com.techelevator.model.ComicCharacter;
+import org.springframework.jdbc.core.JdbcTemplate;
+import org.springframework.jdbc.support.rowset.SqlRowSet;
+
+import java.util.ArrayList;
+import java.util.List;
+
+public class JdbcCharacterDao implements CharacterDao{
+
+    private final JdbcTemplate jdbcTemplate;
+
+    public JdbcCharacterDao(JdbcTemplate jdbcTemplate) {
+        this.jdbcTemplate = jdbcTemplate;
+    }
+
+    @Override
+    public ComicCharacter getCharacterById(ComicCharacter characterId) {
+        ComicCharacter character = new ComicCharacter();
+        try {
+            String sql = "SELECT real_name, alias FROM character_table WHERE character_id = ?";
+            SqlRowSet results = jdbcTemplate.queryForRowSet(sql, character.getCharacterId());
+        } catch(Exception e) {
+            throw new RuntimeException("Failed to find Character");
+        }
+        return character;
+    }
+
+    @Override
+    public ComicCharacter getCharacterByAlias(ComicCharacter comicCharacter) {
+        ComicCharacter character = new ComicCharacter();
+        try {
+            String sql = "SELECT character_id, real_name FROM character_table WHERE alias = ?";
+            SqlRowSet results = jdbcTemplate.queryForRowSet(sql, character.getCharacterAlias());
+        } catch(Exception e) {
+            throw new RuntimeException("Failed to find Character");
+        }
+        return character;
+    }
+
+    @Override
+    public List<ComicCharacter> getAllCharacters() {
+        List<ComicCharacter> characters = new ArrayList<>();
+        try {
+            SqlRowSet results = jdbcTemplate.queryForRowSet(
+                    "SELECT character_id, real_name, alias FROM character_table");
+            while (results.next()){
+                characters.add(mapRowToCharacter(results));
+            }
+        } catch(Exception e) {
+            throw new RuntimeException("Failed to list Characters");
+        }
+        return characters;
+    }
+
+    private ComicCharacter mapRowToCharacter(SqlRowSet results) {
+        ComicCharacter character = new ComicCharacter();
+        character.setCharacterId(results.getInt("character_id"));
+        character.setCharacterRealName(results.getString("real_name"));
+        character.setCharacterAlias(results.getString("alias"));
+        return character;
+    }
+}
