@@ -5,7 +5,7 @@ import com.techelevator.model.ComicCharacter;
 import java.util.List;
 
 public interface CharacterDao {
-    ComicCharacter getCharacterById(ComicCharacter characterId);
-    ComicCharacter getCharacterByAlias(ComicCharacter comicCharacter);
+    ComicCharacter getCharacterById(int characterId);
+    ComicCharacter getCharacterByAlias(String characterName);
     List<ComicCharacter> getAllCharacters();
 }

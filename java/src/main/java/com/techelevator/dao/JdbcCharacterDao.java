@@ -16,11 +16,11 @@ public class JdbcCharacterDao implements CharacterDao{
     }
 
     @Override
-    public ComicCharacter getCharacterById(ComicCharacter characterId) {
+    public ComicCharacter getCharacterById(int characterId) {
         ComicCharacter character = new ComicCharacter();
         try {
             String sql = "SELECT real_name, alias FROM character_table WHERE character_id = ?";
-            SqlRowSet results = jdbcTemplate.queryForRowSet(sql, character.getCharacterId());
+            SqlRowSet results = jdbcTemplate.queryForRowSet(sql, characterId);
         } catch(Exception e) {
             throw new RuntimeException("Failed to find Character");
         }
@@ -28,11 +28,11 @@ public class JdbcCharacterDao implements CharacterDao{
     }
 
     @Override
-    public ComicCharacter getCharacterByAlias(ComicCharacter comicCharacter) {
+    public ComicCharacter getCharacterByAlias(String characterName) {
         ComicCharacter character = new ComicCharacter();
         try {
             String sql = "SELECT character_id, real_name FROM character_table WHERE alias = ?";
-            SqlRowSet results = jdbcTemplate.queryForRowSet(sql, character.getCharacterAlias());
+            SqlRowSet results = jdbcTemplate.queryForRowSet(sql, characterName);
         } catch(Exception e) {
             throw new RuntimeException("Failed to find Character");
         }
