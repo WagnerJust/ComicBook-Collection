@@ -97,10 +97,10 @@ public class JdbcCollectionDao implements CollectionDao{
     }
 
     @Override
-    public void deleteCollection(int collectionId) {
+    public void deleteCollection(int userId, int collectionId) {
         try {
-            String sql = "DELETE FROM collection WHERE collection_name = ?";
-            jdbcTemplate.update(sql, collectionId);
+            String sql = "DELETE FROM collection WHERE user_id = ? AND collection_id = ?";
+            jdbcTemplate.update(sql, userId, collectionId);
         } catch (Exception e) {
             throw new RuntimeException("Failed to delete Collection");
         }
