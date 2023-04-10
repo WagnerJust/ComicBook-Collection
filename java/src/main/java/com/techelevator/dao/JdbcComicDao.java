@@ -13,8 +13,8 @@ import java.util.List;
 public class JdbcComicDao implements ComicDao{
     private final JdbcTemplate jdbcTemplate;
 
-    public JdbcComicDao(DataSource dataSource) {
-        this.jdbcTemplate = new JdbcTemplate(dataSource);
+    public JdbcComicDao(JdbcTemplate jdbcTemplate) {
+        this.jdbcTemplate = jdbcTemplate;
     }
     @Override
     public List<Comic> listAllComicsOfCollection(int collectionId) {
