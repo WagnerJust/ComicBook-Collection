@@ -13,6 +13,8 @@ public class JdbcComicDaoTests extends BaseDaoTests{
         sut = new JdbcComicDao(jdbcTemplate);
     }
 
+    @Test()
+
 
 
 }
