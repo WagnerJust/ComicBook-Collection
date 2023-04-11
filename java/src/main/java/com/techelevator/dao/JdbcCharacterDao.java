@@ -1,5 +1,6 @@
 package com.techelevator.dao;
 
+import com.techelevator.model.Comic;
 import com.techelevator.model.ComicCharacter;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.jdbc.support.rowset.SqlRowSet;
@@ -19,7 +20,7 @@ public class JdbcCharacterDao implements CharacterDao{
     public ComicCharacter getCharacterById(int characterId) {
         ComicCharacter character = new ComicCharacter();
         try {
-            String sql = "SELECT real_name, alias FROM character_table WHERE character_id = ?";
+            String sql = "SELECT * FROM character_table WHERE character_id = ?";
             SqlRowSet results = jdbcTemplate.queryForRowSet(sql, characterId);
         } catch(Exception e) {
             throw new RuntimeException("Failed to find Character");
@@ -31,8 +32,9 @@ public class JdbcCharacterDao implements CharacterDao{
     public ComicCharacter getCharacterByAlias(String characterName) {
         ComicCharacter character = new ComicCharacter();
         try {
-            String sql = "SELECT character_id, real_name FROM character_table WHERE alias = ?";
+            String sql = "SELECT * FROM character_table WHERE alias = ?";
             SqlRowSet results = jdbcTemplate.queryForRowSet(sql, characterName);
+            character = mapRowToCharacter(results);
         } catch(Exception e) {
             throw new RuntimeException("Failed to find Character");
         }
@@ -44,7 +46,7 @@ public class JdbcCharacterDao implements CharacterDao{
         List<ComicCharacter> characters = new ArrayList<>();
         try {
             SqlRowSet results = jdbcTemplate.queryForRowSet(
-                    "SELECT character_id, real_name, alias FROM character_table");
+                    "SELECT * FROM character_table");
             while (results.next()){
                 characters.add(mapRowToCharacter(results));
             }
@@ -59,6 +61,7 @@ public class JdbcCharacterDao implements CharacterDao{
     private ComicCharacter mapRowToCharacter(SqlRowSet results) {
         ComicCharacter character = new ComicCharacter();
         character.setCharacterId(results.getInt("character_id"));
+        character.setMarvelCharacterId(results.getInt("character_id_marvel_api"));
         character.setCharacterRealName(results.getString("real_name"));
         character.setCharacterAlias(results.getString("alias"));
         return character;

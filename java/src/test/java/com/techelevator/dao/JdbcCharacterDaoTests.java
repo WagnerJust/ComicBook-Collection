@@ -1,9 +1,12 @@
 package com.techelevator.dao;
 
 import com.techelevator.model.ComicCharacter;
+import org.junit.Assert;
 import org.junit.Before;
 import org.junit.Test;
 import org.springframework.jdbc.core.JdbcTemplate;
+
+import java.util.List;
 
 public class JdbcCharacterDaoTests extends BaseDaoTests{
 
@@ -24,5 +27,34 @@ public class JdbcCharacterDaoTests extends BaseDaoTests{
     }
 
     @Test
+    public void getAllCharactersReturnsAllCharacters(){
+        List<ComicCharacter> characters = sut.getAllCharacters();
+
+        Assert.assertEquals(5, characters.size());
+    }
+
+    @Test
+    public void getCharacterByAliasReturnsCorrectCharacter(){
+        ComicCharacter character = sut.getCharacterByAlias(CHARACTER_1.getCharacterAlias());
+
+        //Assert.assertEquals(CHARACTER_1, character);
+        assertCharactersMatch(CHARACTER_1, character);
+    }
+
+    @Test
+    public void getCharacterByIdReturnsCorrectCharacter(){
+        ComicCharacter character = sut.getCharacterById(2);
+
+        assertCharactersMatch(CHARACTER_2, character);
+
+    }
+
+
+    public void assertCharactersMatch(ComicCharacter expected, ComicCharacter actual) {
+        Assert.assertEquals(expected.getCharacterId(), actual.getCharacterId());
+        Assert.assertEquals(expected.getMarvelCharacterId(), actual.getMarvelCharacterId());
+        Assert.assertEquals(expected.getCharacterAlias(), actual.getCharacterAlias());
+        Assert.assertEquals(expected.getCharacterRealName(), actual.getCharacterRealName());
+    }
 
 }
