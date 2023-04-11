@@ -29,15 +29,17 @@ public class JdbcCollectionDao implements CollectionDao{
                     comicCollection.getPublic(), comicCollection.getCollectionName());
             comicCollection.setCollectionId(newId);
         } catch(Exception e) {
+            //todo: fix these
             throw new RuntimeException("Failed to create Collection");
         }
         return comicCollection;
     }
 
     @Override
+    //todo: fix this, doesn't function/already covered in comicdao
     public List<ComicCollection> listComicsInCollection(int collectionId) {
         List<ComicCollection> comics = new ArrayList<>();
-        String sql = "SELECT collection_id, comic_id FROM comic_collection WHERE collection_id = ?;";
+        String sql = "SELECT collection_id, comic_data_id FROM comic_collection WHERE collection_id = ?;";
         try {
             SqlRowSet results = jdbcTemplate.queryForRowSet(sql, collectionId);
             while (results.next()) {
@@ -51,10 +53,11 @@ public class JdbcCollectionDao implements CollectionDao{
     }
 
     @Override
+    //todo: option to display all even if not public?
     public List<ComicCollection> listAllCollections() {
         List<ComicCollection> collections = new ArrayList<>();
         try {
-            SqlRowSet results = jdbcTemplate.queryForRowSet("SELECT comic_collection.collection_id, comic_collection.comic_id \n" +
+            SqlRowSet results = jdbcTemplate.queryForRowSet("SELECT comic_collection.collection_id, comic_collection.comic_data_id \n" +
                     "FROM comic_collection \n" +
                     "JOIN collection ON comic_collection.collection_id = collection.collection_id\n" +
                     "WHERE collection.public = true;");
@@ -68,6 +71,7 @@ public class JdbcCollectionDao implements CollectionDao{
     }
 
     @Override
+    //todo: option to display all even if not public?
     public List<ComicCollection> listCollectionsByUser(int id) {
         List<ComicCollection> collections = new ArrayList<>();
         try {
@@ -86,6 +90,7 @@ public class JdbcCollectionDao implements CollectionDao{
     }
 
     @Override
+    //todo: add public toggle
     public ComicCollection updateCollectionName(ComicCollection comicCollectionName) {
         try {
             String sql = "UPDATE collection SET collection_name = ? WHERE collection_id = ?;";
@@ -97,10 +102,10 @@ public class JdbcCollectionDao implements CollectionDao{
     }
 
     @Override
-    public void deleteCollection(int collectionId) {
+    public void deleteCollection(int userId, int collectionId) {
         try {
-            String sql = "DELETE FROM collection WHERE collection_name = ?";
-            jdbcTemplate.update(sql, collectionId);
+            String sql = "DELETE FROM collection WHERE user_id = ? AND collection_id = ?";
+            jdbcTemplate.update(sql, userId, collectionId);
         } catch (Exception e) {
             throw new RuntimeException("Failed to delete Collection");
         }

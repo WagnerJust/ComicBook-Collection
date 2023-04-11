@@ -11,6 +11,6 @@ public interface CollectionDao {
     List<ComicCollection> listAllCollections();
     List<ComicCollection> listCollectionsByUser(int id);
     ComicCollection updateCollectionName(ComicCollection comicCollectionName);
-    void deleteCollection(int collectionId);
+    void deleteCollection(int userId, int collectionId);
 
 }
