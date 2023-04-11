@@ -62,8 +62,8 @@ export default {
 #loginForm {
   display: flex;
   background-color: white;
-  height: 80%;
-  width: 55%;
+  height: 300px;
+  width: 300px;
   grid-area: loginForm;
   border: 5px solid black;
   align-self: center;
@@ -71,6 +71,7 @@ export default {
   justify-content: center;
   align-items: center;
   text-align: center;
+  margin: 3rem;
 }
 
 .form-input-group {
