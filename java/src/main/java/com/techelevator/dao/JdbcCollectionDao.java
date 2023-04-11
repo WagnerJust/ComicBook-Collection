@@ -35,22 +35,21 @@ public class JdbcCollectionDao implements CollectionDao{
         return comicCollection;
     }
 
-    @Override
-    //todo: fix this, doesn't function/already covered in comicdao
-    public List<ComicCollection> listComicsInCollection(int collectionId) {
-        List<ComicCollection> comics = new ArrayList<>();
-        String sql = "SELECT collection_id, comic_data_id FROM comic_collection WHERE collection_id = ?;";
-        try {
-            SqlRowSet results = jdbcTemplate.queryForRowSet(sql, collectionId);
-            while (results.next()) {
-                ComicCollection comic = mapRowToCollection(results);
-                comics.add(comic);
-            }
-        } catch(Exception e) {
-            throw new RuntimeException("Failed to list Comics");
-        }
-        return comics;
-    }
+//    @Override
+//    public List<ComicCollection> findCollectionById(int collectionId) {
+//        List<ComicCollection> comics = new ArrayList<>();
+//        String sql = "SELECT collection_id, comic_data_id FROM comic_collection WHERE collection_id = ?;";
+//        try {
+//            SqlRowSet results = jdbcTemplate.queryForRowSet(sql, collectionId);
+//            while (results.next()) {
+//                ComicCollection comic = mapRowToCollection(results);
+//                comics.add(comic);
+//            }
+//        } catch(Exception e) {
+//            throw new RuntimeException("Failed to list Comics");
+//        }
+//        return comics;
+//    }
 
     @Override
     //todo: option to display all even if not public?
@@ -72,14 +71,14 @@ public class JdbcCollectionDao implements CollectionDao{
 
     @Override
     //todo: option to display all even if not public?
-    public List<ComicCollection> listCollectionsByUser(int id) {
+    public List<ComicCollection> listCollectionsByUser(int userId) {
         List<ComicCollection> collections = new ArrayList<>();
         try {
             String sql = "SELECT collection.collection_id, collection.user_id, collection.collection_name, users.username\n" +
                     "FROM collection\n" +
                     "JOIN users ON collection.user_id = users.user_id\n" +
                     "WHERE collection.public=true AND users.user_id = ?;";
-            SqlRowSet results = jdbcTemplate.queryForRowSet(sql, id);
+            SqlRowSet results = jdbcTemplate.queryForRowSet(sql, userId);
             while (results.next()) {
                 collections.add(mapRowToCollection(results));
             }
