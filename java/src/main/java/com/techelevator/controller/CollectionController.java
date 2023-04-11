@@ -1,7 +1,8 @@
 package com.techelevator.controller;
 
-import com.techelevator.dao.MemoryCollectionsDao;
-import com.techelevator.model.ComicCollections;
+import com.techelevator.dao.CollectionDao;
+import com.techelevator.dao.JdbcCollectionDao;
+import com.techelevator.model.ComicCollection;
 import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -20,26 +21,24 @@ public class CollectionController {
 
 
 
-    private MemoryCollectionsDao memoryCollectionsDao;
+    CollectionDao collectionDao;
 
-    public CollectionController(MemoryCollectionsDao memoryCollectionsDao) {
-        this.memoryCollectionsDao = memoryCollectionsDao;
+    CollectionController(CollectionDao collectionDao){
+        this.collectionDao = collectionDao;
     }
 
 
     @PreAuthorize("permitAll")
-    @GetMapping(path="/collections")
-    public List<ComicCollections> getAllPublicCollections(){
-
-        return memoryCollectionsDao.listAll();
+    @GetMapping("/collections")
+    public List<ComicCollection> getPublicCollections(){
+        return collectionDao.listAllCollections();
     }
 
-
-
     @PreAuthorize("hasRole('USER')")
-    @GetMapping(path="/collections/{userId}")
-    public List<ComicCollections> getPrivateCollections(@PathVariable int userId){
-        return memoryCollectionsDao.collectionsByUserId(userId);
+    @GetMapping("/{userId}/collections")
+    public List<ComicCollection> getCollectionsByUserId(@PathVariable int userId){
+
+        return collectionDao.listCollectionsByUser(userId);
     }
 
 }

@@ -13,5 +13,7 @@ export default{
     listByUserId(userId){
         return http.get(`/${userId}/collections`);
     }
+
+    
     
 }
