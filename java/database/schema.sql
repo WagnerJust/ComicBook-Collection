@@ -37,12 +37,6 @@ CREATE TABLE character_table(
     CONSTRAINT PK_character_id PRIMARY KEY (character_id)
 );
 
-CREATE TABLE user_comic (
-    comic_id SERIAL,
-    comic_data_id int REFERENCES comic_data(comic_data_id),
-    CONSTRAINT PK_comic_id PRIMARY KEY (comic_id),
-    CONSTRAINT FK_comic_data_id FOREIGN KEY (comic_data_id) REFERENCES comic_data(comic_data_id)
-);
 
 CREATE TABLE comic_collection(
     collection_id int REFERENCES collection(collection_id),

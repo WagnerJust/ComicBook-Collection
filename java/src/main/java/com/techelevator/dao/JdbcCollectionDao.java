@@ -35,11 +35,11 @@ public class JdbcCollectionDao implements CollectionDao{
     }
 
     @Override
-    public List<ComicCollection> listComicsInCollection(ComicCollection comicCollectionId) {
+    public List<ComicCollection> listComicsInCollection(int collectionId) {
         List<ComicCollection> comics = new ArrayList<>();
         String sql = "SELECT collection_id, comic_id FROM comic_collection WHERE collection_id = ?;";
         try {
-            SqlRowSet results = jdbcTemplate.queryForRowSet(sql, comicCollectionId.getCollectionId());
+            SqlRowSet results = jdbcTemplate.queryForRowSet(sql, collectionId);
             while (results.next()) {
                 ComicCollection comic = mapRowToCollection(results);
                 comics.add(comic);
@@ -68,19 +68,19 @@ public class JdbcCollectionDao implements CollectionDao{
     }
 
     @Override
-    public List<ComicCollection> listCollectionsByUser(User username) {
-        ArrayList<ComicCollection> collections = new ArrayList<>();
+    public List<ComicCollection> listCollectionsByUser(int id) {
+        List<ComicCollection> collections = new ArrayList<>();
         try {
             String sql = "SELECT collection.collection_id, collection.user_id, collection.collection_name, users.username\n" +
                     "FROM collection\n" +
                     "JOIN users ON collection.user_id = users.user_id\n" +
-                    "WHERE collection.public=true AND users.username = ?;";
-            SqlRowSet results = jdbcTemplate.queryForRowSet(sql, username);
+                    "WHERE collection.public=true AND users.user_id = ?;";
+            SqlRowSet results = jdbcTemplate.queryForRowSet(sql, id);
             while (results.next()) {
                 collections.add(mapRowToCollection(results));
             }
         } catch(Exception e) {
-            throw new RuntimeException("Failed to list Collections by Username");
+            throw new RuntimeException("Failed to list Collections by Id");
         }
         return collections;
     }
@@ -97,10 +97,10 @@ public class JdbcCollectionDao implements CollectionDao{
     }
 
     @Override
-    public void deleteCollection(ComicCollection comicCollectionName) {
+    public void deleteCollection(int userId, int collectionId) {
         try {
-            String sql = "DELETE FROM collection WHERE collection_name = ?";
-            jdbcTemplate.update(sql, comicCollectionName.getCollectionName());
+            String sql = "DELETE FROM collection WHERE user_id = ? AND collection_id = ?";
+            jdbcTemplate.update(sql, userId, collectionId);
         } catch (Exception e) {
             throw new RuntimeException("Failed to delete Collection");
         }
