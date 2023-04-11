@@ -22,6 +22,9 @@ public class JdbcCharacterDao implements CharacterDao{
         try {
             String sql = "SELECT * FROM character_table WHERE character_id = ?";
             SqlRowSet results = jdbcTemplate.queryForRowSet(sql, characterId);
+            if(results.next()){
+                character = mapRowToCharacter(results);
+            }
         } catch(Exception e) {
             throw new RuntimeException("Failed to find Character");
         }
@@ -34,7 +37,9 @@ public class JdbcCharacterDao implements CharacterDao{
         try {
             String sql = "SELECT * FROM character_table WHERE alias = ?";
             SqlRowSet results = jdbcTemplate.queryForRowSet(sql, characterName);
-            character = mapRowToCharacter(results);
+            if(results.next()) {
+                character = mapRowToCharacter(results);
+            }
         } catch(Exception e) {
             throw new RuntimeException("Failed to find Character");
         }

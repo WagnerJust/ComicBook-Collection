@@ -10,8 +10,8 @@ import java.util.List;
 
 public class JdbcCharacterDaoTests extends BaseDaoTests{
 
-    protected final ComicCharacter CHARACTER_1 = new ComicCharacter(1,1,  "Peter Parker", "Spiderman");
-    protected final ComicCharacter CHARACTER_2 = new ComicCharacter(2,2,  "Bruce Banner", "Hulk");
+    protected final ComicCharacter CHARACTER_1 = new ComicCharacter(1,1,  "name1", "alias1");
+    protected final ComicCharacter CHARACTER_2 = new ComicCharacter(2,2,  "name2", "alias2");
 
     private ComicCharacter characterTest;
     private ComicCharacter characterTest2;
@@ -43,9 +43,9 @@ public class JdbcCharacterDaoTests extends BaseDaoTests{
 
     @Test
     public void getCharacterByIdReturnsCorrectCharacter(){
-        ComicCharacter character = sut.getCharacterById(2);
+        ComicCharacter character = sut.getCharacterById(CHARACTER_1.getCharacterId());
 
-        assertCharactersMatch(CHARACTER_2, character);
+        assertCharactersMatch(CHARACTER_1, character);
 
     }
 
