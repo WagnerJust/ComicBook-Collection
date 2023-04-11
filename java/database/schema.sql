@@ -40,9 +40,9 @@ CREATE TABLE character_table(
 
 CREATE TABLE comic_collection(
     collection_id int REFERENCES collection(collection_id),
-    comic_id int REFERENCES user_comic(comic_id),
+    comic_data_id int REFERENCES comic_data(comic_data_id),
     CONSTRAINT FK_collection_id FOREIGN KEY (collection_id) REFERENCES collection(collection_id),
-    CONSTRAINT FK_comic_id FOREIGN KEY (comic_id) REFERENCES user_comic(comic_id)
+    CONSTRAINT FK_comic_id FOREIGN KEY (comic_data_id) REFERENCES comic_data(comic_data_id)
 );
 
 CREATE TABLE character_comic (

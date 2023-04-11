@@ -18,18 +18,18 @@ public class JdbcComicDao implements ComicDao{
     @Override
     public List<Comic> listAllComicsOfCollection(int collectionId) {
         List<Comic> comics = new ArrayList<>();
-        String sql = "SELECT issue_id, image_url, series, upc, issue_number " +
-                     "FROM comic_data " +
-                     "JOIN collection ON collection.collection_id = comic_collection.collection_id " +
-                     "JOIN comic_collection ON comic_collection.comic_id = user_comic.comic_id " +
-                     "JOIN user_comic ON user_comic.issue_id = comic_data.issue_id " +
-                     "WHERE collection_id = ?;";
+        String sql = "SELECT comic_data.comic_data_id, image_url, series, upc, issue_number, publish_date  \n" +
+                "FROM comic_data  \n" +
+                "JOIN comic_collection ON comic_collection.comic_data_id = comic_data.comic_data_id  \n" +
+                "JOIN collection ON collection.collection_id = comic_collection.collection_id  \n" +
+                "WHERE collection.collection_id = ?";
         try {
             SqlRowSet results = jdbcTemplate.queryForRowSet(sql, collectionId);
             while (results.next()) {
                 comics.add(mapRowToComic(results));
             }
         } catch (DataAccessException e){
+            System.out.println(e);
             return null;
         }
         return comics;
@@ -38,9 +38,9 @@ public class JdbcComicDao implements ComicDao{
     @Override
     public Comic getComic(int comicId) {
         Comic comic = null;
-        String sql = "SELECT issue_id, image_url, series, upc, issue_number " +
+        String sql = "SELECT comic_data_id, image_url, series, upc, issue_number, publish_date " +
                      "FROM comic_data " +
-                     "WHERE comic_id = ?;";
+                     "WHERE comic_data_id = ?;";
         try{
             SqlRowSet results = jdbcTemplate.queryForRowSet(sql, comicId);
             if (results.next()) {
@@ -56,7 +56,7 @@ public class JdbcComicDao implements ComicDao{
     public Comic addComic(Comic comic) {
         Comic comicNew;
         String sql = "INSERT INTO comic_data (upc, issue_number, series, publish_date, image_url) " +
-                     "VALUES (?, ?, ?, ?, ?) RETURNING comic_id;";
+                     "VALUES (?, ?, ?, ?, ?) RETURNING comic_data_id;";
         try{
             Integer newId = jdbcTemplate.queryForObject(sql, Integer.class, comic.getUpc(), comic.getIssueNumber(),
                     comic.getSeriesName(), comic.getPublish_date(), comic.getImageURL());
@@ -69,7 +69,7 @@ public class JdbcComicDao implements ComicDao{
 
     @Override
     public boolean addComicToCollection(int comicId, int collectionId) {
-        String sql = "INSERT INTO comic_collection (comic_id, collection_id) " +
+        String sql = "INSERT INTO comic_collection (comic_data_id, collection_id) " +
                      "VALUES (?, ?);";
         try{
             jdbcTemplate.update(sql, comicId, collectionId);
@@ -82,7 +82,7 @@ public class JdbcComicDao implements ComicDao{
     @Override
     public boolean removeComicFromCollection(int comicId, int collectionId) {
         String sql = "DELETE FROM comic_collection " +
-                     "WHERE comic_id = ?;";
+                     "WHERE comic_data_id = ?;";
         try{
             jdbcTemplate.update(sql, collectionId);
         }catch (DataAccessException e){
@@ -95,7 +95,7 @@ public class JdbcComicDao implements ComicDao{
     public boolean updateComic(Comic comic) {
         String sql = "UPDATE comic_data " +
                      "SET upc = ?, issue_number = ?, series = ?, publish_date = ?, image_url = ? " +
-                     "WHERE comic_id = ?;";
+                     "WHERE comic_data_id = ?;";
         try{
             jdbcTemplate.update(sql, comic.getUpc(), comic.getIssueNumber(), comic.getSeriesName(), comic.getPublish_date(),
                      comic.getImageURL(), comic.getComicId());
@@ -124,7 +124,8 @@ public class JdbcComicDao implements ComicDao{
         comic.setIssueNumber(results.getInt("issue_number"));
         comic.setSeriesName(results.getString("series"));
         comic.setUpc(results.getString("upc"));
-        comic.setComicId(results.getInt("comic_id"));
+        comic.setComicId(results.getInt("comic_data_id"));
+        comic.setPublish_date(results.getDate("publish_date").toLocalDate());
         return comic;
     }
 }
