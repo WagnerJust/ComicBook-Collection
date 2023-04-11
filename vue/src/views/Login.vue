@@ -5,6 +5,7 @@
       <login-form />
       <new-user-signup />
     </div>
+    <img class="image-fit" src="https://mightymega.com/wp-content/uploads/2013/05/marvel_panoramic_posters_2.jpg" alt="Marvel image" />
   </div>
 </template>
 
@@ -32,6 +33,14 @@ export default {
   display: flex;
   align-items: center;
   justify-content: center;
+}
+
+.image-fit {
+  display: flex;
+  justify-content: space-evenly;
+  object-fit: cover;
+  margin: auto;
+  margin-top: 3%;
 }
 
 </style>
