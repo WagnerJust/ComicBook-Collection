@@ -1,28 +1,8 @@
 <template>
   <div id="container">
-    <div id="login-banner">
-      <img src="..\public\manageMyComics.png">
-    </div>
-    <div id="login">
-      <form @submit.prevent="login">
-        <h1 >LOGIN</h1>
-        <div role="alert" v-if="invalidCredentials">
-          Invalid username and password!
-        </div>
-        <div role="alert" v-if="this.$route.query.registration">
-          Thank you for registering, please sign in.
-        </div>
-        <div class="form-input-group">
-          <input type="text" id="username" placeholder="username" v-model="user.username" required autofocus />
-        </div>
-        <div class="form-input-group">
-          <input type="password" id="password" placeholder="password" v-model="user.password" required />
-        </div>
-        <button type="submit">SIGN IN</button>
-        
-      </form>
-    </div>
-    <div id="create-user">
+    <company-banner />
+    <login-form />
+    <div id="create-user-box">
       <div>
         <div id="welcome">Welcome Back!</div>
         <p>Not Registered?</p>
@@ -32,43 +12,20 @@
   </div>
 </template>
 
+
 <script>
-import authService from "../services/AuthService";
+import CompanyBanner from '../components/CompanyBanner.vue';
+import LoginForm from '../components/LoginForm.vue';
 
 export default {
   name: "login",
-  components: {},
-  data() {
-    return {
-      user: {
-        username: "",
-        password: ""
-      },
-      invalidCredentials: false
-    };
+  components: {
+    CompanyBanner,
+    LoginForm,
   },
-  methods: {
-    login() {
-      authService
-        .login(this.user)
-        .then(response => {
-          if (response.status == 200) {
-            this.$store.commit("SET_AUTH_TOKEN", response.data.token);
-            this.$store.commit("SET_USER", response.data.user);
-            this.$router.push("/");
-          }
-        })
-        .catch(error => {
-          const response = error.response;
-
-          if (response.status === 401) {
-            this.invalidCredentials = true;
-          }
-        });
-    }
-  }
 };
 </script>
+
 
 <style scoped>
 
@@ -77,58 +34,22 @@ export default {
   display: grid;
   grid-template-areas: 
   "banner banner"
-  "login register"
-  "login register";
+  "loginForm register"
+  "loginForm register";
   gap: 1rem;
   border: 5px solid black;
   height: 95vh;
-}
-
-#login-banner {
-  grid-area: banner;
-  display: flex;
-  height: 30vh;
-  width: 95%;
-  background-image: url("https://cdn.pixabay.com/photo/2016/03/06/04/14/comics-1239698_960_720.jpg");
-  border-style: solid;
-  justify-self: center;
-  margin-top: 1rem;
-  justify-content: center;
-  align-items: center;
-}
-
-#login-banner > img {
-  display: flex;
-  height: 80%;
-}
-
-#login {
-  display: flex;
-  background-color: white;
-  height: 25rem;
-  width: 25rem;
-  grid-area: login;
-  border: 5px solid black;
-  align-self: center;
-  justify-self: center;
-  justify-content: center;
-  align-items: center;
-  text-align: center;
-}
-
-#login > form {
-
 }
 
 #welcome {
   font-size: 3rem;
 }
 
-#create-user {
+#create-user-box {
   display: flex;
   background-color: #BC545E;
-  height: 25rem;
-  width: 25rem;
+  height: 80%;
+  width: 50%;
   align-self: center;
   justify-self: center;
   grid-area: register;
@@ -138,10 +59,14 @@ export default {
   text-align: center;
 }
 
-.form-input-group {
-  margin-bottom: 1rem;
+@media (max-width: 1000px) {
+  #container {
+    display: grid;
+    grid-template-areas:
+    "banner"
+    "loginForm"
+    "register";
+  }
 }
-label {
-  margin-right: 0.5rem;
-}
+
 </style>
