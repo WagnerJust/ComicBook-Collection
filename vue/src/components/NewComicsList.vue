@@ -1,7 +1,11 @@
 <template>
+    <section>
+    <h2 class="new-comics-text">New Comics</h2>
     <div class="new-comics-list" >
         <comic-card v-bind:comic="comic" v-for="comic in comics" v-bind:key="comic.comicId"/>
-    </div>
+    </div>       
+    </section>
+
 </template>
 
 <script>
@@ -21,9 +25,16 @@ export default {
 </script>
 
 <style>
+
+.new-comics-text {
+    margin-top: 4%;
+}
+
 .new-comics-list {
     display: flex;
     justify-content: space-evenly;
     flex-wrap: wrap;
+    column-gap: 2.2%;
+    margin-top: 2%;
 }
 </style>
