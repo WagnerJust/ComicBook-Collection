@@ -6,9 +6,9 @@
     <div>
         <img class="image-fit" src="https://w0.peakpx.com/wallpaper/691/675/HD-wallpaper-marvel-comics-marvel-logo.jpg" alt="Marvel iamge" />
     </div>
-    <div>
-      <new-comics-list />
-    </div>
+    
+    <new-comics-list />
+    
     <h1>Home</h1>
     <p>You must be authenticated to see this</p>
   </div>

@@ -1,9 +1,9 @@
 <template>
-  <div class="card">
-      <h3 class="comic-title">{{ comic.title }}</h3>
-      <img class="comic-image" v-bind:src="comic.image + 'portrait_xlarge.jpg'" />
-      <h4 class="comic-creator">{{ comic.creator.role + ', ' + comic.creator.name}}</h4>
-  </div>
+    <div class="card">
+        <h3 class="comic-title">{{ comic.title }}</h3>
+        <img class="comic-image" v-bind:src="comic.image + 'portrait_xlarge.jpg'" />
+        
+    </div>
 </template>
 
 <script>
