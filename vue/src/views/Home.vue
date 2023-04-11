@@ -8,6 +8,7 @@
     </div>
     
     <new-comics-list />
+    <characters-list />
   </div>
 </section>
 
@@ -16,13 +17,15 @@
 <script>
 import TheHeader from '../components/TheHeader.vue';
 import NewComicsList from '../components/NewComicsList.vue';
+import CharactersList from '../components/CharactersList.vue';
 
 
 export default {
   name: "home",
   components: { 
     TheHeader,
-    NewComicsList 
+    NewComicsList,
+    CharactersList 
   },
 };
 </script>

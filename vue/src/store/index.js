@@ -61,6 +61,38 @@ export default new Vuex.Store({
         penciler: "Steve Mcniven",
         image: "e/f0/511307b2f1200"
       },
+    ],
+    characters: [
+      {
+        characterId: "1009610",
+        alias: "Spider-Man",
+        name: "Peter Parker",
+        image: "3/50/526548a343e4b"
+      },
+      {
+        characterId: "1009165",
+        alias: "Avengers",
+        name: "",
+        image: "9/20/5102c774ebae7"
+      },
+      {
+        characterId: "1009718",
+        alias: "Wolverine",
+        name: "Logan",
+        image: "2/60/537bcaef0f6cf"
+      },
+      {
+        characterId: "1011299",
+        alias: "Guardians of the Galaxy",
+        name: "",
+        image: "2/70/50febd8be6b5d"
+      },
+      {
+        characterId: "1009268",
+        alias: "Deadpool",
+        name: "Wade Wilson",
+        image: "9/90/5261a86cacb99"
+      },
     ]
   },
   mutations: {
