@@ -21,12 +21,7 @@ export default new Vuex.Store({
     token: currentToken || '',
     user: currentUser || {},
     testCollections: [],
-    testComics: [{
-      comicId: '',
-      upc: '',
-      issueNumber: '',
-      series: ''
-    }],
+    testComics: [],
     comics: [
       {
         comicId: "67631",
