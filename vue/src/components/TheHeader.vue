@@ -1,0 +1,74 @@
+<template>
+  <div class="header">
+    <div>
+      <router-link v-bind:to="{ name: 'home' }"><img class="logo" src="..\public\Logo.png" alt="Manage My Comcis!" /></router-link>
+    </div>
+    <nav>
+      <ul class="nav-bar">
+        <li>Browse</li>
+        <li>New Comics</li>
+        <li>My Collections</li>
+      </ul>
+    </nav>
+    <div>
+      <ul class="login-register">
+        <li class="login" ><router-link :to="{ name: 'login' }" tag="button">SIGN IN</router-link></li>
+        <li class="register" ><router-link :to="{ name: 'register' }" tag="button">REGISTER</router-link></li>
+      </ul>
+    </div>
+  </div>
+</template>
+
+<script>
+
+export default {
+
+    name: 'the-header',
+}
+</script>
+
+<style scope>
+div .header {
+  display: grid;
+  grid-template-columns: 1fr 3fr 1fr;
+  grid-template-areas:
+    "logo nav-bar login-register";
+  align-items: center;
+  background-color: white;
+  width: 100%;
+}
+
+.logo {
+  grid-area: logo;
+  margin-left: 10%;
+  width: 80%;
+  margin-top: 5%;
+  margin-bottom: 5%;
+}
+
+ul .login-register {
+  grid-area: login-register;
+}
+
+ul {
+  display: flex;
+  list-style: none;
+}
+
+nav > ul {
+  justify-content: space-evenly;
+  text-transform: uppercase;
+  grid-area: nav-bar;
+  justify-self: end;
+}
+
+div > ul {
+  justify-content: flex-end;
+  margin-right: 10%;
+}
+
+div > ul .login {
+  margin-right: 5%;
+}
+
+</style>

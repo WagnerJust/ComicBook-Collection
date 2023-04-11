@@ -19,7 +19,41 @@ if(currentToken != null) {
 export default new Vuex.Store({
   state: {
     token: currentToken || '',
-    user: currentUser || {}
+    user: currentUser || {},
+    comics: [
+      {
+        comicId: "67631",
+        title: "The Amazing Spider-Man (2018) #1",
+        issueNumber: "1",
+        creators: [
+          {
+            name: "Nick Spencer",
+            role: "writer" 
+          },
+          {
+            name: "Ryan Ottley",
+            role: "penciler (cover)" 
+          }
+        ],
+        image: "http://i.annihil.us/u/prod/marvel/i/mg/b/90/5b3feb60f1a30/"
+      },
+      {
+        comicId: "44198",
+        title: "Thor: God of Thunder (2012) #1",
+        issueNumber: "1",
+        creators: [
+          {
+            name: "Jason Aaron",
+            role: "writer" 
+          },
+          {
+            name: "Esad Ribic",
+            role: "artist (cover)" 
+          }
+        ],
+        image: "http://i.annihil.us/u/prod/marvel/i/mg/3/30/51646f6c2a712/"
+      },
+    ]
   },
   mutations: {
     SET_AUTH_TOKEN(state, token) {
