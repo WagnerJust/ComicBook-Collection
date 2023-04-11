@@ -44,6 +44,19 @@ public class ComicController {
         } else return comic;
     }
 
+    @PreAuthorize("hasRole('USER')")
+    @ResponseStatus(value = HttpStatus.OK)
+    @PutMapping("/collections/{collectionId}")
+    public boolean addComicToCollection(@PathVariable int collectionId, @RequestBody Comic comicToAdd){
+        return comicDao.addComicToCollection(comicToAdd.getComicId(), collectionId);
+    }
+
+    @PreAuthorize("hasRole('USER')")
+    @PostMapping("/comics")
+    public Comic addComic(@RequestBody Comic comic){
+        return comicDao.addComic(comic);
+    }
+
 
 
 

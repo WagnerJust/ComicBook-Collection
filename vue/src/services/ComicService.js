@@ -13,6 +13,14 @@ export default{
 
     getComicById(comicId){
         http.get(`/comics/${comicId}`)
+    },
+
+    addComicToCollection(collectionId, comicToAdd){
+        http.put(`/collections/${collectionId}`, comicToAdd);
+    },
+
+    addComic(comicToAdd){
+        http.post('/comics', comicToAdd);
     }
 
 }
