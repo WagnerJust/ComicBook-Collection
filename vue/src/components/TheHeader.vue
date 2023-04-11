@@ -7,13 +7,14 @@
       <ul class="nav-bar">
         <li>Browse</li>
         <li>New Comics</li>
-        <li>My Collections</li>
+        <li class="collections"><router-link :to="{ name: 'my-collections' }" >Collections</router-link></li>
       </ul>
     </nav>
     <div>
       <ul class="login-register">
-        <li class="login" ><router-link :to="{ name: 'login' }" tag="button">SIGN IN</router-link></li>
-        <li class="register" ><router-link :to="{ name: 'register' }" tag="button">REGISTER</router-link></li>
+        <li class="login" ><router-link :to="{ name: 'login' }" v-if="$store.state.token.length <= 0" tag="button">SIGN IN</router-link></li>
+        <li class="register" ><router-link :to="{ name: 'register' }" v-if="$store.state.token.length <= 0" tag="button">REGISTER</router-link></li>
+        <li class="logout" ><router-link v-bind:to="{ name: 'logout' }" v-if="$store.state.token != ''" tag="button">LOGOUT</router-link></li>
       </ul>
     </div>
   </div>
@@ -36,6 +37,7 @@ div .header {
   align-items: center;
   background-color: white;
   width: 100%;
+  /* background-image: url("https://mightymega.com/wp-content/uploads/2013/05/marvel_panoramic_posters_2.jpg"); */
 }
 
 .logo {
@@ -68,6 +70,10 @@ div > ul {
 }
 
 div > ul .login {
+  margin-right: 5%;
+}
+
+div > ul .register {
   margin-right: 5%;
 }
 

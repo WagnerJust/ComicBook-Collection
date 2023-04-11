@@ -8,17 +8,15 @@
     </div>
     
     <new-comics-list />
-    
-    <h1>Home</h1>
-    <p>You must be authenticated to see this</p>
   </div>
 </section>
 
 </template>
 
 <script>
-import NewComicsList from '../components/NewComicsList.vue';
 import TheHeader from '../components/TheHeader.vue';
+import NewComicsList from '../components/NewComicsList.vue';
+
 
 export default {
   name: "home",

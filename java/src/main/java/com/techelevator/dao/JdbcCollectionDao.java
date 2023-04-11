@@ -5,6 +5,7 @@ import com.techelevator.model.User;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.jdbc.support.rowset.SqlRowSet;
 import org.springframework.stereotype.Component;
+import org.springframework.web.client.RestTemplate;
 import org.springframework.web.server.ResponseStatusException;
 
 import java.util.ArrayList;
@@ -35,24 +36,7 @@ public class JdbcCollectionDao implements CollectionDao{
         return comicCollection;
     }
 
-//    @Override
-//    public List<ComicCollection> findCollectionById(int collectionId) {
-//        List<ComicCollection> comics = new ArrayList<>();
-//        String sql = "SELECT collection_id, comic_data_id FROM comic_collection WHERE collection_id = ?;";
-//        try {
-//            SqlRowSet results = jdbcTemplate.queryForRowSet(sql, collectionId);
-//            while (results.next()) {
-//                ComicCollection comic = mapRowToCollection(results);
-//                comics.add(comic);
-//            }
-//        } catch(Exception e) {
-//            throw new RuntimeException("Failed to list Comics");
-//        }
-//        return comics;
-//    }
-
     @Override
-    //todo: option to display all even if not public?
     public List<ComicCollection> listAllCollections() {
         List<ComicCollection> collections = new ArrayList<>();
         try {
@@ -70,15 +54,14 @@ public class JdbcCollectionDao implements CollectionDao{
     }
 
     @Override
-    //todo: option to display all even if not public?
-    public List<ComicCollection> listCollectionsByUser(int userId) {
+    public List<ComicCollection> listCollectionsByUser(int id) {
         List<ComicCollection> collections = new ArrayList<>();
         try {
             String sql = "SELECT collection.collection_id, collection.user_id, collection.collection_name, users.username\n" +
                     "FROM collection\n" +
                     "JOIN users ON collection.user_id = users.user_id\n" +
                     "WHERE collection.public=true AND users.user_id = ?;";
-            SqlRowSet results = jdbcTemplate.queryForRowSet(sql, userId);
+            SqlRowSet results = jdbcTemplate.queryForRowSet(sql, id);
             while (results.next()) {
                 collections.add(mapRowToCollection(results));
             }

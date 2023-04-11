@@ -75,8 +75,8 @@ export default {
 #registrationForm {
   display: flex;
   background-color: white;
-  height: 80%;
-  width: 50%;
+  height: 300px;
+  width: 300px;
   grid-area: registrationForm;
   border: 5px solid black;
   margin-top: 1rem;
@@ -84,6 +84,7 @@ export default {
   justify-content: center;
   align-items: center;
   text-align: center;
+  margin: 3rem;
 }
 
 .form-input-group {

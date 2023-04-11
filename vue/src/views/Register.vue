@@ -1,73 +1,45 @@
 <template>
   <div id="container">
-    <company-banner />
-    <registration-form />
-    <div id="sign-in-box">
-      <div>
-        <div id="welcome">Hello, Friend!</div>
-        <p>Have an account?</p>
-        <router-link :to="{ name: 'login' }" tag="button">SIGN IN</router-link>
-      </div>
+    <the-header id="nav" />
+    <div class="main">
+      <existing-user-sign-in />
+      <registration-form />
     </div>
+    <img class="image-fit" src="https://mightymega.com/wp-content/uploads/2013/05/marvel_panoramic_posters_1.jpg" alt="Marvel image" />
   </div>
 </template>
 
 
 <script>
-import CompanyBanner from '../components/CompanyBanner.vue';
+import TheHeader from '../components/TheHeader.vue';
 import RegistrationForm from '../components/RegistrationForm.vue';
+import ExistingUserSignIn from '../components/ExistingUserSignIn.vue';
 
 export default {
   name: 'register',
   components: {
-    CompanyBanner,
-    RegistrationForm
-  },
-
+    TheHeader,
+    RegistrationForm,
+    ExistingUserSignIn
+  }
 };
 </script>
 
 
 <style scoped>
 
-#container {
-  background-color: #F5DE87;
-  display: grid;
-  grid-template-areas: 
-  "banner banner"
-  "registrationForm signInBox"
-  "registrationForm signInBox";
-  gap: 1rem;
-  border: 5px solid black;
-  height: 95vh;
-  justify-items: center;
-}
-
-#welcome {
-  font-size: 3rem;
-}
-
-#sign-in-box {
+.main {
   display: flex;
-  background-color: #BC545E;
-  height: 80%;
-  width: 50%;
-  align-self: center;
-  justify-self: center;
-  grid-area: signInBox;
-  border: 5px solid black;
-  justify-content: center;
   align-items: center;
-  text-align: center;
+  justify-content: center;
 }
 
-@media (max-width: 1000px) {
-  #container {
-    display: grid;
-    grid-template-areas:
-    "banner"
-    "registrationForm"
-    "signInBox";
-  }
+.image-fit {
+  display: flex;
+  justify-content: space-evenly;
+  object-fit: cover;
+  margin: auto;
+  margin-top: 3%;
 }
+
 </style>
