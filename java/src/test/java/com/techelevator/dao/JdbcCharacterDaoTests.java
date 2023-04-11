@@ -23,6 +23,4 @@ public class JdbcCharacterDaoTests extends BaseDaoTests{
         characterTest2 = new ComicCharacter(101, 101, "testname2", "testalias2");
     }
 
-    @Test
-
 }

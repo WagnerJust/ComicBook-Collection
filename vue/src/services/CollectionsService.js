@@ -22,7 +22,4 @@ export default{
         return http.put(`/collections.${updatedCollection.collectionId}`, updatedCollection);
     }
     
-
-    
-    
 }
