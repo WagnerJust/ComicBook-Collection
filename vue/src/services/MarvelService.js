@@ -17,7 +17,7 @@ var endURL = "&ts="+ts+"&apikey="+apikey+"&hash="+hash;
 export default{
 
  
-
+    //COMIC REQUESTS
     searchComicByName(title){
         return http.get(`comics?titleStartsWith=${title}${endURL}`)
     },
@@ -30,6 +30,9 @@ export default{
         return http.get(`characters/${characterId}/comics?${endURL}`)
     },
 
+
+
+    //CHARACTER REQUESTS
     getCharacterByName(characterName){
         return http.get(`characters?nameStartsWith=${characterName}${endURL}`)
     },
