@@ -8,19 +8,19 @@ const http = axios.create({
 export default{
     
     geComicsByCollectionId(collectionId){
-        http.get(`/collections/${collectionId}/comics`);
+        return http.get(`/collections/${collectionId}/comics`);
     },
 
     getComicById(comicId){
-        http.get(`/comics/${comicId}`)
+        return http.get(`/comics/${comicId}`)
     },
 
     addComicToCollection(collectionId, comicToAdd){
-        http.put(`/collections/${collectionId}`, comicToAdd);
+        return http.put(`/collections/${collectionId}`, comicToAdd);
     },
 
     addComic(comicToAdd){
-        http.post('/comics', comicToAdd);
+        return http.post('/comics', comicToAdd);
     }
 
 }

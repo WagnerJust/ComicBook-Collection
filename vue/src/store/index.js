@@ -20,6 +20,8 @@ export default new Vuex.Store({
   state: {
     token: currentToken || '',
     user: currentUser || {},
+    testCollections: [],
+    testComics: [],
     comics: [
       {
         comicId: "67631",
@@ -111,6 +113,12 @@ export default new Vuex.Store({
       state.token = '';
       state.user = {};
       axios.defaults.headers.common = {};
+    },
+    SET_COMICS(state, data) {
+      state.testComics = data;
+    },
+    SET_COLLETIONS(state, data) {
+      state.testCollections = data;
     }
   }
 })
