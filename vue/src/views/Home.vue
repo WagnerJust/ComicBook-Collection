@@ -14,8 +14,9 @@
 </template>
 
 <script>
-import NewComicsList from '../components/NewComicsList.vue';
 import TheHeader from '../components/TheHeader.vue';
+import NewComicsList from '../components/NewComicsList.vue';
+
 
 export default {
   name: "home",

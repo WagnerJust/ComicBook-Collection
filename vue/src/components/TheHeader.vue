@@ -7,7 +7,7 @@
       <ul class="nav-bar">
         <li>Browse</li>
         <li>New Comics</li>
-        <li>My Collections</li>
+        <li class="collections"><router-link :to="{ name: 'my-collections' }" >Collections</router-link></li>
       </ul>
     </nav>
     <div>
@@ -37,6 +37,7 @@ div .header {
   align-items: center;
   background-color: white;
   width: 100%;
+  /* background-image: url("https://mightymega.com/wp-content/uploads/2013/05/marvel_panoramic_posters_2.jpg"); */
 }
 
 .logo {

@@ -1,7 +1,7 @@
 <template>
   <div id="container">
     <the-header id="nav" />
-    <div class="home">
+    <div class="main">
       <login-form />
       <new-user-signup />
     </div>
@@ -28,7 +28,7 @@ export default {
 
 <style scoped>
 
-.home {
+.main {
   display: flex;
   align-items: center;
   justify-content: center;
