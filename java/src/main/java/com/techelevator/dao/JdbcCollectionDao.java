@@ -40,10 +40,9 @@ public class JdbcCollectionDao implements CollectionDao{
     public List<ComicCollection> listAllCollections() {
         List<ComicCollection> collections = new ArrayList<>();
         try {
-            SqlRowSet results = jdbcTemplate.queryForRowSet("SELECT comic_collection.collection_id, comic_collection.comic_data_id \n" +
-                    "FROM comic_collection \n" +
-                    "JOIN collection ON comic_collection.collection_id = collection.collection_id\n" +
-                    "WHERE collection.public = true;");
+            SqlRowSet results = jdbcTemplate.queryForRowSet("SELECT * \n" +
+                    "FROM collection \n" +
+                    "WHERE public = true;");
             while (results.next()) {
                 collections.add(mapRowToCollection(results));
             }
@@ -57,10 +56,9 @@ public class JdbcCollectionDao implements CollectionDao{
     public List<ComicCollection> listCollectionsByUser(int id) {
         List<ComicCollection> collections = new ArrayList<>();
         try {
-            String sql = "SELECT collection.collection_id, collection.user_id, collection.collection_name, users.username\n" +
+            String sql = "SELECT *\n" +
                     "FROM collection\n" +
-                    "JOIN users ON collection.user_id = users.user_id\n" +
-                    "WHERE collection.public=true AND users.user_id = ?;";
+                    "WHERE public=true AND user_id = ?;";
             SqlRowSet results = jdbcTemplate.queryForRowSet(sql, id);
             while (results.next()) {
                 collections.add(mapRowToCollection(results));
@@ -95,9 +93,10 @@ public class JdbcCollectionDao implements CollectionDao{
 
     private ComicCollection mapRowToCollection(SqlRowSet results){
         ComicCollection comicCollection = new ComicCollection();
+        comicCollection.setUserId(results.getInt("user_id"));
         comicCollection.setCollectionId(results.getInt("collection_id"));
         comicCollection.setCollectionName(results.getString("collection_name"));
-        comicCollection.setPublic(results.getBoolean("is_public"));
+        comicCollection.setPublic(results.getBoolean("public"));
         return comicCollection;
     }
 }

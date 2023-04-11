@@ -11,8 +11,8 @@ import java.util.List;
 
 public class JdbcCollectionDaoTests extends BaseDaoTests{
 
-    protected final ComicCollection COLLECTION_1 = new ComicCollection(1, 1, "Collection1", true);
-    protected final ComicCollection COLLECTION_2 = new ComicCollection(2, 2, "Collection2", false);
+    protected final ComicCollection COLLECTION_1 = new ComicCollection(1, 1, "collection1", true);
+    protected final ComicCollection COLLECTION_2 = new ComicCollection(2, 2, "collection2", false);
 
     private ComicCollection collectionTest;
     private ComicCollection collectionTest2;
@@ -31,17 +31,16 @@ public class JdbcCollectionDaoTests extends BaseDaoTests{
     public void listAllCollectionsReturnsAllCollections(){
         List<ComicCollection> collections = sut.listAllCollections();
 
-        Assert.assertEquals(1, collections.size());
+        Assert.assertEquals(4, collections.size());
 
     }
 
     @Test
     public void listAllCollectionsByUserIdReturnsCorrectCollections(){
-        List<ComicCollection> collections = sut.listCollectionsByUser(99);
+        List<ComicCollection> collections = sut.listCollectionsByUser(1);
 
-        Assert.assertEquals(1, collections.size());
-        assertCollectionsMatch(COLLECTION_1, collections.get(1));
-        assertCollectionsMatch(COLLECTION_2, collections.get(0));
+        Assert.assertEquals(2, collections.size());
+        assertCollectionsMatch(COLLECTION_1, collections.get(0));
     }
 
 
