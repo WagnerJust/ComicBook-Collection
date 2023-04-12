@@ -1,11 +1,11 @@
 <template>
-  <div id="container">
+  <div id="container" class="container">
     <the-header id="nav" />
     <div class="main">
       <existing-user-sign-in />
       <registration-form />
     </div>
-    <img class="image-fit" src="https://mightymega.com/wp-content/uploads/2013/05/marvel_panoramic_posters_1.jpg" alt="Marvel image" />
+    <!-- <img class="image-fit" src="https://mightymega.com/wp-content/uploads/2013/05/marvel_panoramic_posters_1.jpg" alt="Marvel image" /> -->
   </div>
 </template>
 
@@ -28,6 +28,14 @@ export default {
 
 <style scoped>
 
+.container {
+  background-image: url('/public/x-men.png');
+  background-repeat: no-repeat;
+  background-size: cover;
+  background-position: right;
+  opacity: 0.9;
+  height: 100vh;
+}
 .main {
   display: flex;
   align-items: center;

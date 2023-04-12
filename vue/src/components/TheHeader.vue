@@ -7,7 +7,7 @@
       <ul class="nav-bar">
         <li>Browse</li>
         <li>New Comics</li>
-        <li class="collections"><router-link :to="{ name: 'my-collections' }" >Collections</router-link></li>
+        <li class="collections"><router-link :to="{ name: 'my-collections' }" style="text-decoration: none;">Collections</router-link></li>
       </ul>
     </nav>
     <div>
@@ -29,6 +29,13 @@ export default {
 </script>
 
 <style scope>
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
 div .header {
   display: grid;
   grid-template-columns: 1fr 3fr 1fr;
@@ -36,13 +43,15 @@ div .header {
     "logo nav-bar login-register";
   align-items: center;
   background-color: white;
-  width: 100%;
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
   /* background-image: url("https://mightymega.com/wp-content/uploads/2013/05/marvel_panoramic_posters_2.jpg"); */
 }
 
 .logo {
   grid-area: logo;
-  margin-left: 10%;
+  margin-left: 15%;
   width: 80%;
   margin-top: 5%;
   margin-bottom: 5%;
@@ -55,6 +64,11 @@ ul .login-register {
 ul {
   display: flex;
   list-style: none;
+  font-family: 'Montserrat', Helvetica, sans-serif;
+  font-weight: 800;
+  font-size: 1.3em;
+
+
 }
 
 nav > ul {
@@ -66,7 +80,7 @@ nav > ul {
 
 div > ul {
   justify-content: flex-end;
-  margin-right: 10%;
+  margin-right: 15%;
 }
 
 div > ul .login {
@@ -77,4 +91,25 @@ div > ul .register {
   margin-right: 5%;
 }
 
+button {
+  cursor: pointer;
+  border: 0;
+  border-radius: 4px;
+  font-weight: 600;
+  margin: 1 10px;
+  width: 7rem;
+  padding: 10px 0;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.15);
+  transition: 0.4s;
+  color: rgb(236, 29, 36);
+  background-color: rgba(255, 255, 255, 1);
+  border: 1px solid rgba(236, 29, 36, 1);
+  font-family: 'Montserrat', Helvetica, sans-serif;
+}
+
+button:hover {
+  color: white;
+  box-shadow: 0 0 20px rgba(0, 0, 0, 0.15);
+  background-color: rgba(236, 29, 36, 1);
+}
 </style>
