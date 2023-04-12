@@ -94,7 +94,7 @@ export default {
 
 .new-user {
   position: relative;
-  bottom: -108px;
+  bottom: -105px;
 }
 
 .new-user > p {
