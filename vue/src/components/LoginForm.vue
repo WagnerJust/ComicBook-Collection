@@ -1,7 +1,7 @@
 <template>
   <div id="loginForm">
     <form @submit.prevent="login">
-      <h1>LOGIN</h1>
+      <h1 class="login-text">LOGIN</h1>
       <div role="alert" v-if="invalidCredentials">
         Invalid username and password!
       </div>
@@ -9,12 +9,12 @@
         Thank you for registering, please sign in.
       </div>
       <div class="form-input-group">
-        <input type="text" id="username" placeholder="username" v-model="user.username" required autofocus />
+        <input type="text" id="username" placeholder=" username" v-model="user.username" required autofocus />
       </div>
       <div class="form-input-group">
-        <input type="password" id="password" placeholder="password" v-model="user.password" required />
+        <input type="password" id="password" placeholder=" password" v-model="user.password" required />
       </div>
-      <button type="submit">SIGN IN</button>
+      <button type="submit" class="submit-button">SIGN IN</button>
     </form>
   </div>
 </template>
@@ -62,20 +62,37 @@ export default {
 #loginForm {
   display: flex;
   background-color: white;
-  height: 300px;
-  width: 300px;
+  height: 600px;
+  width: 400px;
   grid-area: loginForm;
-  border: 5px solid black;
-  align-self: center;
-  justify-self: center;
+  border: 1px solid black;
+
+
   justify-content: center;
   align-items: center;
   text-align: center;
   margin: 3rem;
+  font-family: 'Montserrat', Helvetica, sans-serif;
+}
+
+.login-text {
+  position: relative;
+  top: -50px;
+  font-size: 2.2rem;
+}
+
+.submit-button {
+  position: relative;
+  bottom: -30px;
 }
 
 .form-input-group {
   margin-bottom: 1rem;
+}
+
+input {
+  height: 2rem;
+  width: 15rem;
 }
 
 </style>

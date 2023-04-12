@@ -3,7 +3,7 @@
         <div>
             <div id="welcome">Hello, Friend!</div>
             <p>Have an account?</p>
-            <router-link :to="{ name: 'login' }" tag="button">SIGN IN</router-link>
+            <router-link :to="{ name: 'login' }" tag="button" class="register">SIGN IN</router-link>
         </div>
     </div>
 </template>
@@ -20,21 +20,37 @@ export default {
 
 #sign-in-box {
   display: flex;
-  background-color: #BC545E;
-  height: 300px;
-  width: 300px;
+  background: linear-gradient(#e66465, #fff0ed);
+  height: 600px;
+  width: 400px;
   align-self: center;
   justify-self: center;
   grid-area: signInBox;
-  border: 5px solid black;
+  border: 1px solid black;
   justify-content: center;
   align-items: center;
   text-align: center;
   margin: 3rem;
+  font-family: 'Montserrat', Helvetica, sans-serif;
+}
+
+.register {
+  position: relative;
+  bottom: -90px;
 }
 
 #welcome {
-  font-size: 3rem;
+  font-size: 2.2rem;
+  font-weight: 800;
+  position: relative;
+  top: -110px;
+  color: white;
+}
+
+p {
+  color: white;
+  position: relative;
+  bottom: -70px;
 }
 
 </style>
