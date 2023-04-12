@@ -111,7 +111,7 @@ public class JdbcComicDao implements ComicDao{
         String sqlJoinTable = "DELETE FROM comic_collection WHERE comic_data_id = ?;";
         try{
             jdbcTemplate.update(sql, comicId);
-            jdbcTemplate.update(sql, comicId);
+            jdbcTemplate.update(sqlJoinTable, comicId);
         }catch (DataAccessException e){
             return false;
         }

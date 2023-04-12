@@ -73,7 +73,7 @@ public class JdbcComicDaoTests extends BaseDaoTests{
 
     @Test
     public void deleteComic_deletes_comic_correctly(){
-
+        // dont forget to check both tables
     }
 
 
