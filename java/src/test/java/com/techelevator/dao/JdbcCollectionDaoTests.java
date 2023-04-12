@@ -56,7 +56,7 @@ public class JdbcCollectionDaoTests extends BaseDaoTests{
 
         collectionToUpdate.setCollectionName("updatedCollection");
         collectionToUpdate.setPublic(true);
-        sut.updateCollectionName(collectionToUpdate);
+        sut.updateCollectionName(collectionToUpdate.getCollectionId(), collectionToUpdate);
 
         ComicCollection retrievedCollection = sut.getCollectionByCollectionId(1);
         assertCollectionsMatch(collectionToUpdate, retrievedCollection);

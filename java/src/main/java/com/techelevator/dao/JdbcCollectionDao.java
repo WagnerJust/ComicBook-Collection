@@ -87,7 +87,7 @@ public class JdbcCollectionDao implements CollectionDao{
     }
 
     @Override
-    public ComicCollection updateCollectionName(ComicCollection comicCollectionName) {
+    public ComicCollection updateCollectionName(int collectionId, ComicCollection comicCollectionName) {
         try {
             String sql = "UPDATE collection SET collection_name = ?, public = ? WHERE collection_id = ?;";
             jdbcTemplate.update(sql, comicCollectionName.getCollectionName(), comicCollectionName.getPublic(), comicCollectionName.getCollectionId());
