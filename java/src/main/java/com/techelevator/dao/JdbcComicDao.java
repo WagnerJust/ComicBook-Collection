@@ -118,6 +118,23 @@ public class JdbcComicDao implements ComicDao{
         return true;
     }
 
+    @Override
+    public int countUniqueComicsOfUser(int userId) {
+        int result = -1;
+        String sql = "SELECT COUNT(DISTINCT comic_collection.comic_data_id) AS total FROM collection\n" +
+                     "JOIN comic_collection ON comic_collection.collection_id = collection.collection_id\n" +
+                     "WHERE collection.user_id = ?;";
+        try{
+            SqlRowSet rowSet = jdbcTemplate.queryForRowSet(sql, userId);
+            if(rowSet.next()){
+                result = rowSet.getInt("total");
+            }
+        }catch (DataAccessException e){
+            return -1;
+        }
+        return result;
+    }
+
     private Comic mapRowToComic(SqlRowSet results) {
         Comic comic = new Comic();
         comic.setImageURL(results.getString("image_url"));

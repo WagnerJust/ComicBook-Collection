@@ -76,6 +76,10 @@ public class JdbcComicDaoTests extends BaseDaoTests{
         // dont forget to check both tables
     }
 
+    @Test public void countUniqueComicsOfUser_counts_correctly(){
+        Assert.assertEquals(5, sut.countUniqueComicsOfUser(1));
+    }
+
 
 
 

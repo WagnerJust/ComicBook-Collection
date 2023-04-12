@@ -12,6 +12,8 @@ public interface CharacterDao {
     boolean updateCharacter(int characterId, ComicCharacter character);
     boolean deleteCharacter(int characterId);
     boolean addCharacterToComic(int characterId, int comicId);
+    int countCharactersInCollection(int collectionId, int characterId);
+    int countCharactersOfUser(int userId, int characterId);
 
     //todo: is this needed?
     //boolean removeCharacterFromComic(int characterId, int comicId);
