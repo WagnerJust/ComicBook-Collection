@@ -10,7 +10,7 @@ public interface CollectionDao {
     ComicCollection getCollectionByCollectionId(int id);
     List<ComicCollection> listAllCollections();
     List<ComicCollection> listCollectionsByUser(int id);
-    ComicCollection updateCollectionName(ComicCollection comicCollectionName);
+    ComicCollection updateCollectionName(int collectionId, ComicCollection comicCollectionName);
     void deleteCollection(int userId, int collectionId);
 
 }

@@ -80,7 +80,7 @@ public class JdbcCharacterDao implements CharacterDao{
     }
 
     @Override
-    public boolean updateCharacter(ComicCharacter updatedCharacter) {
+    public boolean updateCharacter(int characterId, ComicCharacter updatedCharacter) {
         String sql = "UPDATE character_table " +
                 "SET character_id_marvel_api = ?, alias = ?, real_name = ? " +
                 "WHERE character_id = ?;";

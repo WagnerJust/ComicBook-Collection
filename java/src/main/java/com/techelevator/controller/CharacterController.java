@@ -60,9 +60,9 @@ public class CharacterController {
 
     @PreAuthorize("hasRole('USER')")
     @ResponseStatus(value = HttpStatus.OK)
-    @PutMapping("/characters")
-    public boolean updateCharacter(@RequestBody ComicCharacter updatedCharacter){
-        return characterDao.updateCharacter(updatedCharacter);
+    @PutMapping("/characters/{characterId}")
+    public boolean updateCharacter(@PathVariable int characterId, @RequestBody ComicCharacter updatedCharacter){
+        return characterDao.updateCharacter(characterId, updatedCharacter);
     }
 
 

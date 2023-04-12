@@ -55,9 +55,9 @@ public class CollectionController {
     }
     @PreAuthorize("hasRole('USER')")
     @ResponseStatus(value = HttpStatus.OK)
-    @PutMapping("/collections")
-    public ComicCollection updateCollectionName(@RequestBody ComicCollection comicCollectionToUpdate){
-        return collectionDao.updateCollectionName(comicCollectionToUpdate);
+    @PutMapping("/collections{collectionId}")
+    public ComicCollection updateCollectionName(@PathVariable int collectionId, @RequestBody ComicCollection comicCollectionToUpdate){
+        return collectionDao.updateCollectionName(collectionId, comicCollectionToUpdate);
     }
 
 

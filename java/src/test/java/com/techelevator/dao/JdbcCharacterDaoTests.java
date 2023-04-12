@@ -56,7 +56,7 @@ public class JdbcCharacterDaoTests extends BaseDaoTests{
         characterToUpdate.setMarvelCharacterId(10);
         characterToUpdate.setCharacterAlias("updatedAlias");
         characterToUpdate.setCharacterRealName("updatedRealName");
-        sut.updateCharacter(characterToUpdate);
+        sut.updateCharacter(characterToUpdate.getCharacterId(), characterToUpdate);
 
         ComicCharacter retrievedCharacter = sut.getCharacterById(CHARACTER_1.getCharacterId());
         assertCharactersMatch(characterToUpdate, retrievedCharacter);
