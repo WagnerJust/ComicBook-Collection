@@ -52,4 +52,5 @@ public class JdbcCollectionDaoTests extends BaseDaoTests{
         Assert.assertEquals(expected.getPublic(), actual.getPublic());
     }
 
+
 }

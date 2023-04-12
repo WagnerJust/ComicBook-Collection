@@ -53,6 +53,12 @@ public class CollectionController {
     public ComicCollection createCollection(@RequestBody ComicCollection newCollection){
         return collectionDao.createCollection(newCollection);
     }
+    @PreAuthorize("hasRole('USER')")
+    @ResponseStatus(value = HttpStatus.OK)
+    @PutMapping("/collections")
+    public ComicCollection updateCollectionName(@RequestBody ComicCollection comicCollectionToUpdate){
+        return collectionDao.updateCollectionName(comicCollectionToUpdate);
+    }
 
 
 }
