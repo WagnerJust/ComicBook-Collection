@@ -21,7 +21,7 @@ export default {
     display: flex;
     flex-direction: column;
     justify-content: space-between;
-    text-align: center;
+    margin-bottom: 30px;
 }
 
 .character:hover {
@@ -38,5 +38,13 @@ export default {
 
 .character-image:hover {
     transform: translateY(-10px);
+}
+
+.character-alias {
+    margin-top: 1.5rem;
+    text-align: center;
+    font-family: 'Montserrat', Helvetica, sans-serif;
+    font-size: 1.2rem;
+    font-weight: 600;
 }
 </style>

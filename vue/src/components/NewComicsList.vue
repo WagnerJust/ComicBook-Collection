@@ -28,6 +28,7 @@ export default {
 
 .new-comics-text {
     margin-top: 4%;
+    font-family: 'Montserrat', Helvetica, sans-serif;
 }
 
 .new-comics-list {
