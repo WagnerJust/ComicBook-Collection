@@ -43,6 +43,26 @@ public class JdbcCollectionDaoTests extends BaseDaoTests{
         assertCollectionsMatch(COLLECTION_1, collections.get(0));
     }
 
+    @Test
+    public void getCollectionByCollectionIdReturnsCorrectCollection(){
+        ComicCollection collection = sut.getCollectionByCollectionId(1);
+
+        assertCollectionsMatch(COLLECTION_1, collection);
+    }
+
+    @Test
+    public void updateCollectionNameCorrectlyUpdatesCollection(){
+        ComicCollection collectionToUpdate = sut.getCollectionByCollectionId(1);
+
+        collectionToUpdate.setCollectionName("updatedCollection");
+        collectionToUpdate.setPublic(true);
+        sut.updateCollectionName(collectionToUpdate);
+
+        ComicCollection retrievedCollection = sut.getCollectionByCollectionId(1);
+        assertCollectionsMatch(collectionToUpdate, retrievedCollection);
+
+    }
+
 
 
     public void assertCollectionsMatch(ComicCollection expected, ComicCollection actual){
@@ -51,5 +71,6 @@ public class JdbcCollectionDaoTests extends BaseDaoTests{
         Assert.assertEquals(expected.getUserId(), actual.getUserId());
         Assert.assertEquals(expected.getPublic(), actual.getPublic());
     }
+
 
 }

@@ -6,15 +6,15 @@
           {{ registrationErrorMsg }}
         </div>
         <div class="form-input-group">
-          <input type="text" id="username" placeholder="username" v-model="user.username" required autofocus />
+          <input type="text" id="username" placeholder=" username" v-model="user.username" required autofocus />
         </div>
         <div class="form-input-group">
-          <input type="password" id="password" placeholder="password" v-model="user.password" required />
+          <input type="password" id="password" placeholder=" password" v-model="user.password" required />
         </div>
         <div class="form-input-group">
-          <input type="password" id="confirmPassword" placeholder="re-type password" v-model="user.confirmPassword" required />
+          <input type="password" id="confirmPassword" placeholder=" re-type password" v-model="user.confirmPassword" required />
         </div>
-        <button type="submit">START COLLECTING</button>
+        <button type="submit" class="submit-button">START COLLECTING</button>
       </form>
     </div>
 </template>
@@ -75,20 +75,36 @@ export default {
 #registrationForm {
   display: flex;
   background-color: white;
-  height: 300px;
-  width: 300px;
+  height: 600px;
+  width: 400px;
   grid-area: registrationForm;
-  border: 5px solid black;
-  margin-top: 1rem;
-  margin-bottom: -1rem;
+  border: 1px solid black;
+
   justify-content: center;
   align-items: center;
   text-align: center;
   margin: 3rem;
+  font-family: 'Montserrat', Helvetica, sans-serif;
+}
+
+h1 {
+  position: relative;
+  top: -50px;
+  font-size: 2.2rem;
+}
+
+.submit-button {
+  position: relative;
+  bottom: -30px;
 }
 
 .form-input-group {
   margin-bottom: 1rem;
+}
+
+input {
+  height: 2rem;
+  width: 15rem;
 }
 
 </style>

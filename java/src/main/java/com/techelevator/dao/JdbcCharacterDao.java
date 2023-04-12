@@ -63,61 +63,8 @@ public class JdbcCharacterDao implements CharacterDao{
         return characters;
     }
 
-    @Override
-    public ComicCharacter addCharacter(ComicCharacter newCharacter) {
-        ComicCharacter comicCharacter;
-        String sql = "INSERT INTO character_table (character_id_marvel_api, alias, real_name) " +
-                     "VALUES (?, ?, ?) RETURNING character_id;";
-        try{
-            Integer newId = jdbcTemplate.queryForObject(sql, Integer.class, newCharacter.getMarvelCharacterId(),
-                    newCharacter.getCharacterAlias(), newCharacter.getCharacterRealName());
-            comicCharacter = getCharacterById(newId);
-        } catch (DataAccessException e){
-            return null;
-        }
-        return comicCharacter;
-    }
 
-    @Override
-    public boolean updateCharacter(ComicCharacter updatedCharacter) {
-        String sql = "UPDATE character_table " +
-                     "SET character_id_marvel_api = ?, alias = ?, real_name = ? " +
-                     "WHERE character_id = ?;";
-        try{
-            jdbcTemplate.update(sql, updatedCharacter.getMarvelCharacterId(), updatedCharacter.getCharacterAlias(),
-                    updatedCharacter.getCharacterRealName(), updatedCharacter.getCharacterId());
-        }catch (DataAccessException e){
-            return false;
-        }
-        return true;
-    }
-
-    @Override
-    public boolean deleteCharacter(int characterId) {
-        String sql = "DELETE FROM character_table " +
-                     "WHERE character_id = ?;";
-        String sqlJoinTable = "DELETE FROM character_comic " +
-                              "WHERE character_id = ?;";
-        try{
-            jdbcTemplate.update(sql, characterId);
-            jdbcTemplate.update(sqlJoinTable, characterId);
-        }catch (DataAccessException e){
-            return false;
-        }
-        return true;
-    }
-
-    @Override
-    public boolean addCharacterToComic(int characterId, int comicId) {
-        String sql = "INSERT INTO character_comic (character_id, comic_data_id) " +
-                     "VALUES(?, ?);";
-        try{
-            jdbcTemplate.update(sql, characterId, comicId);
-        }catch (DataAccessException e){
-            return false;
-        }
-        return true;
-    }
+    //todo: get all characters by comic
 
     private ComicCharacter mapRowToCharacter(SqlRowSet results) {
         ComicCharacter character = new ComicCharacter();
