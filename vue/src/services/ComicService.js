@@ -7,7 +7,7 @@ const http = axios.create({
 
 export default{
     
-    geComicsByCollectionId(collectionId){
+    getComicsByCollectionId(collectionId){
         return http.get(`/collections/${collectionId}/comics`);
     },
 

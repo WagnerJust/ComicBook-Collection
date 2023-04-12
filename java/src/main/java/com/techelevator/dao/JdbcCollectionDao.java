@@ -20,21 +20,22 @@ public class JdbcCollectionDao implements CollectionDao{
         this.jdbcTemplate = jdbcTemplate;
     }
 
+    //TODO:
     @Override
     public ComicCollection createCollection(ComicCollection comicCollection) {
         String sql = "INSERT INTO collection(" +
-                "user_id, is_public, collection_name) " +
+                "user_id, public, collection_name) " +
                 "VALUES (?, ?, ?) RETURNING collection_id;";
         try {
             Integer newId = jdbcTemplate.queryForObject(sql, Integer.class, comicCollection.getUserId(),
                     comicCollection.getPublic(), comicCollection.getCollectionName());
             comicCollection.setCollectionId(newId);
         } catch(Exception e) {
-            //todo: fix these
-            throw new RuntimeException("Failed to create Collection");
+            System.out.println(e.getMessage());  //  changed to print out message
         }
         return comicCollection;
     }
+
 
     @Override
     public List<ComicCollection> listAllCollections() {
@@ -51,6 +52,7 @@ public class JdbcCollectionDao implements CollectionDao{
         }
         return collections;
     }
+
 
     @Override
     public List<ComicCollection> listCollectionsByUser(int id) {
