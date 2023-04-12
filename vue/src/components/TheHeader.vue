@@ -12,9 +12,9 @@
     </nav>
     <div>
       <ul class="login-register">
-        <li class="login" ><router-link :to="{ name: 'login' }" v-if="$store.state.token.length <= 0" tag="button">SIGN IN</router-link></li>
-        <li class="register" ><router-link :to="{ name: 'register' }" v-if="$store.state.token.length <= 0" tag="button">REGISTER</router-link></li>
-        <li class="logout" ><router-link v-bind:to="{ name: 'logout' }" v-if="$store.state.token != ''" tag="button">LOGOUT</router-link></li>
+        <li class="login" ><router-link class="nav-link" :to="{ name: 'login' }" v-if="$store.state.token.length <= 0" tag="button">SIGN IN</router-link></li>
+        <li class="register" ><router-link class="nav-link" :to="{ name: 'register' }" v-if="$store.state.token.length <= 0" tag="button">REGISTER</router-link></li>
+        <li class="logout" ><router-link class="nav-link" v-bind:to="{ name: 'logout' }" v-if="$store.state.token != ''" tag="button">LOGOUT</router-link></li>
       </ul>
     </div>
   </div>
@@ -112,4 +112,10 @@ button:hover {
   box-shadow: 0 0 20px rgba(0, 0, 0, 0.15);
   background-color: rgba(236, 29, 36, 1);
 }
+
+a, a:hover, a:visited, a:active {
+  color: inherit;
+  text-decoration: none;
+ }
+
 </style>
