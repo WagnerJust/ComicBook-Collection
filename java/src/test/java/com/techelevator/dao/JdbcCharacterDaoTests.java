@@ -49,6 +49,38 @@ public class JdbcCharacterDaoTests extends BaseDaoTests{
 
     }
 
+    @Test
+    public void updateCharacterUpdatesCharacter(){
+        ComicCharacter characterToUpdate = sut.getCharacterById(CHARACTER_1.getCharacterId());
+
+        characterToUpdate.setMarvelCharacterId(10);
+        characterToUpdate.setCharacterAlias("updatedAlias");
+        characterToUpdate.setCharacterRealName("updatedRealName");
+        sut.updateCharacter(characterToUpdate);
+
+        ComicCharacter retrievedCharacter = sut.getCharacterById(CHARACTER_1.getCharacterId());
+        assertCharactersMatch(characterToUpdate, retrievedCharacter);
+    }
+
+    @Test
+    public void addCharacterAddsCharacter(){
+        ComicCharacter newCharacter = sut.addCharacter(characterTest);
+
+        int newId = newCharacter.getCharacterId();
+        Assert.assertTrue(newId > 0);
+
+        characterTest.setCharacterId(newId);
+        assertCharactersMatch(characterTest, newCharacter);
+    }
+
+    @Test
+    public void deletedCharacterCantBeRetrieved() {
+        sut.deleteCharacter(1);
+
+        ComicCharacter retrievedCharacter = sut.getCharacterById(1);
+        Assert.assertNull(retrievedCharacter);
+    }
+
 
     public void assertCharactersMatch(ComicCharacter expected, ComicCharacter actual) {
         Assert.assertEquals(expected.getCharacterId(), actual.getCharacterId());
