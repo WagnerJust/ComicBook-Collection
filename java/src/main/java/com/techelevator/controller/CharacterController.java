@@ -65,6 +65,10 @@ public class CharacterController {
         return characterDao.updateCharacter(characterId, updatedCharacter);
     }
 
+    //todo: get charcter by comic: use path /comics/comicId/characters
+
+    //todo: get add character to comic : use path comic/comicId/character/characterId with two path variables
+
 
 
 

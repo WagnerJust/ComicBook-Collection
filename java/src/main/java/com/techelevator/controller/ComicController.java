@@ -46,7 +46,7 @@ public class ComicController {
 
     @PreAuthorize("hasRole('USER')")
     @ResponseStatus(value = HttpStatus.OK)
-    @PutMapping("/collections/{collectionId}")
+    @PutMapping("/collections/{collectionId}/add")
     public boolean addComicToCollection(@PathVariable int collectionId, @RequestBody Comic comicToAdd){
         return comicDao.addComicToCollection(comicToAdd.getComicId(), collectionId);
     }
@@ -57,6 +57,14 @@ public class ComicController {
         return comicDao.addComic(comic);
     }
 
+
+    //todo: remove comic from collection
+
+    //todo: get comics by character
+
+    //todo: get comics by author
+
+    //todo: get comic by title
 
 
 

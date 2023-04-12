@@ -39,7 +39,7 @@ public class CollectionController {
     }
 
     @PreAuthorize("hasRole('USER')")
-    @GetMapping("/{userId}/collections")
+    @GetMapping("/user/{userId}/collections")
     public List<ComicCollection> getCollectionsByUserId(@PathVariable int userId){
         List<ComicCollection> collection = collectionDao.listCollectionsByUser(userId);
         if(collection == null || collection.size() == 0){
@@ -49,16 +49,21 @@ public class CollectionController {
 
     @PreAuthorize("hasRole('USER')")
     @ResponseStatus(value = HttpStatus.CREATED)
-    @PostMapping("/collections")
+    @PostMapping("/collections/add")
     public ComicCollection createCollection(@RequestBody ComicCollection newCollection){
         return collectionDao.createCollection(newCollection);
     }
     @PreAuthorize("hasRole('USER')")
     @ResponseStatus(value = HttpStatus.OK)
-    @PutMapping("/collections{collectionId}")
+    @PutMapping("/collections/update/{collectionId}")
     public ComicCollection updateCollectionName(@PathVariable int collectionId, @RequestBody ComicCollection comicCollectionToUpdate){
         return collectionDao.updateCollectionName(collectionId, comicCollectionToUpdate);
     }
-
+    @PreAuthorize("hasRole('USER')")
+    @ResponseStatus(value = HttpStatus.OK)
+    @GetMapping("/collections/{collectionId}")
+    public ComicCollection getCollectionByCollectionId(@PathVariable int collectionId) {
+        return collectionDao.getCollectionByCollectionId(collectionId);
+    }
 
 }
