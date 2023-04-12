@@ -8,4 +8,12 @@ public interface CharacterDao {
     ComicCharacter getCharacterById(int characterId);
     ComicCharacter getCharacterByAlias(String characterName);
     List<ComicCharacter> getAllCharacters();
+    ComicCharacter addCharacter(ComicCharacter character);
+    boolean updateCharacter(ComicCharacter character);
+    boolean deleteCharacter(int characterId);
+    boolean addCharacterToComic(int characterId, int comicId);
+
+    //todo: is this needed?
+    //boolean removeCharacterFromComic(int characterId, int comicId);
+
 }
