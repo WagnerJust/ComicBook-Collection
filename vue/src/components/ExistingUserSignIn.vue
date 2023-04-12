@@ -1,6 +1,6 @@
 <template>
     <div id="sign-in-box">
-        <div>
+        <div class="existing-user">
             <div id="welcome">Hello, Friend!</div>
             <p>Have an account?</p>
             <router-link :to="{ name: 'login' }" tag="button" class="register">SIGN IN</router-link>

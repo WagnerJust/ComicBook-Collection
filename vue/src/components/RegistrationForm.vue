@@ -1,7 +1,9 @@
 <template>
+  <div class="registrationFormContainer">
+    <div class="welcome">Hello, Friend!</div>
     <div id="registrationForm" class="text-center">
       <form @submit.prevent="register">
-        <h1>Create Account</h1>
+        <h1>CREATE ACCOUNT</h1>
         <div role="alert" v-if="registrationErrors">
           {{ registrationErrorMsg }}
         </div>
@@ -17,6 +19,11 @@
         <button type="submit" class="submit-button">START COLLECTING</button>
       </form>
     </div>
+    <div class="existing-user">
+      <p>Have an account?</p>
+      <router-link :to="{ name: 'login' }" tag="button" class="register">SIGN IN</router-link>
+    </div>
+  </div>
 </template>
 
 
@@ -72,14 +79,14 @@ export default {
 
 <style scoped>
 
-#registrationForm {
+.registrationFormContainer {
   display: flex;
+  flex-direction: column;
   background-color: white;
   height: 600px;
   width: 400px;
   grid-area: registrationForm;
   border: 1px solid black;
-
   justify-content: center;
   align-items: center;
   text-align: center;
@@ -89,8 +96,22 @@ export default {
 
 h1 {
   position: relative;
-  top: -50px;
-  font-size: 2.2rem;
+  top: -25px;
+  font-size: 2rem;
+}
+
+.welcome {
+  position: relative;
+  top: -60px;
+}
+
+.existing-user {
+  position: relative;
+  bottom: -75px;
+}
+
+.existing-user > p {
+  margin-bottom: 1rem;
 }
 
 .submit-button {

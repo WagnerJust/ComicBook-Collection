@@ -1,21 +1,28 @@
 <template>
-  <div id="loginForm">
-    <form @submit.prevent="login">
-      <h1 class="login-text">LOGIN</h1>
-      <div role="alert" v-if="invalidCredentials">
-        Invalid username and password!
-      </div>
-      <div role="alert" v-if="this.$route.query.registration" class="thank-you">
-        Thank you for registering, please sign in.
-      </div>
-      <div class="form-input-group">
-        <input type="text" id="username" placeholder=" username" v-model="user.username" required autofocus />
-      </div>
-      <div class="form-input-group">
-        <input type="password" id="password" placeholder=" password" v-model="user.password" required />
-      </div>
-      <button type="submit" class="submit-button">SIGN IN</button>
-    </form>
+  <div class="loginFormContainer">
+    <div class="welcome">Welcome Back!</div>
+    <div>
+      <form @submit.prevent="login">
+        <h1 class="login-text">LOGIN</h1>
+        <div role="alert" v-if="invalidCredentials">
+          Invalid username and password!
+        </div>
+        <div role="alert" v-if="this.$route.query.registration" class="thank-you">
+          Thank you for registering, please sign in.
+        </div>
+        <div class="form-input-group">
+          <input type="text" id="username" placeholder=" username" v-model="user.username" required autofocus />
+        </div>
+        <div class="form-input-group">
+          <input type="password" id="password" placeholder=" password" v-model="user.password" required />
+        </div>
+        <button type="submit" class="submit-button">SIGN IN</button>
+      </form>
+    </div>
+    <div class="new-user">
+      <p>Not a Member?</p>
+      <router-link :to="{ name: 'register' }" tag="button" class="register">SIGN UP</router-link>
+    </div>
   </div>
 </template>
 
@@ -59,15 +66,14 @@ export default {
 
 <style scoped>
 
-#loginForm {
+.loginFormContainer {
   display: flex;
+  flex-direction: column;
   background-color: white;
   height: 600px;
   width: 400px;
   grid-area: loginForm;
   border: 1px solid black;
-
-
   justify-content: center;
   align-items: center;
   text-align: center;
@@ -79,6 +85,20 @@ export default {
   position: relative;
   top: -50px;
   font-size: 2.2rem;
+}
+
+.welcome {
+  position: relative;
+  top: -90px;
+}
+
+.new-user {
+  position: relative;
+  bottom: -108px;
+}
+
+.new-user > p {
+  margin-bottom: 1rem;
 }
 
 .submit-button {

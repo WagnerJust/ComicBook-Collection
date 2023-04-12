@@ -2,7 +2,6 @@
   <div id="container" class="container">
     <the-header id="nav" />
     <div class="main">
-      <existing-user-sign-in />
       <registration-form />
     </div>
     <!-- <img class="image-fit" src="https://mightymega.com/wp-content/uploads/2013/05/marvel_panoramic_posters_1.jpg" alt="Marvel image" /> -->
@@ -13,14 +12,12 @@
 <script>
 import TheHeader from '../components/TheHeader.vue';
 import RegistrationForm from '../components/RegistrationForm.vue';
-import ExistingUserSignIn from '../components/ExistingUserSignIn.vue';
 
 export default {
   name: 'register',
   components: {
     TheHeader,
-    RegistrationForm,
-    ExistingUserSignIn
+    RegistrationForm
   }
 };
 </script>
