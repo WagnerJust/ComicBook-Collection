@@ -1,7 +1,9 @@
 <template>
-    <div class="main">
+    <div class="container">
         <the-header />
-        <new-comics-list />
+        <div class="main">
+            <new-comics-list />
+        </div>
     </div>
 </template>
 
@@ -27,6 +29,8 @@ export default {
     created() {
         collectionService.listAllPublic().then(response => {
             this.collections = response.data;
+            console.log("COLLECTION DATA: " + this.collections)
+            console.log(this.collections)
             this.collections.forEach(collection => {
                 comicService.geComicsByCollectionId(collection.collectionId).then(response => {
                     this.comics.push(response.data);
@@ -40,10 +44,9 @@ export default {
 
 <style scoped>
 
-.home {
+.main {
   margin-left: 12%;
   margin-right: 12%;
-
 }
 
 </style>
