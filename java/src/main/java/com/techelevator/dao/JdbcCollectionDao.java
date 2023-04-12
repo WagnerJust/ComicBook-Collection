@@ -36,6 +36,21 @@ public class JdbcCollectionDao implements CollectionDao{
         return comicCollection;
     }
 
+    @Override
+    public ComicCollection getCollectionByCollectionId(int id){
+        ComicCollection collection = new ComicCollection();
+        try {
+            String sql = "SELECT * FROM collection WHERE collection_id = ?";
+            SqlRowSet results = jdbcTemplate.queryForRowSet(sql, id);
+            if(results.next()){
+                collection = mapRowToCollection(results);
+            }
+        } catch (Exception e) {
+            return null;
+        }
+        return collection;
+    }
+
 
     @Override
     public List<ComicCollection> listAllCollections() {
@@ -72,11 +87,10 @@ public class JdbcCollectionDao implements CollectionDao{
     }
 
     @Override
-    //todo: add public toggle
     public ComicCollection updateCollectionName(ComicCollection comicCollectionName) {
         try {
-            String sql = "UPDATE collection SET collection_name = ? WHERE collection_id = ?;";
-            jdbcTemplate.update(sql, comicCollectionName.getCollectionName(), comicCollectionName.getCollectionId());
+            String sql = "UPDATE collection SET collection_name = ?, public = ? WHERE collection_id = ?;";
+            jdbcTemplate.update(sql, comicCollectionName.getCollectionName(), comicCollectionName.getPublic(), comicCollectionName.getCollectionId());
         } catch(Exception e) {
             throw new RuntimeException("Failed to update Collection Name");
         }

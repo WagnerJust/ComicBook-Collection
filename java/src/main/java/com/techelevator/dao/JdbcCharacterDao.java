@@ -61,7 +61,7 @@ public class JdbcCharacterDao implements CharacterDao{
         return characters;
     }
 
-    //todo: get all characters by collection/comic/user?
+    //todo: get all characters by comic
 
     private ComicCharacter mapRowToCharacter(SqlRowSet results) {
         ComicCharacter character = new ComicCharacter();

@@ -7,6 +7,7 @@ import java.util.List;
 
 public interface CollectionDao {
     ComicCollection createCollection(ComicCollection comicCollection);
+    ComicCollection getCollectionByCollectionId(int id);
     List<ComicCollection> listAllCollections();
     List<ComicCollection> listCollectionsByUser(int id);
     ComicCollection updateCollectionName(ComicCollection comicCollectionName);
