@@ -53,6 +53,41 @@ public class JdbcComicDao implements ComicDao{
     }
 
     @Override
+    public List<Comic> getComicsByAuthor(String author) {
+        ArrayList<Comic> comics = new ArrayList<>();
+        String sql = "SELECT * " +
+                     "FROM comic_data " +
+                     "WHERE author ILIKE ?;";
+        try {
+            SqlRowSet results = jdbcTemplate.queryForRowSet(sql, "%" + author + "%");
+            while (results.next()){
+                comics.add(mapRowToComic(results));
+            }
+        }catch (DataAccessException e){
+            return null;
+        }
+        return comics;
+    }
+
+    @Override
+    public List<Comic> getComicsByArtist(String artist) {
+        ArrayList<Comic> comics = new ArrayList<>();
+        String sql = "SELECT * " +
+                "FROM comic_data " +
+                "WHERE artist ILIKE ?;";
+        try {
+            SqlRowSet results = jdbcTemplate.queryForRowSet(sql, "%" + artist + "%");
+            while (results.next()){
+                comics.add(mapRowToComic(results));
+            }
+        }catch (DataAccessException e){
+            return null;
+        }
+        return comics;
+    }
+
+
+    @Override
     public Comic addComic(Comic comic) {
         Comic comicNew;
         String sql = "INSERT INTO comic_data (upc, issue_number, series, publish_date, image_url, author, artist) " +
@@ -108,10 +143,12 @@ public class JdbcComicDao implements ComicDao{
     @Override
     public boolean deleteComic(int comicId) {
         String sql = "DELETE FROM comic_data WHERE comic_data_id = ?;";
-        String sqlJoinTable = "DELETE FROM comic_collection WHERE comic_data_id = ?;";
+        String sqlCollectionJunctionTable = "DELETE FROM comic_collection WHERE comic_data_id = ?;";
+        String sqlCharacterJunctionTable = "DELETE FROM character_comic WHERE comic_data_id = ?";
         try{
+            jdbcTemplate.update(sqlCollectionJunctionTable, comicId);
+            jdbcTemplate.update(sqlCharacterJunctionTable, comicId);
             jdbcTemplate.update(sql, comicId);
-            jdbcTemplate.update(sqlJoinTable, comicId);
         }catch (DataAccessException e){
             return false;
         }

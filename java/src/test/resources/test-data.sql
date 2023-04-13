@@ -7,17 +7,17 @@ INSERT INTO users (username,password_hash,role) VALUES ('user3','user3','ROLE_US
 INSERT INTO comic_data (upc,issue_number,series,publish_date,image_url,author,artist)
 VALUES ('UPC1', '1', 'series1', '2011-01-01', 'URL1', 'author1', 'artist1');
 INSERT INTO comic_data (upc,issue_number,series,publish_date,image_url,author,artist)
-VALUES ('UPC2', '2', 'series2', '2011-01-02', 'URL2', 'author2', 'artist2');
+VALUES ('UPC2', '2', 'series2', '2011-01-02', 'URL2', 'author1', 'artist1');
 INSERT INTO comic_data (upc,issue_number,series,publish_date,image_url,author,artist)
-VALUES ('UPC3', '3', 'series3', '2011-01-03', 'URL3', 'author3', 'artist3');
+VALUES ('UPC3', '3', 'series3', '2011-01-03', 'URL3', 'author2', 'artist2');
 INSERT INTO comic_data (upc,issue_number,series,publish_date,image_url,author,artist)
-VALUES ('UPC5', '4', 'series4', '2011-01-04', 'URL4', 'author4', 'artist4');
+VALUES ('UPC5', '4', 'series4', '2011-01-04', 'URL4', 'author3', 'artist3');
 INSERT INTO comic_data (upc,issue_number,series,publish_date,image_url,author,artist)
-VALUES ('UPC6', '5', 'series5', '2011-01-05', 'URL5', 'author5', 'artist5');
+VALUES ('UPC6', '5', 'series5', '2011-01-05', 'URL5', 'author4', 'artist4');
 INSERT INTO comic_data (upc,issue_number,series,publish_date,image_url,author,artist)
-VALUES ('UPC7', '6', 'series6', '2011-01-06', 'URL6', 'author6', 'artist6');
+VALUES ('UPC7', '6', 'series6', '2011-01-06', 'URL6', 'author4', 'artist4');
 INSERT INTO comic_data (upc,issue_number,series,publish_date,image_url,author,artist)
-VALUES ('UPC8', '7', 'series7', '2011-01-07', 'URL7', 'author7', 'artist7');
+VALUES ('UPC8', '7', 'series7', '2011-01-07', 'URL7', 'author4', 'artist4');
 
 INSERT INTO collection (public, user_id, collection_name) VALUES (true, 1, 'collection1');
 INSERT INTO collection (public, user_id, collection_name) VALUES (false, 1, 'collection2');

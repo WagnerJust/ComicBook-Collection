@@ -15,6 +15,7 @@ public class JdbcComicDaoTests extends BaseDaoTests{
 
     private Comic comicTest;
     private Comic comicTest2;
+    private Comic updateComic;
 
     private JdbcComicDao sut;
 
@@ -24,6 +25,7 @@ public class JdbcComicDaoTests extends BaseDaoTests{
         sut = new JdbcComicDao(jdbcTemplate);
         comicTest = new Comic("series8", 8, 8, "UPC8", "URL8", LocalDate.parse("2011-01-08"), "author8", "artist8");
         comicTest2 = new Comic("series9", 9, 9, "UPC9", "URL9", LocalDate.parse("2011-01-09"), "author9", "artist9");
+        updateComic = new Comic("series9", 1, 9, "UPC9", "URL9", LocalDate.parse("2011-01-09"), "author9", "artist9");
     }
 
     @Test
@@ -68,17 +70,39 @@ public class JdbcComicDaoTests extends BaseDaoTests{
 
     @Test
     public void updateComic_updates_comic_correctly(){
-
+        sut.updateComic(updateComic);
+        assertComicsMatch(updateComic, sut.getComic(1));
     }
 
     @Test
     public void deleteComic_deletes_comic_correctly(){
-        // dont forget to check both tables
+        sut.deleteComic(1);
+        Assert.assertEquals(null, sut.getComic(1));
+        Assert.assertEquals(2, sut.listAllComicsOfCollection(1).size());
+        // todo: check character junction table?
     }
 
-    @Test public void countUniqueComicsOfUser_counts_correctly(){
+    @Test
+    public void countUniqueComicsOfUser_counts_correctly(){
         Assert.assertEquals(5, sut.countUniqueComicsOfUser(1));
     }
+
+    @Test
+    public void getComicsByAuthor_returns_correct_list(){
+        Assert.assertEquals(2, sut.getComicsByAuthor("author1").size());
+        Assert.assertEquals(7, sut.getComicsByAuthor("author").size());
+        Assert.assertEquals(0, sut.getComicsByAuthor("author8").size());
+        Assert.assertEquals(2, sut.getComicsByAuthor("AuThOr1").size());
+    }
+
+    @Test
+    public void getComicsByArtist_returns_correct_list(){
+        Assert.assertEquals(2, sut.getComicsByArtist("artist1").size());
+        Assert.assertEquals(7, sut.getComicsByArtist("artist").size());
+        Assert.assertEquals(0, sut.getComicsByArtist("artist8").size());
+        Assert.assertEquals(2, sut.getComicsByArtist("ArTiSt1").size());
+    }
+
 
 
 
