@@ -1,6 +1,5 @@
 <template>
     <div class="container">
-        <the-header />
         <h2 class="collections-title">My Collections</h2>
         <div class="test-collection-list">
             <router-link class="collectionBoxes" :to="{ name: 'collection', params: {collectionId: collection.collectionId} }" v-for="collection in this.myCollections" :key="collection.collectionId">
@@ -18,13 +17,12 @@
 
 
 <script>
-import TheHeader from '../components/TheHeader.vue';
 import collectionService from '../services/CollectionsService.js';
 
 export default {
     name: 'collections',
     components: { 
-        TheHeader,
+
     },
     data() {
         return {

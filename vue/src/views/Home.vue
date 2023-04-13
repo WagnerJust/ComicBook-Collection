@@ -1,21 +1,18 @@
 <template>
-<section>
-  <the-header />
-  <div class="home">
-    
-    <div>
-        <img class="image-fit" src="https://w0.peakpx.com/wallpaper/691/675/HD-wallpaper-marvel-comics-marvel-logo.jpg" alt="Marvel iamge" />
+  <section>
+    <div class="home">
+      
+      <div>
+          <img class="image-fit" src="https://w0.peakpx.com/wallpaper/691/675/HD-wallpaper-marvel-comics-marvel-logo.jpg" alt="Marvel iamge" />
+      </div>
+      
+      <new-comics-list />
+      <characters-list />
     </div>
-    
-    <new-comics-list />
-    <characters-list />
-  </div>
-</section>
-
+  </section>
 </template>
 
 <script>
-import TheHeader from '../components/TheHeader.vue';
 import NewComicsList from '../components/NewComicsList.vue';
 import CharactersList from '../components/CharactersList.vue';
 
@@ -23,7 +20,6 @@ import CharactersList from '../components/CharactersList.vue';
 export default {
   name: "home",
   components: { 
-    TheHeader,
     NewComicsList,
     CharactersList 
   },

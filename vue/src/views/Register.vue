@@ -1,6 +1,5 @@
 <template>
   <div id="container" class="container">
-    <the-header id="nav" />
     <div class="main">
       <registration-form />
     </div>
@@ -10,13 +9,11 @@
 
 
 <script>
-import TheHeader from '../components/TheHeader.vue';
 import RegistrationForm from '../components/RegistrationForm.vue';
 
 export default {
   name: 'register',
   components: {
-    TheHeader,
     RegistrationForm
   }
 };

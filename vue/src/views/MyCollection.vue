@@ -1,6 +1,5 @@
 <template>
     <div class="container">
-        <the-header />
         my collection
         <max-comic-card v-for="comic in this.comics" :key="comic.comicId" :comic="comic" />
     </div>
@@ -9,13 +8,11 @@
 
 <script>
 import MaxComicCard from '../components/MaxComicCard.vue';
-import TheHeader from '../components/TheHeader.vue';
 import comicService from '../services/ComicService.js'
 
 export default {
     name: 'collection',
     components: { 
-        TheHeader,
         MaxComicCard
     },
     data() {
