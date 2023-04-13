@@ -3,21 +3,15 @@
         <the-header />
         <h2 class="collections-title">My Collections</h2>
         <div class="test-collection-list">
-            <div class="collectionBoxes" v-for="collection in this.myCollections" :key="collection.collectionId">
-                <div class="collectionBox">
-                    {{collection.collectionName}}
-                    <router-link class="router-link" :to="{ name: 'my-collection' }" >LINK</router-link>
-                </div>
-            </div>
+            <router-link class="collectionBoxes" :to="{ name: 'collection', params: {collectionId: collection.collectionId} }" v-for="collection in this.myCollections" :key="collection.collectionId">
+                {{collection.collectionName}}
+            </router-link>
         </div>
         <h2 class="collections-title">Public Collections</h2>
         <div class="test-collection-list">
-            <div class="collectionBoxes" v-for="collection in this.publicCollections" :key="collection.collectionId">
-                <div class="collectionBox">
-                    {{collection.collectionName}}
-                    <router-link class="router-link" :to="{ name: 'my-collection' }"  >LINK</router-link>
-                </div>
-            </div>
+            <router-link class="collectionBoxes" :to="{ name: 'collection' }" v-for="collection in this.publicCollections" :key="collection.collectionId">
+                {{collection.collectionName}}
+            </router-link>
         </div>
     </div>
 </template>
@@ -81,12 +75,6 @@ export default {
     width: 200px;
     justify-content: center;
     background-color: white;
-    
-}
-
-.collectionBox {
-    display: flex;
-    justify-content: center;
     
 }
 
