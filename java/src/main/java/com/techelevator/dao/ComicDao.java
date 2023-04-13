@@ -12,5 +12,6 @@ public interface ComicDao {
     public boolean removeComicFromCollection(int comicId, int collectionId);
     public boolean updateComic (Comic comic);
     public boolean deleteComic (int comicId);
+    public int countUniqueComicsOfUser(int userId);
 
 }

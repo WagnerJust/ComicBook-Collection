@@ -120,6 +120,44 @@ public class JdbcCharacterDao implements CharacterDao{
         return true;
     }
 
+    @Override
+    public int countCharactersInCollection(int collectionId, int characterId) {
+        int result = -1;
+        String sql = "SELECT COUNT(*) AS total FROM character_table\n" +
+                     "JOIN character_comic ON character_comic.character_id = character_table.character_id\n" +
+                     "JOIN comic_collection ON comic_collection.comic_data_id = character_comic.comic_data_id\n" +
+                     "JOIN collection ON comic_collection.collection_id = collection.collection_id\n" +
+                     "WHERE character_table.character_id = ? AND collection.collection_id = ?;";
+        try {
+            SqlRowSet rowSet = jdbcTemplate.queryForRowSet(sql, characterId, collectionId);
+            if (rowSet.next()){
+                result = rowSet.getInt("total");
+            }
+        }catch (DataAccessException e){
+            return -1;
+        }
+        return result;
+    }
+
+    @Override
+    public int countCharactersOfUser(int userId, int characterId) {
+        int result = -1;
+        String sql = "SELECT COUNT(DISTINCT comic_collection.comic_data_id) AS total FROM character_table\n" +
+                     "JOIN character_comic ON character_comic.character_id = character_table.character_id\n" +
+                     "JOIN comic_collection ON comic_collection.comic_data_id = character_comic.comic_data_id\n" +
+                     "JOIN collection ON comic_collection.collection_id = collection.collection_id\n" +
+                     "WHERE character_table.character_id = ? AND collection.user_id = ?;";
+        try {
+            SqlRowSet rowSet = jdbcTemplate.queryForRowSet(sql, characterId, userId);
+            if (rowSet.next()){
+                result = rowSet.getInt("total");
+            }
+        }catch (DataAccessException e){
+            return -1;
+        }
+        return result;
+    }
+
 
     //todo: get all characters by comic
 

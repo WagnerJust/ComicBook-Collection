@@ -107,6 +107,8 @@ public class JdbcCollectionDao implements CollectionDao{
         }
     }
 
+
+
     private ComicCollection mapRowToCollection(SqlRowSet results){
         ComicCollection comicCollection = new ComicCollection();
         comicCollection.setUserId(results.getInt("user_id"));

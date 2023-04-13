@@ -27,6 +27,7 @@ INSERT INTO character_table (character_id_marvel_api, alias, real_name) VALUES (
 INSERT INTO character_table (character_id_marvel_api, alias, real_name) VALUES (5, 'alias5', 'name5');
 
 INSERT INTO comic_collection (collection_id, comic_data_id) VALUES (1, 1);
+INSERT INTO comic_collection (collection_id, comic_data_id) VALUES (3, 1);
 INSERT INTO comic_collection (collection_id, comic_data_id) VALUES (1, 2);
 INSERT INTO comic_collection (collection_id, comic_data_id) VALUES (1, 3);
 INSERT INTO comic_collection (collection_id, comic_data_id) VALUES (2, 1);
@@ -40,6 +41,7 @@ INSERT INTO character_comic (character_id, comic_data_id) VALUES (1, 1);
 INSERT INTO character_comic (character_id, comic_data_id) VALUES (1, 2);
 INSERT INTO character_comic (character_id, comic_data_id) VALUES (1, 3);
 INSERT INTO character_comic (character_id, comic_data_id) VALUES (1, 4);
+INSERT INTO character_comic (character_id, comic_data_id) VALUES (1, 5);
 INSERT INTO character_comic (character_id, comic_data_id) VALUES (2, 1);
 INSERT INTO character_comic (character_id, comic_data_id) VALUES (2, 5);
 INSERT INTO character_comic (character_id, comic_data_id) VALUES (3, 3);
