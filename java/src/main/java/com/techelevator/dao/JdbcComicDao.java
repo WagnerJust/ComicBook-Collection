@@ -49,6 +49,9 @@ public class JdbcComicDao implements ComicDao{
             if (results.next()) {
                 comic = mapRowToComic(results);
             }
+            if (comic == null){
+                return null;
+            }
         } catch (DataAccessException e){
             return null;
         }
@@ -65,6 +68,9 @@ public class JdbcComicDao implements ComicDao{
             SqlRowSet results = jdbcTemplate.queryForRowSet(sql, "%" + author + "%");
             while (results.next()){
                 comics.add(mapRowToComic(results));
+            }
+            if (comics.size()==0){
+                return null;
             }
         }catch (DataAccessException e){
             return null;
@@ -83,6 +89,9 @@ public class JdbcComicDao implements ComicDao{
             while (results.next()){
                 comics.add(mapRowToComic(results));
             }
+            if (comics.size()==0){
+                return null;
+            }
         }catch (DataAccessException e){
             return null;
         }
@@ -100,6 +109,9 @@ public class JdbcComicDao implements ComicDao{
             while (results.next()){
                 comics.add(mapRowToComic(results));
             }
+            if (comics.size()==0){
+                return null;
+            }
         }catch (DataAccessException e){
             return null;
         }
@@ -116,6 +128,9 @@ public class JdbcComicDao implements ComicDao{
             SqlRowSet results = jdbcTemplate.queryForRowSet(sql, "%" + series + "%");
             while (results.next()){
                 comics.add(mapRowToComic(results));
+            }
+            if (comics.size()==0){
+                return null;
             }
         }catch (DataAccessException e){
             return null;

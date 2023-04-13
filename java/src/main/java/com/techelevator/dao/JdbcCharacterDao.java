@@ -20,12 +20,15 @@ public class JdbcCharacterDao implements CharacterDao{
     //todo: get all characters by collection/comic/user?
     @Override
     public ComicCharacter getCharacterById(int characterId) {
-        ComicCharacter character = new ComicCharacter();
+        ComicCharacter character = null;
         try {
             String sql = "SELECT * FROM character_table WHERE character_id = ?";
             SqlRowSet results = jdbcTemplate.queryForRowSet(sql, characterId);
             if(results.next()){
                 character = mapRowToCharacter(results);
+            }
+            if (character == null){
+                return null;
             }
         } catch(Exception e) {
             throw new RuntimeException("Failed to find Character");
@@ -42,6 +45,9 @@ public class JdbcCharacterDao implements CharacterDao{
             while (results.next()){
                 characters.add(mapRowToCharacter(results));
             }
+            if (characters.size()==0){
+                return null;
+            }
         } catch(Exception e) {
             throw new RuntimeException("Failed to find Character");
         }
@@ -56,6 +62,9 @@ public class JdbcCharacterDao implements CharacterDao{
             SqlRowSet results = jdbcTemplate.queryForRowSet(sql, "%" + characterName + "%");
             while (results.next()){
                 characters.add(mapRowToCharacter(results));
+            }
+            if (characters.size()==0){
+                return null;
             }
         } catch(Exception e) {
             throw new RuntimeException("Failed to find Character");
@@ -90,6 +99,9 @@ public class JdbcCharacterDao implements CharacterDao{
             SqlRowSet results = jdbcTemplate.queryForRowSet(sql, comicId);
             while (results.next()){
                 characters.add(mapRowToCharacter(results));
+            }
+            if (characters.size()==0){
+                return null;
             }
         } catch(Exception e) {
             throw new RuntimeException("Failed to find Character");

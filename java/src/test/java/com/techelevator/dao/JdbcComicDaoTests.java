@@ -36,6 +36,11 @@ public class JdbcComicDaoTests extends BaseDaoTests{
     }
 
     @Test
+    public void getComicsByID_returns_null_given_invalid_id(){
+        Assert.assertEquals(null, sut.getComic(-1));
+    }
+
+    @Test
     public void listAllComicsOfCollection_returns_correct_list() {
         Assert.assertEquals(3, sut.listAllComicsOfCollection(1).size());
 
@@ -102,11 +107,21 @@ public class JdbcComicDaoTests extends BaseDaoTests{
     }
 
     @Test
+    public void getComicsByAuthor_returns_null_given_invalid_name(){
+        Assert.assertEquals(null, sut.getComicsByAuthor("z"));
+    }
+
+    @Test
     public void getComicsByArtist_returns_correct_list(){
         Assert.assertEquals(2, sut.getComicsByArtist("artist1").size());
         Assert.assertEquals(7, sut.getComicsByArtist("artist").size());
         Assert.assertEquals(0, sut.getComicsByArtist("artist8").size());
         Assert.assertEquals(2, sut.getComicsByArtist("ArTiSt1").size());
+    }
+
+    @Test
+    public void getComicsByArtist_returns_null_given_invalid_name(){
+        Assert.assertEquals(null, sut.getComicsByArtist("z"));
     }
 
     @Test
@@ -117,11 +132,21 @@ public class JdbcComicDaoTests extends BaseDaoTests{
     }
 
     @Test
+    public void getComicsByCharacter_returns_null_given_invalid_character(){
+        Assert.assertEquals(null, sut.getComicsByCharacter(-1));
+    }
+
+    @Test
     public void getComicsBySeries_returns_correct_list(){
         Assert.assertEquals(7, sut.getComicsBySeries("SERIES").size());
         Assert.assertEquals(7, sut.getComicsBySeries("series").size());
         Assert.assertEquals(1, sut.getComicsBySeries("series1").size());
         Assert.assertEquals(1, sut.getComicsBySeries("SeRiEs1").size());
+    }
+
+    @Test
+    public void getComicsBySeries_returns_null_given_invalid_series(){
+        Assert.assertEquals(null, sut.getComicsBySeries("z"));
     }
 
 

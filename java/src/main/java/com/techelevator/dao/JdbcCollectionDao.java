@@ -38,12 +38,15 @@ public class JdbcCollectionDao implements CollectionDao{
 
     @Override
     public ComicCollection getCollectionByCollectionId(int id){
-        ComicCollection collection = new ComicCollection();
+        ComicCollection collection = null;
         try {
             String sql = "SELECT * FROM collection WHERE collection_id = ?";
             SqlRowSet results = jdbcTemplate.queryForRowSet(sql, id);
             if(results.next()){
                 collection = mapRowToCollection(results);
+            }
+            if (collection == null){
+                return null;
             }
         } catch (Exception e) {
             return null;
@@ -79,6 +82,9 @@ public class JdbcCollectionDao implements CollectionDao{
             SqlRowSet results = jdbcTemplate.queryForRowSet(sql, id);
             while (results.next()) {
                 collections.add(mapRowToCollection(results));
+            }
+            if (collections.size()==0){
+                return null;
             }
         } catch(Exception e) {
             throw new RuntimeException("Failed to list Collections by Id");
