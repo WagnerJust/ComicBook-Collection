@@ -53,7 +53,7 @@ public class CharacterController {
 
     @PreAuthorize("hasRole('USER')")
     @ResponseStatus(value = HttpStatus.CREATED)
-    @PostMapping("/characters")
+    @PostMapping("/characters/add")
     public ComicCharacter addCharacter(@RequestBody ComicCharacter newCharacter){
         return characterDao.addCharacter(newCharacter);
     }
@@ -76,7 +76,7 @@ public class CharacterController {
 
     @PreAuthorize("hasRole('USER')")
     @ResponseStatus(value = HttpStatus.OK)
-    @PostMapping("/comic/{comicId}/characters/{characterId}")
+    @PostMapping("/comics/{comicId}/characters/{characterId}")
     public boolean addCharacterToComic(@PathVariable int comicId, int characterId){
         return characterDao.addCharacterToComic(characterId,comicId);
     }
@@ -88,7 +88,7 @@ public class CharacterController {
         return characterDao.countCharactersInCollection(collectionId,characterId);
     }
 
-    //todo: change name of function below in characterDao
+    //todo: change name of function below in characterDao -> countUserComicsWithCharacter
     @PreAuthorize("hasRole('USER')")
     @ResponseStatus(value = HttpStatus.OK)
     @GetMapping("/user/{userId}/characters/{characterId}")

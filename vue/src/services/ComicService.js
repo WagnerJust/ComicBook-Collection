@@ -18,12 +18,36 @@ export default{
         return http.get(`/comics/${comicId}`)
     },
 
+    getComicsByCharacterName(characterName){
+        return http.get(`/comics/characters/real/${characterName}`);
+    },
+
+    
+    getComicsByCharacterAlias(characterAlias){
+        return http.get(`/comics/characters/alias/${characterAlias}`);
+    },
+
+    getComicsByAuthor(authorName){
+        return http.get(`/comics/author/${authorName}`);
+    },
+
+    getComicBySeries(seriesName){
+        return http.get(`/comics/series/${seriesName}`);
+    },
+
     addComicToCollection(collectionId, comicToAdd){
-        return http.put(`/collections/${collectionId}`, comicToAdd);
+        return http.put(`/collections/${collectionId}/add`, comicToAdd);
     },
 
     addComic(comicToAdd){
         return http.post('/comics', comicToAdd);
+    },
+
+    removeComicFromCollection(collectionId,comicId){
+        return http.delete(`/collections/${collectionId}/comics/${comicId}`);
     }
+
+    
+
 
 }

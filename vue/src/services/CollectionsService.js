@@ -10,6 +10,11 @@ const http = axios.create({
 
 export default{
 
+
+    getCollectionByCollectionId(collectionId){
+        return http.get(`/collections/${collectionId}`);
+    },
+
     listAllPublic(){
         return http.get('/collections'); 
     },
@@ -19,11 +24,19 @@ export default{
     },
     
     createCollection(newCollection){
-        return http.post(`/collections/`, newCollection);
+        return http.post(`/collections/add`, newCollection);
     },
     
     updateCollection(updatedCollection){
-        return http.put(`/collections.${updatedCollection.collectionId}`, updatedCollection);
+        return http.put(`/collections/update/${updatedCollection.collectionId}`, updatedCollection);
+    },
+
+    countCharactersInCollection(collectionId){
+        return http.get(`/collections/${collectionId}/stats`);
+    },
+
+    countUserComicsWithCharacter(userId, characterId){
+        return http.get(`/user/${userId}/characters/${characterId}`);
     }
     
 }
