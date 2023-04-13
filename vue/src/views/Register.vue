@@ -22,12 +22,12 @@ export default {
 <style scoped>
 
 .container {
-	background-image: url('/public/x-men.png');
+	background-image: url('/public/x-men-1.png');
 	background-repeat: no-repeat;
 	background-size: cover;
 	background-position: bottom;
 	opacity: 0.9;
-	height: 100vh;
+	height: 84vh;
 }
 
 .main {

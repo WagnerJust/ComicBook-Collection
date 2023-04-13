@@ -4,20 +4,71 @@ components / SearchComics
   <div class="search-comics">
     <img class="image-container" src="../../public/star-wars.jpg" alt="star-wars image">
     <div class="search-container">
-        <input class="search-box" type="text" placeholder="  Search" v-model="searchValue">
-
+        <input class="search-box" type="text" placeholder="  Search" v-model="searchValue" />
+    </div>
+    <div class="filtered-comics-list">
+        <comic-card v-bind:comic="comic" />
     </div>
 
   </div>
 </template>
 
 <script>
+import collectionsService from '../services/CollectionsService';
+import marvelService from '../services/MarvelService';
+import ComicCard from './ComicCard.vue';
+
 export default {
     name: "search-comics",
-    components: {},
-    data: () => ({
-        searchValue: '',
-    }),
+    components: { ComicCard },
+    data() {
+        return {
+            publicCollections: [],
+            searchResults: [],
+            searchValue: "",
+        }
+    },
+    
+    method: {
+    searchByTitle(title) {
+        marvelService.searchComicByTitle(title).then((response) => {
+        this.searchResults = response.data;
+        })
+    },
+
+    searchComicBySeries(series) {
+        marvelService.searchComicByTitle(series).then((response) => {
+        this.searchResults = response.data;
+        })   
+    },
+    
+    searchComicByCreator(name) {
+        marvelService.searchComicByTitle(name).then((response) => {
+        this.searchResults = response.data;
+        })   
+    },
+
+    searchComicByIssue(title, issue) {
+        marvelService.searchComicByTitle(title, issue).then((response) => {
+        this.searchResults = response.data;
+        })   
+    },
+
+    SearchComicByCharacter(characterId) {
+        marvelService.searchComicByTitle(characterId).then((response) => {
+        this.searchResults = response.data;
+        })   
+    },
+    
+
+
+    created() {
+        collectionsService.listAllPublic().then((response) => {
+            this.publicCollections = response.data;
+            console.log(this.publicCollections)
+        })
+    }
+}
 };
 
 </script>
