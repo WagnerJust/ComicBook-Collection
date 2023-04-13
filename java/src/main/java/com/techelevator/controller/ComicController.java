@@ -64,6 +64,20 @@ public class ComicController {
         return comicDao.removeComicFromCollection(comicId, collectionId);
     }
 
+    @PreAuthorize("hasRole('USER')")
+    @ResponseStatus(value = HttpStatus.OK)
+    @GetMapping("/comics/author/{authorName}")
+    public List<Comic> getComicsByAuthor(@PathVariable String authorName){
+        return comicDao.getComicsByAuthor(authorName);
+    }
+
+    @PreAuthorize("hasRole('USER')")
+    @ResponseStatus(value = HttpStatus.OK)
+    @GetMapping("/comics/author/{artistName}")
+    public List<Comic> getComicsByArtist(@PathVariable String artistName){
+        return comicDao.getComicsByArtist(artistName);
+    }
+
 //    @PreAuthorize("hasRole('USER')")
 //    @ResponseStatus(value = HttpStatus.OK)
 //    @GetMapping("/comics/characters/real/{name}")
@@ -77,12 +91,7 @@ public class ComicController {
 //    public List<Comic> getComicsByCharacterAlias(@PathVariable String alias){
 //        return comicDao.getComicsByCharacterAlias(alias);
 //    }
-//    @PreAuthorize("hasRole('USER')")
-//    @ResponseStatus(value = HttpStatus.OK)
-//    @GetMapping("/comics/author/{authorName}")
-//    public List<Comic> getComicsByAuthor(@PathVariable String authorName){
-//        return comicDao.getComicsByAuthor(authorName);
-//    }
+
 //
 //    @PreAuthorize("hasRole('USER')")
 //    @ResponseStatus(value = HttpStatus.OK)

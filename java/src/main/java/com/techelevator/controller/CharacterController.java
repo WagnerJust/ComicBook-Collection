@@ -34,8 +34,8 @@ public class CharacterController {
 
     @PreAuthorize("hasRole('USER')")
     @GetMapping("/characters/alias/{characterName}")
-    public ComicCharacter getCharacterByAlias(@PathVariable String characterName) {
-        ComicCharacter character = characterDao.getCharacterByAlias(characterName);
+    public List<ComicCharacter> getCharacterByAlias(@PathVariable String characterName) {
+        List<ComicCharacter> character = characterDao.getCharacterByAlias(characterName);
         if(character == null){
             throw new ResponseStatusException(HttpStatus.NOT_FOUND, "Could not find Character");
         }
@@ -84,28 +84,26 @@ public class CharacterController {
     @PreAuthorize("hasRole('USER')")
     @ResponseStatus(value = HttpStatus.OK)
     @GetMapping("/collections/{collectionId}/stats")
-    public int countCharactersInCollection(int characterId ,@PathVariable int collectionId){
-        return characterDao.countCharactersInCollection(collectionId,characterId);
+    public int countCollectionComicsWithCharacter(int characterId ,@PathVariable int collectionId){
+        return characterDao.countCollectionComicsWithCharacter(collectionId,characterId);
     }
 
-    //todo: change name of function below in characterDao -> countUserComicsWithCharacter
+
     @PreAuthorize("hasRole('USER')")
     @ResponseStatus(value = HttpStatus.OK)
     @GetMapping("/user/{userId}/characters/{characterId}")
-    public int countComicsByCharacterId(@PathVariable int userId, int characterId){
-        return characterDao.countCharactersOfUser(userId, characterId);
+    public int countUserComicsWithCharacter(@PathVariable int userId, int characterId){
+        return characterDao.countUserComicsWithCharacter(userId, characterId);
     }
 
 
 
-
-
-//    @PreAuthorize("hasRole('USER')")
-//    @ResponseStatus(value = HttpStatus.OK)
-//    @GetMapping("/comics/{comicId}/characters")
-//    public List<ComicCharacter> getCharactersByComicId(@PathVariable int comicId){
-//        //return characterDao.getCharacterByComic(comicId);
-//    }
+    @PreAuthorize("hasRole('USER')")
+    @ResponseStatus(value = HttpStatus.OK)
+    @GetMapping("/comics/{comicId}/characters")
+    public List<ComicCharacter> getCharactersByComicId(@PathVariable int comicId){
+        return characterDao.getCharactersByComicId(comicId);
+    }
 
 
 

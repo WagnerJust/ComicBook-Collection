@@ -6,14 +6,16 @@ import java.util.List;
 
 public interface CharacterDao {
     ComicCharacter getCharacterById(int characterId);
-    ComicCharacter getCharacterByAlias(String characterName);
+    List<ComicCharacter> getCharacterByAlias(String characterName);
+    List<ComicCharacter> getCharacterByRealName(String characterName);
     List<ComicCharacter> getAllCharacters();
+    List<ComicCharacter> getCharactersByComicId(int comicId);
     ComicCharacter addCharacter(ComicCharacter character);
     boolean updateCharacter(int characterId, ComicCharacter character);
     boolean deleteCharacter(int characterId);
     boolean addCharacterToComic(int characterId, int comicId);
-    int countCharactersInCollection(int collectionId, int characterId);
-    int countCharactersOfUser(int userId, int characterId);
+    int countCollectionComicsWithCharacter(int collectionId, int characterId);
+    int countUserComicsWithCharacter(int userId, int characterId);
 
     //todo: is this needed?
     //boolean removeCharacterFromComic(int characterId, int comicId);
