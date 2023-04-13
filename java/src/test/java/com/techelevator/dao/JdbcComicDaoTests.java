@@ -1,5 +1,6 @@
 package com.techelevator.dao;
 
+import com.fasterxml.jackson.annotation.JsonTypeInfo;
 import com.techelevator.model.Comic;
 import org.junit.Assert;
 import org.junit.Before;
@@ -101,6 +102,21 @@ public class JdbcComicDaoTests extends BaseDaoTests{
         Assert.assertEquals(7, sut.getComicsByArtist("artist").size());
         Assert.assertEquals(0, sut.getComicsByArtist("artist8").size());
         Assert.assertEquals(2, sut.getComicsByArtist("ArTiSt1").size());
+    }
+
+    @Test
+    public void getComicsByCharacter_returns_correct_list(){
+        Assert.assertEquals(5, sut.getComicsByCharacter(1).size());
+        Assert.assertEquals(0, sut.getComicsByCharacter(10).size());
+        Assert.assertEquals(2, sut.getComicsByCharacter(2).size());
+    }
+
+    @Test
+    public void getComicsBySeries_returns_correct_list(){
+        Assert.assertEquals(7, sut.getComicsBySeries("SERIES").size());
+        Assert.assertEquals(7, sut.getComicsBySeries("series").size());
+        Assert.assertEquals(1, sut.getComicsBySeries("series1").size());
+        Assert.assertEquals(1, sut.getComicsBySeries("SeRiEs1").size());
     }
 
 

@@ -1,17 +1,21 @@
 package com.techelevator.dao;
 
+import com.techelevator.model.Comic;
 import com.techelevator.model.ComicCharacter;
 import org.junit.Assert;
 import org.junit.Before;
 import org.junit.Test;
 import org.springframework.jdbc.core.JdbcTemplate;
 
+import java.time.LocalDate;
 import java.util.List;
 
 public class JdbcCharacterDaoTests extends BaseDaoTests{
 
     protected final ComicCharacter CHARACTER_1 = new ComicCharacter(1,1,  "name1", "alias1");
     protected final ComicCharacter CHARACTER_2 = new ComicCharacter(2,2,  "name2", "alias2");
+
+    protected final Comic COMIC_1 = new Comic("series1", 1, 1, "UPC1", "URL1", LocalDate.parse("2011-01-01"), "author1", "artist1");
 
     private ComicCharacter characterTest;
     private ComicCharacter characterTest2;
@@ -47,12 +51,12 @@ public class JdbcCharacterDaoTests extends BaseDaoTests{
         Assert.assertEquals(1, character.size());
     }
 
-//    @Test
-//    public void getCharacterByComicIdReturnsCorrectCharacter(){
-//        List<ComicCharacter> character = sut.getCharactersByComicId(CHARACTER_1.getCharacterRealName());
-//
-//        Assert.assertEquals(1, character.size());
-//    }
+    @Test
+    public void getCharacterByComicIdReturnsCorrectCharacter(){
+        List<ComicCharacter> character = sut.getCharactersByComicId(COMIC_1.getComicId());
+
+        Assert.assertEquals(2, character.size());
+    }
 
     @Test
     public void getCharacterByIdReturnsCorrectCharacter(){
