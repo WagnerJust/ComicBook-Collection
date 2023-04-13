@@ -7,7 +7,7 @@
       <ul class="nav-bar">
         <li>Browse</li>
         <li>New Comics</li>
-        <li class="collections"><router-link :to="{ name: 'my-collections' }" style="text-decoration: none;">Collections</router-link></li>
+        <li class="collections"><router-link :to="{ name: 'collections' }" style="text-decoration: none;">Collections</router-link></li>
       </ul>
     </nav>
     <div>
