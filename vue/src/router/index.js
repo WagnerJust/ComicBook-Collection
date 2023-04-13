@@ -7,6 +7,7 @@ import Register from '../views/Register.vue'
 import Collections from '../views/Collections.vue'
 import MyCollection from '../views/MyCollection.vue'
 import NotFound from '../views/NotFound.vue'
+import Browse from '../views/Browse.vue'
 import store from '../store/index'
 
 
@@ -71,6 +72,14 @@ const router = new Router({
       component: MyCollection,
       meta: {
         requiresAuth: true
+      }
+    },
+    {
+      path: "/browse",
+      name: "browse",
+      component: Browse,
+      meta: {
+        requiresAuth: false
       }
     },
     {

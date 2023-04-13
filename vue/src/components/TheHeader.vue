@@ -5,7 +5,7 @@
     </div>
     <nav>
       <ul class="nav-bar">
-        <li>Browse</li>
+        <li><router-link :to="{ name: 'browse' }" style="text-decoration: none;">Browse</router-link></li>
         <li>New Comics</li>
         <li class="collections"><router-link :to="{ name: 'collections' }" style="text-decoration: none;">Collections</router-link></li>
       </ul>
