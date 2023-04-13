@@ -2,7 +2,7 @@
     <div class="container">
         <the-header />
         my collection
-        <max-comic-card v-for="comic in this.$store.state.testComics" :key="comic.comicId"/>
+        <max-comic-card v-for="comic in this.comics" :key="comic.comicId" :comic="comic" />
     </div>
 </template>
 
@@ -18,11 +18,18 @@ export default {
         TheHeader,
         MaxComicCard
     },
+    data() {
+        return {
+            comics: []
+        }
+    },
     created() {
         
         /* This call can be seen in the console. It is requesting the comics from collectionId: 1 */
-        comicService.getComicsByCollectionId(this.myCollections).then(response => {
-            this.$store.state.testComics = response.data;
+        comicService.getComicsByCollectionId(this.$route.params.collectionId).then(response => {
+            this.comics = response.data;
+            console.log("COMICS")
+            console.log(this.comics)
         })
 
     }
