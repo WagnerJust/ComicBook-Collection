@@ -28,6 +28,9 @@ public class JdbcComicDao implements ComicDao{
             while (results.next()) {
                 comics.add(mapRowToComic(results));
             }
+            if (comics.size()==0){
+                return null;
+            }
         } catch (DataAccessException e){
             System.out.println(e);
             return null;

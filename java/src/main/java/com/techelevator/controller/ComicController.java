@@ -78,6 +78,13 @@ public class ComicController {
         return comicDao.getComicsByArtist(artistName);
     }
 
+    @PreAuthorize("hasRole('USER')")
+    @ResponseStatus(value = HttpStatus.OK)
+    @GetMapping("/comics/series/{seriesName}")
+    public List<Comic> getComicsBySeries(@PathVariable String seriesName){
+        return comicDao.getComicsBySeries(seriesName);
+    }
+
 //    @PreAuthorize("hasRole('USER')")
 //    @ResponseStatus(value = HttpStatus.OK)
 //    @GetMapping("/comics/characters/real/{name}")
@@ -91,18 +98,6 @@ public class ComicController {
 //    public List<Comic> getComicsByCharacterAlias(@PathVariable String alias){
 //        return comicDao.getComicsByCharacterAlias(alias);
 //    }
-
-//
-//    @PreAuthorize("hasRole('USER')")
-//    @ResponseStatus(value = HttpStatus.OK)
-//    @GetMapping("/comics/series/{seriesName}")
-//    public List<Comic> getComicsBySeries(@PathVariable String seriesName){
-//        return comicDao.geComicsBySeries(seriesName);
-//    }
-
-
-
-
 
 
 

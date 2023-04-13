@@ -133,8 +133,8 @@ public class JdbcCharacterDao implements CharacterDao{
         String sqlJoinTable = "DELETE FROM character_comic " +
                 "WHERE character_id = ?;";
         try{
-            jdbcTemplate.update(sql, characterId);
             jdbcTemplate.update(sqlJoinTable, characterId);
+            jdbcTemplate.update(sql, characterId);
         }catch (DataAccessException e){
             return false;
         }
