@@ -20,8 +20,14 @@ export default new Vuex.Store({
   state: {
     token: currentToken || '',
     user: currentUser || {},
-    testCollections: [],
+    myCollections: [],
+    collectionId: '',
+    publicCollections: [],
     testComics: [],
+    activeCollection: {
+      collectionId: '',
+      collectionName: '',
+    },
     comics: [
       {
         comicId: "67631",
@@ -117,8 +123,8 @@ export default new Vuex.Store({
     SET_COMICS(state, data) {
       state.testComics = data;
     },
-    SET_COLLETIONS(state, data) {
-      state.testCollections = data;
+    SET_COLLECTION(state, data) {
+      state.activeCollection = data;
     }
   }
 })

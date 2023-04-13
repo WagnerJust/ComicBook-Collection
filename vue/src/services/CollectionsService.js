@@ -15,7 +15,7 @@ export default{
     },
 
     listByUserId(userId){
-        return http.get(`/${userId}/collections`);
+        return http.get(`user/${userId}/collections`);
     },
     
     createCollection(newCollection){

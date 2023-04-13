@@ -4,7 +4,9 @@ import Home from '../views/Home.vue'
 import Login from '../views/Login.vue'
 import Logout from '../views/Logout.vue'
 import Register from '../views/Register.vue'
-import MyCollections from '../views/MyCollections.vue'
+import Collections from '../views/Collections.vue'
+import MyCollection from '../views/MyCollection.vue'
+import NotFound from '../views/NotFound.vue'
 import store from '../store/index'
 
 
@@ -56,12 +58,25 @@ const router = new Router({
       }
     },
     {
-      path: "/my-collections",
-      name: "my-collections",
-      component: MyCollections,
+      path: "/collections",
+      name: "collections",
+      component: Collections,
       meta: {
         requiresAuth: true
       }
+    },
+    {
+      path: "/collection/:id",
+      name: "collection",
+      component: MyCollection,
+      meta: {
+        requiresAuth: true
+      }
+    },
+    {
+      path: "/404",
+      name: "NotFound",
+      component: NotFound
     }
   ]
 })

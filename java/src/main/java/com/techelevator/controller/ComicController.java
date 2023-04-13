@@ -46,7 +46,7 @@ public class ComicController {
 
     @PreAuthorize("hasRole('USER')")
     @ResponseStatus(value = HttpStatus.OK)
-    @PutMapping("/collections/{collectionId}")
+    @PutMapping("/collections/{collectionId}/add")
     public boolean addComicToCollection(@PathVariable int collectionId, @RequestBody Comic comicToAdd){
         return comicDao.addComicToCollection(comicToAdd.getComicId(), collectionId);
     }
@@ -56,6 +56,42 @@ public class ComicController {
     public Comic addComic(@RequestBody Comic comic){
         return comicDao.addComic(comic);
     }
+
+    @PreAuthorize("hasRole('USER')")
+    @ResponseStatus(value = HttpStatus.OK)
+    @DeleteMapping("/collections/{collectionId}/comics/{comicId}")
+    public boolean removeComicFromCollection(@PathVariable int collectionId, int comicId){
+        return comicDao.removeComicFromCollection(comicId, collectionId);
+    }
+
+//    @PreAuthorize("hasRole('USER')")
+//    @ResponseStatus(value = HttpStatus.OK)
+//    @GetMapping("/comics/characters/real/{name}")
+//    public List<Comic> getComicByCharacterName(@PathVariable String name){
+//        return comicDao.getComicsByCharacterName(name);
+//    }
+//
+//    @PreAuthorize("hasRole('USER')")
+//    @ResponseStatus(value = HttpStatus.OK)
+//    @GetMapping("/comics/characters/alias/{alias}")
+//    public List<Comic> getComicByCharacterName(@PathVariable String alias){
+//        return comicDao.getComicsByCharacterAlias(alias);
+//    }
+//    @PreAuthorize("hasRole('USER')")
+//    @ResponseStatus(value = HttpStatus.OK)
+//    @GetMapping("/comics/author/{authorName}")
+//    public List<Comic> getComicsByAuthor(@PathVariable String authorName){
+//        return comicDao.getComicsByAuthor(authorName);
+//    }
+//
+//    @PreAuthorize("hasRole('USER')")
+//    @ResponseStatus(value = HttpStatus.OK)
+//    @GetMapping("/comics/Series/{seriesName}")
+//    public List<Comic> getComicsBySeries(@PathVariable String seriesName){
+//        return comicDao.geComicsBySeries(seriesName);
+//    }
+
+
 
 
 
