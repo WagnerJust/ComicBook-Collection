@@ -1,22 +1,24 @@
 <template>
     <section class="container">
         <h2 class="collections-title">My Collections</h2>
-        <div class="test-collection-list">
+        <div class="collection-list">
             <router-link class="collectionBoxes" 
             :to="{ name: 'collection', params: {collectionId: collection.collectionId} }" 
             v-for="collection in this.myCollections" 
             :key="collection.collectionId"
             :collection="collection">
-                {{collection.collectionName}}
+                <div class="collection-name">{{collection.collectionName}}</div>
+                <img class="collection-image" src="..\public\comic-collection.jpg" />
             </router-link>
         </div>
         <h2 class="collections-title">Public Collections</h2>
-        <div class="test-collection-list">
+        <div class="collection-list">
             <router-link class="collectionBoxes" 
             :to="{ name: 'collection' }" 
             v-for="collection in this.publicCollections" 
             :key="collection.collectionId">
-                {{collection.collectionName}}
+                <div class="collection-name">{{collection.collectionName}}</div>
+                <img class="collection-image" src="..\public\comic-collection.jpg" />
             </router-link>
         </div>
     </section>
@@ -60,27 +62,37 @@ export default {
 
 <style scoped>
 
+.container {
+    margin-left: 12%;
+    margin-right: 12%;
+    font-family: 'Montserrat', Helvetica, sans-serif;
+}
+
 .collections-title {
-    margin: 2rem;
-    font-size: 3rem;
+    margin-top: 1.5rem;
+    font-size: 2.5rem;
     text-align: center;
 }
 
-.test-collection-list {
+.collection-list {
     display: flex;
     justify-content: space-evenly;
-    align-items: center;
-    margin: 2rem;
 }
 
 .collectionBoxes {
-    display: flex;
-    flex-direction: row;
-    height: 200px;
-    width: 200px;
-    justify-content: center;
+    text-transform: uppercase;
+    text-align: center;
     background-color: white;
-    
+    margin: 2rem;
+}
+
+.collection-name {
+    margin-top: .3rem;
+    margin-bottom: .1rem;
+}
+
+.collection-image:hover {
+    transform: translateY(+5px);
 }
 
 </style>
