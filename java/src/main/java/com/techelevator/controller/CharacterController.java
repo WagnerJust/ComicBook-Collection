@@ -65,9 +65,19 @@ public class CharacterController {
         return characterDao.updateCharacter(characterId, updatedCharacter);
     }
 
-    //todo: get charcter by comic: use path /comics/comicId/characters
+//    @PreAuthorize("hasRole('USER')")
+//    @ResponseStatus(value = HttpStatus.OK)
+//    @GetMapping("/comics/{comicId}/characters")
+//    public List<ComicCharacter> getCharactersByComicId(@PathVariable int comicId){
+//        //return characterDao.getCharacterByComic(comicId);
+//    }
 
-    //todo: get add character to comic : use path comic/comicId/character/characterId with two path variables
+    @PreAuthorize("hasRole('USER')")
+    @ResponseStatus(value = HttpStatus.OK)
+    @PostMapping("/comic/{comicId}/characters/{characterId}")
+    public boolean addCharacterToComic(@PathVariable int comicId, int characterId){
+        return characterDao.addCharacterToComic(characterId,comicId);
+    }
 
 
 
