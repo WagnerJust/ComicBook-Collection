@@ -91,6 +91,10 @@ export default {
     margin-bottom: .1rem;
 }
 
+.collectionBoxes:hover {
+    color: #ED1D24;
+}
+
 .collection-image:hover {
     transform: translateY(+5px);
 }
