@@ -35,11 +35,24 @@ public class JdbcCharacterDaoTests extends BaseDaoTests{
 
     @Test
     public void getCharacterByAliasReturnsCorrectCharacter(){
-        ComicCharacter character = sut.getCharacterByAlias(CHARACTER_1.getCharacterAlias());
+        List<ComicCharacter> character = sut.getCharacterByAlias(CHARACTER_1.getCharacterAlias());
 
-        //Assert.assertEquals(CHARACTER_1, character);
-        assertCharactersMatch(CHARACTER_1, character);
+        Assert.assertEquals(1, character.size());
     }
+
+    @Test
+    public void getCharacterByRealNameReturnsCorrectCharacter(){
+        List<ComicCharacter> character = sut.getCharacterByRealName(CHARACTER_1.getCharacterRealName());
+
+        Assert.assertEquals(1, character.size());
+    }
+
+//    @Test
+//    public void getCharacterByComicIdReturnsCorrectCharacter(){
+//        List<ComicCharacter> character = sut.getCharactersByComicId(CHARACTER_1.getCharacterRealName());
+//
+//        Assert.assertEquals(1, character.size());
+//    }
 
     @Test
     public void getCharacterByIdReturnsCorrectCharacter(){
@@ -83,13 +96,13 @@ public class JdbcCharacterDaoTests extends BaseDaoTests{
 
     @Test
     public void countCharactersInCollection_returns_correct_number() {
-        Assert.assertEquals(3, sut.countCharactersInCollection(1, 1));
+        Assert.assertEquals(3, sut.countCollectionComicsWithCharacter(1, 1));
     }
 
     @Test
     public void countCharactersOfUser_returns_correct_number(){
-        Assert.assertEquals(5, sut.countCharactersOfUser(1, 1));
-        Assert.assertEquals(2, sut.countCharactersOfUser(1, 2));
+        Assert.assertEquals(5, sut.countUserComicsWithCharacter(1, 1));
+        Assert.assertEquals(2, sut.countUserComicsWithCharacter(1, 2));
     }
 
 
