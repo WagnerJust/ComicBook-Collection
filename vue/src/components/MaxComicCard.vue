@@ -9,6 +9,7 @@
     </div>
 </template>
 
+
 <script>
 export default {
     name: 'comic-card',
@@ -17,6 +18,7 @@ export default {
     }
 }
 </script>
+
 
 <style>
 

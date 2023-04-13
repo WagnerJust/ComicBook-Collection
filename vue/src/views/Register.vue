@@ -1,10 +1,9 @@
 <template>
-  <div id="container" class="container">
+  <section class="container">
     <div class="main">
       <registration-form />
     </div>
-    <!-- <img class="image-fit" src="https://mightymega.com/wp-content/uploads/2013/05/marvel_panoramic_posters_1.jpg" alt="Marvel image" /> -->
-  </div>
+  </section>
 </template>
 
 
@@ -12,10 +11,10 @@
 import RegistrationForm from '../components/RegistrationForm.vue';
 
 export default {
-  name: 'register',
-  components: {
-    RegistrationForm
-  }
+	name: 'register',
+	components: {
+		RegistrationForm
+	}
 };
 </script>
 
@@ -23,25 +22,18 @@ export default {
 <style scoped>
 
 .container {
-  background-image: url('/public/x-men.png');
-  background-repeat: no-repeat;
-  background-size: cover;
-  background-position: right;
-  opacity: 0.9;
-  height: 100vh;
-}
-.main {
-  display: flex;
-  align-items: center;
-  justify-content: center;
+	background-image: url('/public/x-men.png');
+	background-repeat: no-repeat;
+	background-size: cover;
+	background-position: bottom;
+	opacity: 0.9;
+	height: 100vh;
 }
 
-.image-fit {
-  display: flex;
-  justify-content: space-evenly;
-  object-fit: cover;
-  margin: auto;
-  margin-top: 3%;
+.main {
+	display: flex;
+	align-items: center;
+	justify-content: center;
 }
 
 </style>

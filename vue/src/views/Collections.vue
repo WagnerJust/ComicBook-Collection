@@ -1,5 +1,5 @@
 <template>
-    <div class="container">
+    <section class="container">
         <h2 class="collections-title">My Collections</h2>
         <div class="test-collection-list">
             <router-link class="collectionBoxes" 
@@ -19,7 +19,7 @@
                 {{collection.collectionName}}
             </router-link>
         </div>
-    </div>
+    </section>
 </template>
 
 
@@ -81,28 +81,6 @@ export default {
     justify-content: center;
     background-color: white;
     
-}
-
-.router-link {
-    display: flex;
-    align-items: flex-end;
-    
-}
-
-.test-comic-list {
-    display: flex;
-    flex-direction: row;
-}
-
-.test-comic {
-    display: flex;
-    flex-direction: column;
-    margin: 2rem
-}
-
-.main {
-  margin-left: 12%;
-  margin-right: 12%;
 }
 
 </style>

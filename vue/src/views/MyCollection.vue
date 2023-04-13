@@ -1,12 +1,10 @@
 <template>
-    <div class="container">
-        <div class="main">
-            <h2>"Collection Name Here"</h2>
-            <div class="cards">
-                <max-comic-card v-for="comic in this.comics" :key="comic.comicId" :comic="comic" />
-            </div>
+    <section class="container">
+        <h2>"Collection Name Here"</h2>
+        <div class="cards">
+            <max-comic-card v-for="comic in this.comics" :key="comic.comicId" :comic="comic" />
         </div>
-    </div>
+    </section>
 </template>
 
 
@@ -19,23 +17,18 @@ export default {
     components: { 
         MaxComicCard
     },
-    props: {
-        collection: Object
-    },
     data() {
         return {
             comics: []
         }
     },
     created() {
-        
         /* This call can be seen in the console. It is requesting the comics from collectionId: 1 */
         comicService.getComicsByCollectionId(this.$route.params.collectionId).then(response => {
             this.comics = response.data;
-            console.log("COMICS")
-            console.log(this.comics)
-        })
-
+            console.log("COMICS");
+            console.log(this.comics);
+        });
     }
 }
 </script>
