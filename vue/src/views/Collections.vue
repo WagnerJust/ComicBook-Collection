@@ -2,13 +2,20 @@
     <div class="container">
         <h2 class="collections-title">My Collections</h2>
         <div class="test-collection-list">
-            <router-link class="collectionBoxes" :to="{ name: 'collection', params: {collectionId: collection.collectionId} }" v-for="collection in this.myCollections" :key="collection.collectionId">
+            <router-link class="collectionBoxes" 
+            :to="{ name: 'collection', params: {collectionId: collection.collectionId} }" 
+            v-for="collection in this.myCollections" 
+            :key="collection.collectionId"
+            :collection="collection">
                 {{collection.collectionName}}
             </router-link>
         </div>
         <h2 class="collections-title">Public Collections</h2>
         <div class="test-collection-list">
-            <router-link class="collectionBoxes" :to="{ name: 'collection' }" v-for="collection in this.publicCollections" :key="collection.collectionId">
+            <router-link class="collectionBoxes" 
+            :to="{ name: 'collection' }" 
+            v-for="collection in this.publicCollections" 
+            :key="collection.collectionId">
                 {{collection.collectionName}}
             </router-link>
         </div>

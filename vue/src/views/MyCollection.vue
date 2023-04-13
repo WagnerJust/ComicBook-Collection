@@ -1,7 +1,11 @@
 <template>
     <div class="container">
-        my collection
-        <max-comic-card v-for="comic in this.comics" :key="comic.comicId" :comic="comic" />
+        <div class="main">
+            <h2>"Collection Name Here"</h2>
+            <div class="cards">
+                <max-comic-card v-for="comic in this.comics" :key="comic.comicId" :comic="comic" />
+            </div>
+        </div>
     </div>
 </template>
 
@@ -14,6 +18,9 @@ export default {
     name: 'collection',
     components: { 
         MaxComicCard
+    },
+    props: {
+        collection: Object
     },
     data() {
         return {
@@ -36,55 +43,22 @@ export default {
 
 <style scoped>
 
-.my-collections-title {
-    margin: 2rem;
-    font-size: 3rem;
-    text-align: center;
+.container {
+    margin-left: 12%;
+    margin-right: 12%;
 }
 
-.test-collection-list {
+.cards {
     display: flex;
     justify-content: space-evenly;
-    align-items: center;
+    flex-wrap: wrap;
+    column-gap: 2.2%;
+    margin-top: 2%;
+}
+
+h2 {
+    text-align: center;
     margin: 2rem;
-}
-
-.collectionBoxes {
-    display: flex;
-    flex-direction: row;
-    height: 200px;
-    width: 200px;
-    justify-content: center;
-    background-color: white;
-    
-}
-
-.collectionBox {
-    display: flex;
-    justify-content: center;
-    
-}
-
-.router-link {
-    display: flex;
-    align-items: flex-end;
-    
-}
-
-.test-comic-list {
-    display: flex;
-    flex-direction: row;
-}
-
-.test-comic {
-    display: flex;
-    flex-direction: column;
-    margin: 2rem
-}
-
-.main {
-  margin-left: 12%;
-  margin-right: 12%;
 }
 
 </style>
