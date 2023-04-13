@@ -26,6 +26,8 @@ CREATE TABLE comic_data(
     series varchar(500),
     publish_date DATE,
     image_url varchar(500),
+    author varchar(200),
+    artist varchar(200),
     CONSTRAINT PK_comic_data_id PRIMARY KEY (comic_data_id)
 );
 

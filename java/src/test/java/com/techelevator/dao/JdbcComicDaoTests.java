@@ -10,8 +10,8 @@ import java.time.LocalDate;
 
 public class JdbcComicDaoTests extends BaseDaoTests{
 
-    protected final Comic COMIC_1 = new Comic("series1", 1, 1, "UPC1", "URL1", LocalDate.parse("2011-01-01"));
-    protected final Comic COMIC_2 = new Comic("series2", 2, 2, "UPC2", "URL2", LocalDate.parse("2011-01-02"));
+    protected final Comic COMIC_1 = new Comic("series1", 1, 1, "UPC1", "URL1", LocalDate.parse("2011-01-01"), "author1", "artist1");
+    protected final Comic COMIC_2 = new Comic("series2", 2, 2, "UPC2", "URL2", LocalDate.parse("2011-01-02"), "author2", "artist2");
 
     private Comic comicTest;
     private Comic comicTest2;
@@ -22,8 +22,8 @@ public class JdbcComicDaoTests extends BaseDaoTests{
     public void setup() {
         JdbcTemplate jdbcTemplate = new JdbcTemplate(dataSource);
         sut = new JdbcComicDao(jdbcTemplate);
-        comicTest = new Comic("series8", 8, 8, "UPC8", "URL8", LocalDate.parse("2011-01-08"));
-        comicTest2 = new Comic("series9", 9, 9, "UPC9", "URL9", LocalDate.parse("2011-01-09"));
+        comicTest = new Comic("series8", 8, 8, "UPC8", "URL8", LocalDate.parse("2011-01-08"), "author8", "artist8");
+        comicTest2 = new Comic("series9", 9, 9, "UPC9", "URL9", LocalDate.parse("2011-01-09"), "author9", "artist9");
     }
 
     @Test
@@ -90,5 +90,7 @@ public class JdbcComicDaoTests extends BaseDaoTests{
         Assert.assertEquals(expected.getUpc(), actual.getUpc());
         Assert.assertEquals(expected.getComicId(), actual.getComicId());
         Assert.assertEquals(expected.getSeriesName(), actual.getSeriesName());
+        Assert.assertEquals(expected.getArtist(), actual.getArtist());
+        Assert.assertEquals(expected.getAuthor(), actual.getAuthor());
     }
 }

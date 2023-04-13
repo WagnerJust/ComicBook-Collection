@@ -9,17 +9,37 @@ public class Comic {
     private String upc;
     private String imageURL;
     private LocalDate publish_date;
+    private String author;
+    private String artist;
 
     public Comic() {
     }
 
-    public Comic(String seriesName, int comicId, int issueNumber, String upc, String imageURL, LocalDate publish_date) {
+    public Comic(String seriesName, int comicId, int issueNumber, String upc, String imageURL, LocalDate publish_date, String author, String artist) {
         this.seriesName = seriesName;
         this.comicId = comicId;
         this.issueNumber = issueNumber;
         this.upc = upc;
         this.imageURL = imageURL;
         this.publish_date = publish_date;
+        this.author = author;
+        this.artist = artist;
+    }
+
+    public String getAuthor() {
+        return author;
+    }
+
+    public void setAuthor(String author) {
+        this.author = author;
+    }
+
+    public String getArtist() {
+        return artist;
+    }
+
+    public void setArtist(String artist) {
+        this.artist = artist;
     }
 
     public LocalDate getPublish_date() {
