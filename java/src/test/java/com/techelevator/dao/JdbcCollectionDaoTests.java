@@ -44,10 +44,20 @@ public class JdbcCollectionDaoTests extends BaseDaoTests{
     }
 
     @Test
+    public void listAllCollectionsByUserId_returns_null_if_invalid_id(){
+        Assert.assertEquals(null, sut.getCollectionByCollectionId(-1));
+    }
+
+    @Test
     public void getCollectionByCollectionIdReturnsCorrectCollection(){
         ComicCollection collection = sut.getCollectionByCollectionId(1);
 
         assertCollectionsMatch(COLLECTION_1, collection);
+    }
+
+    @Test
+    public void getCollectionByCollectionId_returns_null_if_invalid_id(){
+        Assert.assertEquals(null, sut.getCollectionByCollectionId(-1));
     }
 
     @Test

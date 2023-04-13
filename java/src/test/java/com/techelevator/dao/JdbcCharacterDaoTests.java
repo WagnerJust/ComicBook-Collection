@@ -45,10 +45,20 @@ public class JdbcCharacterDaoTests extends BaseDaoTests{
     }
 
     @Test
+    public void getCharacterByAlias_returns_void_if_invalid_alias(){
+        Assert.assertEquals(null, sut.getCharacterByAlias("z"));
+    }
+
+    @Test
     public void getCharacterByRealNameReturnsCorrectCharacter(){
         List<ComicCharacter> character = sut.getCharacterByRealName(CHARACTER_1.getCharacterRealName());
 
         Assert.assertEquals(1, character.size());
+    }
+
+    @Test
+    public void getCharacterByRealName_returns_void_if_invalid_alias(){
+        Assert.assertEquals(null, sut.getCharacterByRealName("z"));
     }
 
     @Test
@@ -59,11 +69,20 @@ public class JdbcCharacterDaoTests extends BaseDaoTests{
     }
 
     @Test
+    public void getCharacterByComicId_returns_void_if_invalid_id(){
+        Assert.assertEquals(null, sut.getCharactersByComicId(-1));
+    }
+
+    @Test
     public void getCharacterByIdReturnsCorrectCharacter(){
         ComicCharacter character = sut.getCharacterById(CHARACTER_1.getCharacterId());
 
         assertCharactersMatch(CHARACTER_1, character);
+    }
 
+    @Test
+    public void getCharacterById_returns_null_if_invalid_id(){
+        Assert.assertEquals(null, sut.getCharacterById(-1));
     }
 
     @Test
