@@ -18,7 +18,7 @@ public class JdbcComicDao implements ComicDao{
     @Override
     public List<Comic> listAllComicsOfCollection(int collectionId) {
         List<Comic> comics = new ArrayList<>();
-        String sql = "SELECT comic_data.comic_data_id, image_url, series, upc, issue_number, publish_date  \n" +
+        String sql = "SELECT *  \n" +
                 "FROM comic_data  \n" +
                 "JOIN comic_collection ON comic_collection.comic_data_id = comic_data.comic_data_id  \n" +
                 "JOIN collection ON collection.collection_id = comic_collection.collection_id  \n" +
@@ -38,7 +38,7 @@ public class JdbcComicDao implements ComicDao{
     @Override
     public Comic getComic(int comicId) {
         Comic comic = null;
-        String sql = "SELECT comic_data_id, image_url, series, upc, issue_number, publish_date " +
+        String sql = "SELECT * " +
                      "FROM comic_data " +
                      "WHERE comic_data_id = ?;";
         try{
@@ -55,11 +55,11 @@ public class JdbcComicDao implements ComicDao{
     @Override
     public Comic addComic(Comic comic) {
         Comic comicNew;
-        String sql = "INSERT INTO comic_data (upc, issue_number, series, publish_date, image_url) " +
-                     "VALUES (?, ?, ?, ?, ?) RETURNING comic_data_id;";
+        String sql = "INSERT INTO comic_data (upc, issue_number, series, publish_date, image_url, author, artist) " +
+                     "VALUES (?, ?, ?, ?, ?, ?, ?) RETURNING comic_data_id;";
         try{
             Integer newId = jdbcTemplate.queryForObject(sql, Integer.class, comic.getUpc(), comic.getIssueNumber(),
-                    comic.getSeriesName(), comic.getPublish_date(), comic.getImageURL());
+                    comic.getSeriesName(), comic.getPublish_date(), comic.getImageURL(), comic.getAuthor(), comic.getArtist());
             comicNew = getComic(newId);
         } catch (DataAccessException e){
             return null;
@@ -94,11 +94,11 @@ public class JdbcComicDao implements ComicDao{
     @Override
     public boolean updateComic(Comic comic) {
         String sql = "UPDATE comic_data " +
-                     "SET upc = ?, issue_number = ?, series = ?, publish_date = ?, image_url = ? " +
+                     "SET upc = ?, issue_number = ?, series = ?, publish_date = ?, image_url = ?, author = ?, artist = ? " +
                      "WHERE comic_data_id = ?;";
         try{
             jdbcTemplate.update(sql, comic.getUpc(), comic.getIssueNumber(), comic.getSeriesName(), comic.getPublish_date(),
-                     comic.getImageURL(), comic.getComicId());
+                     comic.getImageURL(), comic.getAuthor(), comic.getArtist(), comic.getComicId());
         }catch (DataAccessException e) {
             return false;
         }
@@ -142,6 +142,8 @@ public class JdbcComicDao implements ComicDao{
         comic.setSeriesName(results.getString("series"));
         comic.setUpc(results.getString("upc"));
         comic.setComicId(results.getInt("comic_data_id"));
+        comic.setAuthor(results.getString("author"));
+        comic.setArtist(results.getString("artist"));
         if (results.getDate("publish_date") != null) {
             comic.setPublish_date(results.getDate("publish_date").toLocalDate());
         }
