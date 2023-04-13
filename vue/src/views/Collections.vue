@@ -3,7 +3,7 @@
         <the-header />
         <h2 class="collections-title">My Collections</h2>
         <div class="test-collection-list">
-            <div class="collectionBoxes" :collection="collection" v-for="collection in this.$store.state.myCollections" :key="collection.collectionId">
+            <div class="collectionBoxes" v-for="collection in this.myCollections" :key="collection.collectionId">
                 <div class="collectionBox">
                     {{collection.collectionName}}
                     <router-link class="router-link" :to="{ name: 'my-collection' }" >LINK</router-link>
@@ -12,7 +12,7 @@
         </div>
         <h2 class="collections-title">Public Collections</h2>
         <div class="test-collection-list">
-            <div class="collectionBoxes" :collection="collection" v-for="collection in this.$store.state.publicCollections" :key="collection.collectionId">
+            <div class="collectionBoxes" v-for="collection in this.publicCollections" :key="collection.collectionId">
                 <div class="collectionBox">
                     {{collection.collectionName}}
                     <router-link class="router-link" :to="{ name: 'my-collection' }"  >LINK</router-link>
@@ -32,49 +32,28 @@ export default {
     components: { 
         TheHeader,
     },
+    data() {
+        return {
+            myCollections: [],
+            publicCollections: []
+        }
+    },
     created() {
 
+        /* This call can be seen in the console. It is requesting all the current user's collections */
         collectionService.listByUserId(this.$store.state.user.id).then(response => {
-            this.$store.state.myCollections = response.data;
-            console.log("My Collections")
-            console.log(response.data)            
+            this.myCollections = response.data;
+            console.log("My Collections");
+            console.log(this.myCollections);         
         })
-        
-        // collectionService.listAllPublic().then(response => {
-        //     this.collections = response.data;
-        //     console.log("COLLECTION DATA")
-        //     console.log(this.collections)
-        //     this.collections.forEach(collection => {
-        //         comicService.getComicsByCollectionId(collection.collectionId).then(response => {
-        //             this.comics += response.data;
-        //         })
-        //     })
-        // }).then(console.log(this.comics))
-
-        
-        // /* This call can be seen in the console. It is requesting the comics from collectionId: 1 */
-        // comicService.getComicsByCollectionId(1).then(response => {
-        //     this.comics = response.data;
-        //     console.log("COMICS")
-        //     console.log(response.data)
-        // })
 
         /* This call can be seen in the console. It is requesting all the public collections */
         collectionService.listAllPublic().then(response => {
-            this.$store.state.publicCollections = response.data;
-            console.log("Collections")
-            console.log(response.data)
+            this.publicCollections = response.data;
+            console.log("Public Collections");
+            console.log(this.publicCollections);
         })
 
-    },
-    methods: {
-        setCollectionId() {
-            this.$store.state.collectionId = this.collection.collectionId;
-        },
-
-        viewCollection(id) {
-            this.$router.push(`/collection/${id}`)
-        }
     }
 }
 </script>
