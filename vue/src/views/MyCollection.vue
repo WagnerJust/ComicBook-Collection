@@ -19,30 +19,11 @@ export default {
         MaxComicCard
     },
     created() {
-
-        // collectionService.listAllPublic().then(response => {
-        //     this.collections = response.data;
-        //     console.log("COLLECTION DATA")
-        //     console.log(this.collections)
-        //     this.collections.forEach(collection => {
-        //         comicService.getComicsByCollectionId(collection.collectionId).then(response => {
-        //             this.comics += response.data;
-        //         })
-        //     })
-        // }).then(console.log(this.comics))
-
         
         /* This call can be seen in the console. It is requesting the comics from collectionId: 1 */
         comicService.getComicsByCollectionId(this.myCollections).then(response => {
             this.$store.state.testComics = response.data;
         })
-
-        // /* This call can be seen in the console. It is requesting all the public collections */
-        // collectionService.listAllPublic().then(response => {
-        //     this.collections = response.data;
-        //     console.log("COLLECTIONS")
-        //     console.log(response.data)
-        // })
 
     }
 }

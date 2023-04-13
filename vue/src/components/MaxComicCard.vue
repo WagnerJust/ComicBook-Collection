@@ -20,52 +20,5 @@ export default {
 
 <style>
 
-.card {
-    width: 150px;
-    height: 250px;
-    background-color: white;
-    border: 2px solid black;
-    margin: 1rem;
-    display: flex;
-    flex-direction: column;
-    justify-content: space-between;
-    text-align: center;
-    font-family: 'Montserrat', Helvetica, sans-serif;
-}
-
-.comic-creator {
-    margin-top: 5px;
-    text-align: left;
-    font-family: 'Oswald', Helvetica, sans-serif;
-    font-size: 1rem;
-    font-weight: 500;
-}
-
-.comic-title {
-    font-weight: 600;
-    margin-top: 1.5rem;
-    text-align: left;
-    font-size: 1.1rem;
-}
-
-.image-wrap:hover {
-    color: #ED1D24;
-}
-
-.comic-image {
-    width: 100%;
-    box-shadow: 0 6px 10px 0 rgba(0, 0, 0, 0.2), 0 10px 30px 0 rgba(0, 0, 0, 0.19);
-    position: relative;
-    transition: transform 250ms;
-}
-
-.comic-image:hover {
-    transform: translateY(-10px);
-}
-
-.add {
-    text-align: end;
-    margin-bottom: 5%;
-}
 
 </style>

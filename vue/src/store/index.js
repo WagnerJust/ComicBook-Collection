@@ -20,14 +20,6 @@ export default new Vuex.Store({
   state: {
     token: currentToken || '',
     user: currentUser || {},
-    myCollections: [],
-    collectionId: '',
-    publicCollections: [],
-    testComics: [],
-    activeCollection: {
-      collectionId: '',
-      collectionName: '',
-    },
     comics: [
       {
         comicId: "67631",
