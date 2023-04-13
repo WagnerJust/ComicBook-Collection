@@ -43,6 +43,11 @@ public class JdbcComicDaoTests extends BaseDaoTests{
     }
 
     @Test
+    public void listAllComicsOfCollection_returns_null_given_invalid_id(){
+        Assert.assertEquals(null, sut.listAllComicsOfCollection(-1));
+    }
+
+    @Test
     public void addComic_adds_comic_correctly() {
         int newId = sut.addComic(comicTest).getComicId();
         comicTest.setComicId(newId);

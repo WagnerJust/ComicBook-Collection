@@ -1,6 +1,5 @@
 <template>
   <div id="container" class="container">
-    <the-header id="nav" />
     <div class="main">
       <login-form />
     </div>
@@ -10,13 +9,11 @@
 
 
 <script>
-import TheHeader from '../components/TheHeader.vue';
 import LoginForm from '../components/LoginForm.vue';
 
 export default {
   name: "login",
   components: {
-    TheHeader,
     LoginForm
   },
 };

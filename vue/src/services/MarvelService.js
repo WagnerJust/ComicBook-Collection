@@ -18,26 +18,46 @@ export default{
 
  
     //COMIC REQUESTS
-    searchComicByName(title){
+    searchComicByTitle(title){
         return http.get(`comics?titleStartsWith=${title}${endURL}`)
+    },
+
+    searchComicBySeries(series){
+        return http.get(`comics?titleStartsWith=${series}${endURL}`)
+    },
+
+    searchComicByCreator(name){
+        return http.get(`comics?nameStartsWith=${name}${endURL}`)
     },
 
     searchComicByIssue(title, issue){
         return http.get(`comics?titleStartsWith=${title}&issueNumber=${issue}${endURL}`)
     },
 
-    getComidByCharacter(characterId){
+    SearchComicByCharacter(characterId){
         return http.get(`characters/${characterId}/comics?${endURL}`)
+    },
+
+    serachComicByDateRange(date1, date2){
+        //dates should be YYYY-MM-DD
+        return http.get(`comics?dateRange=%20${date1}%2C${date2}${endURL}`)
     },
 
 
 
+
     //CHARACTER REQUESTS
-    getCharacterByName(characterName){
+    getCharacterIdByName(characterName){
         return http.get(`characters?nameStartsWith=${characterName}${endURL}`)
     },
     
     getCharacterById(characterId){
         return http.get(`characters/${characterId}?${endURL}`)
+    },
+
+    getCharactersInComic(comicId){
+        return http.get(`/comics/${comicId}/characters${endURL}`)
     }
+
+
 }
