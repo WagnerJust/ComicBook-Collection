@@ -9,6 +9,8 @@ public interface ComicDao {
     public Comic getComic (int comicId);
     public List<Comic> getComicsByAuthor(String author);
     public List<Comic> getComicsByArtist(String artist);
+    public List<Comic> getComicsByCharacter(int characterId);
+    public List<Comic> getComicsBySeries(String series);
     public Comic addComic (Comic comic);
     public boolean addComicToCollection(int comicId, int collectionId);
     public boolean removeComicFromCollection(int comicId, int collectionId);

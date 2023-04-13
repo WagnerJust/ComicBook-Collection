@@ -86,6 +86,40 @@ public class JdbcComicDao implements ComicDao{
         return comics;
     }
 
+    @Override
+    public List<Comic> getComicsByCharacter(int characterId) {
+        ArrayList<Comic> comics = new ArrayList<>();
+        String sql = "Select * FROM comic_data " +
+                     "JOIN character_comic ON character_comic.comic_data_id = comic_data.comic_data_id " +
+                     "WHERE character_comic.character_id = ?;";
+        try {
+            SqlRowSet results = jdbcTemplate.queryForRowSet(sql, characterId);
+            while (results.next()){
+                comics.add(mapRowToComic(results));
+            }
+        }catch (DataAccessException e){
+            return null;
+        }
+        return comics;
+    }
+
+    @Override
+    public List<Comic> getComicsBySeries(String series) {
+        ArrayList<Comic> comics = new ArrayList<>();
+        String sql = "SELECT * " +
+                     "FROM comic_data " +
+                     "WHERE series ILIKE ?;";
+        try {
+            SqlRowSet results = jdbcTemplate.queryForRowSet(sql, "%" + series + "%");
+            while (results.next()){
+                comics.add(mapRowToComic(results));
+            }
+        }catch (DataAccessException e){
+            return null;
+        }
+        return comics;
+    }
+
 
     @Override
     public Comic addComic(Comic comic) {
