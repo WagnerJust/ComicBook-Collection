@@ -120,4 +120,26 @@ input {
   top: -40px;
 }
 
+button {
+  cursor: pointer;
+  border: 0;
+  border-radius: 4px;
+  font-weight: 600;
+  margin: 1 10px;
+  width: 7rem;
+  padding: 10px 0;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.15);
+  transition: 0.4s;
+  color: rgb(236, 29, 36);
+  background-color: rgba(255, 255, 255, 1);
+  border: 1px solid rgba(236, 29, 36, 1);
+  font-family: 'Montserrat', Helvetica, sans-serif;
+}
+
+button:hover {
+  color: white;
+  box-shadow: 0 0 20px rgba(0, 0, 0, 0.15);
+  background-color: rgba(236, 29, 36, 1);
+}
+
 </style>

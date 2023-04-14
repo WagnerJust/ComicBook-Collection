@@ -67,6 +67,10 @@ form-text validate[required] form-validation-error {
     font-family: 'Montserrat', Helvetica, sans-serif;
 }
 
+#show-form-button {
+    width: 15rem;
+}
+
 .field {
     display: flex;
     justify-content: center;
@@ -140,7 +144,6 @@ button:hover {
     margin-top: 1rem;
 }
 
-/* testing switch */
 input[type=checkbox]{
 	height: 0;
 	width: 0;

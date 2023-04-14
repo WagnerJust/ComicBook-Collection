@@ -1,17 +1,22 @@
 <template>
     <div class="card">
-        <p class="add" tag="button" >Add</p>
         <div class="image-wrap">
             <img class="comic-image" v-bind:src="'http://i.annihil.us/u/prod/marvel/i/mg/' + comic.image + '/portrait_xlarge.jpg'" />
             <h3 class="comic-title">{{ comic.title }}</h3>
             <p class="comic-creator">{{ comic.writer }}, {{ comic.penciler }}</p>
         </div>
+        <add-comic />
     </div>
 </template>
 
 <script>
+import AddComic from '../components/AddComic.vue';
+
 export default {
     name: 'comic-card',
+    components: {
+        AddComic
+    },
     props: {
         comic: Object
     }
