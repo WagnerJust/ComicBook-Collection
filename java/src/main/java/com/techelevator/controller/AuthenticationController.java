@@ -18,7 +18,9 @@ import org.springframework.web.server.ResponseStatusException;
 import com.techelevator.dao.UserDao;
 import com.techelevator.security.jwt.JWTFilter;
 import com.techelevator.security.jwt.TokenProvider;
-import com.techelevator.controller.RestMarvelService;
+import com.techelevator.services.RestMarvelService;
+
+import java.util.List;
 
 @RestController
 @CrossOrigin
@@ -40,6 +42,12 @@ public class AuthenticationController {
     public Comic testService() throws JsonProcessingException {
         return marvelService.getComicByUpc("759606204831000411");
 
+
+    }
+
+    @RequestMapping(value = "/test2", method = RequestMethod.GET)
+    public List<Comic> testService2() throws JsonProcessingException {
+        return marvelService.searchComicsBySeriesAndIssueNo("Guardians of the", "1");
 
     }
 
