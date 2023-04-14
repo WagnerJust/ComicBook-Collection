@@ -16,7 +16,7 @@ var endURL = "&ts="+ts+"&apikey="+apikey+"&hash="+hash;
 
 export default{
 
- 
+
     //COMIC REQUESTS
     searchComicByTitle(title){
         return http.get(`comics?titleStartsWith=${title}${endURL}`)

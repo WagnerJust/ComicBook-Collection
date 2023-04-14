@@ -20,9 +20,10 @@ export default {
 
 <style scoped>
 .card {
-    width: 18%;
-    height: 25%;
+    width: 200px;
+    height: 100%;
     display: flex;
+    flex-wrap: wrap;
     flex-direction: column;
     justify-content: space-between;
     text-align: center;
