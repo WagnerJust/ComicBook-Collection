@@ -11,8 +11,8 @@
 
 <script>
 export default {
-    name: 'comic-card',
-    props: {
+  name: 'details',
+  props: {
         comic: Object
     }
 }
