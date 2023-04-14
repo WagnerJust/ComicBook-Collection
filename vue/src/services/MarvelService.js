@@ -1,62 +1,64 @@
 import axios from 'axios'
-import CryptoJS from 'crypto-js';
+import store from '../store/index.js'
 
 const http = axios.create({
-    baseURL: 'http://gateway.marvel.com/v1/public/'
+    baseURL: "http://localhost:9000/marvel/",
+    headers: {
+        "Authorization": `Bearer ${store.state.token}`
+    }    
 });
 
-
-var pubkey = "76d0e7cf435efb6b98077dbeb60e1a7e";
-var pvtkey = "2354076cc2f715c89acf505c8eb541c711a7a3ff";
-var ts = new Date().getTime();
-var apikey = pubkey;
-var urladdition = ts+pubkey+pvtkey;
-var hash = CryptoJS.MD5(urladdition).toString();
-var endURL = "&ts="+ts+"&apikey="+apikey+"&hash="+hash;
 
 export default{
 
 
     //COMIC REQUESTS
     searchComicByTitle(title){
-        return http.get(`comics?titleStartsWith=${title}${endURL}`)
+        return http.get(`comics/title/${title}`)
     },
 
     searchComicBySeries(series){
-        return http.get(`comics?titleStartsWith=${series}${endURL}`)
+        return http.get(`comics/series/${series}`)
     },
 
-    searchComicByCreator(name){
-        return http.get(`comics?nameStartsWith=${name}${endURL}`)
+    searchComicByAuthor(name){
+        return http.get(`comics/author/${name}`)
     },
 
-    searchComicByIssue(title, issue){
-        return http.get(`comics?titleStartsWith=${title}&issueNumber=${issue}${endURL}`)
+    searchComicByArtist(name){
+        return http.get(`comics/artist/${name}`)
     },
 
-    SearchComicByCharacter(characterId){
-        return http.get(`characters/${characterId}/comics?${endURL}`)
+
+    searchComicByIssue(issue){
+        return http.get(`comics/issue/${issue}`)
     },
 
-    serachComicByDateRange(date1, date2){
-        //dates should be YYYY-MM-DD
-        return http.get(`comics?dateRange=%20${date1}%2C${date2}${endURL}`)
+    searchComicByCharacter(characterId){
+        return http.get(`characters/${characterId}/comics`)
     },
+
+    
+
+    // serachComicByDateRange(date1, date2){
+    //     //dates should be YYYY-MM-DD
+    //     return http.get(`comics/dateRange?date1=${date1}&date2=${date2}`)
+    // },
 
 
 
 
     //CHARACTER REQUESTS
     getCharacterIdByName(characterName){
-        return http.get(`characters?nameStartsWith=${characterName}${endURL}`)
+        return http.get(`characters/name/${characterName}`)
     },
     
     getCharacterById(characterId){
-        return http.get(`characters/${characterId}?${endURL}`)
+        return http.get(`characters/${characterId}`)
     },
 
     getCharactersInComic(comicId){
-        return http.get(`/comics/${comicId}/characters${endURL}`)
+        return http.get(`/comics/${comicId}/characters}`)
     }
 
 

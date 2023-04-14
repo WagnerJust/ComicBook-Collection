@@ -1,6 +1,9 @@
 package com.techelevator.model;
 
+import com.fasterxml.jackson.annotation.JsonProperty;
+
 import java.time.LocalDate;
+import java.util.Map;
 
 public class Comic {
     private String seriesName;
@@ -24,6 +27,14 @@ public class Comic {
         this.publish_date = publish_date;
         this.author = author;
         this.artist = artist;
+    }
+
+    @SuppressWarnings("unchecked")
+    @JsonProperty("data")
+    private void unpack(Map<String,Object> map){
+        Map<String,String> results = (Map<String,String>)map.get("results");
+        this.seriesName = results.get("title");
+        this.issueNumber = Integer.parseInt(results.get("issueNumber"));
     }
 
     public String getAuthor() {

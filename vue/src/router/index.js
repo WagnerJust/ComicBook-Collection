@@ -8,6 +8,7 @@ import Collections from '../views/Collections.vue'
 import MyCollection from '../views/MyCollection.vue'
 import NotFound from '../views/NotFound.vue'
 import Browse from '../views/Browse.vue'
+import NewComics from '../views/NewComics.vue'
 import store from '../store/index'
 
 
@@ -86,6 +87,14 @@ const router = new Router({
       path: "/404",
       name: "NotFound",
       component: NotFound
+    },
+    {
+      path: "/newcomics",
+      name: "newcomics",
+      component: NewComics,
+      meta: {
+        requiresAuth: false
+      }
     }
   ]
 })
