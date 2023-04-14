@@ -1,14 +1,16 @@
 <template>
 	<section class="container">
-        <h2 class ="comic-details-text">Comic Details</h2>
-        <img class="comic-image" v-bind:src="'http://i.annihil.us/u/prod/marvel/i/mg/' + comic.image + '/portrait_xlarge.jpg'" >
-		<div class="comic-details">
+        <img class="comic-image" v-bind:src="'http://i.annihil.us/u/prod/marvel/i/mg/' + comic.image + '/portrait_incredible.jpg'" >
+		
+        <div class="comic-details">
+            <h1 class ="comic-details-text">Comic Details</h1>
             <h3> {{ comic.title }}</h3>
             <p> Issue Number: {{ comic.issueNumber }}</p>
             <p> Writer: {{ comic.writer }}</p>
             <p> Penciler: {{ comic.penciler }}</p>
 			<comic-card v-bind:comic="comic" v-for="comic in comics" v-bind:key="comic.comicId"/>
-            <Details class="details-pic" v-bind:comic="comic"/>
+            <Details />
+            <add-comic class="add" v-bind:comic="comic"/>
 		</div>
 	</section>
 </template>
@@ -16,6 +18,7 @@
 <script>
 import ComicCard from '../components/ComicCard.vue';
 import Details from '../components/Details.vue';
+import AddComic from '../components/AddComic.vue';
 
 export default {
 	name: "new-comics",
@@ -26,7 +29,8 @@ export default {
     },
 	components: { 
 		ComicCard,
-        Details
+        Details,
+        AddComic
 	},
 };
 </script>
@@ -47,8 +51,8 @@ export default {
 }
 
 .comic-details-text {
-    font-size: 8vh;
-    margin-top: 4%;
+    font-size: 6vh;
+    margin-bottom: 2%;
     margin: 4%;
     text-align: center;
     font-family: 'Montserrat', Helvetica, sans-serif;
@@ -56,23 +60,22 @@ export default {
 
 .comic-details {
     font-size: 3vh;
-    margin-top: 4%;
-    margin: 4%;
     text-align: center;
     font-family: 'Montserrat', Helvetica, sans-serif;
     float: right;
 }
 
 .comic-image {
+    margin-top: 2%;
     width: 40%;
     box-shadow: 0 6px 10px 0 rgba(0, 0, 0, 0.2), 0 10px 30px 0 rgba(0, 0, 0, 0.19);
     position: relative;
     transition: transform 250ms;
 }
 
-.details-pic{
-    margin-top: 10%;
-    align-content: center;
+.add{
+    margin-top: 5%;
+    width: 20%;
 }
 
 </style>
