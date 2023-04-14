@@ -4,8 +4,6 @@ import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.JsonNode;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.techelevator.model.Comic;
-import org.springframework.boot.json.JsonParser;
-import org.springframework.boot.json.JsonParserFactory;
 import org.springframework.stereotype.Component;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.client.RestTemplate;
@@ -14,8 +12,8 @@ import java.math.BigInteger;
 import java.security.MessageDigest;
 import java.security.NoSuchAlgorithmException;
 import java.text.SimpleDateFormat;
-import java.util.List;
-import java.util.Map;
+import java.time.LocalDate;
+import java.util.Objects;
 
 @Component
 public class MarvelService {
@@ -33,44 +31,39 @@ public class MarvelService {
 
         String resp = restTemplate.getForObject(apiUrl+"comics?upc="+upc+endUrl, String.class);
         JsonNode comicNode = new ObjectMapper().readTree(resp);
-        Comic comic = new Comic();
-        comic.setSeriesName(comicNode.get("data").get("results").get(0).get("title").textValue());
-
-        return comic;
-
-//        Comic comic = new ObjectMapper()
-//                .readerFor(Comic.class)
-//                .readValue(resp);
-//        return comic;
-
-        //        JsonParser springParser = JsonParserFactory.getJsonParser();
-//        Map<String, Object> map = springParser.parseMap(resp);
-//        Map<String, Object> map2 = springParser.parseMap(map.get("data").toString());
-//        Map<String, Object> map3 = springParser.parseMap(map2.get("results").toString());
-//        return map3.get("title").toString();
-
+        return jsonComicMapper(comicNode);
 
     }
-
-
+    private Comic jsonComicMapper(JsonNode comicNode){
+        Comic comic = new Comic();
+        comic.setSeriesName(comicNode.get("data").get("results").get(0).get("title").textValue());
+        JsonNode creators = (comicNode.get("data").get("results").get(0).get("creators"));
+        for (JsonNode creator: creators){
+            if (Objects.equals(creator.get("role").textValue(), "penciler")){
+                comic.setArtist(creator.get("name").textValue());
+            }
+            if (Objects.equals(creator.get("role").textValue(), "writer")){
+                comic.setAuthor(creator.get("name").textValue());
+            }
+        }
+        comic.setPublish_date(LocalDate.parse(comicNode.get("data").get("results").get(0).get("title").textValue()));
+        comic.setUpc(comicNode.get("data").get("results").get(0).get("title").textValue());
+        comic.setIssueNumber(Integer.parseInt(comicNode.get("data").get("results").get(0).get("title").textValue()));
+        comic.setImageURL(comicNode.get("data").get("results").get(0).get("title").textValue());
+        return comic;
+    }
     public static String getMd5(String input)
     {
         try {
-
             MessageDigest md = MessageDigest.getInstance("MD5");
-
             byte[] messageDigest = md.digest(input.getBytes());
-
             BigInteger no = new BigInteger(1, messageDigest);
-
             String hashtext = no.toString(16);
             while (hashtext.length() < 32) {
                 hashtext = "0" + hashtext;
             }
             return hashtext;
-        }
-
-        catch (NoSuchAlgorithmException e) {
+        } catch (NoSuchAlgorithmException e) {
             throw new RuntimeException(e);
         }
     }
