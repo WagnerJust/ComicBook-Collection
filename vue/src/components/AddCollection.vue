@@ -82,6 +82,7 @@ form-text validate[required] form-validation-error {
     width: 25rem;
     font-size: 1.5rem;
     text-align: center;
+    border: 2px solid black;
 }
 
 #collection-form-name-input:focus::placeholder {
@@ -153,11 +154,12 @@ input[type=checkbox]{
 #testLabel {
 	cursor: pointer;
 	text-indent: -9999px;
-	width: 4rem;
+	width: 4.2rem;
 	height: 2rem;
 	background: grey;
 	display: block;
 	position: relative;
+    border: 3px solid black;
 }
 
 label:after {
@@ -166,7 +168,7 @@ label:after {
 	top: 0px;
 	left: 0px;
 	width: 2rem;
-	height: 2rem;
+	height: 1.65rem;
 	background: #fff;
 	transition: 0.2s;
 }

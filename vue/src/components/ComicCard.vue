@@ -28,12 +28,12 @@ export default {
     width: 200px;
     height: 100%;
     display: flex;
-    flex-wrap: wrap;
     flex-direction: column;
     justify-content: space-between;
     text-align: center;
     font-family: 'Montserrat', Helvetica, sans-serif;
 }
+
 .comic-creator {
     margin-top: 5px;
     text-align: left;

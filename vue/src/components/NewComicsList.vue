@@ -24,7 +24,7 @@ export default {
 }
 </script>
 
-<style>
+<style scoped>
 
 .new-comics-text {
     margin-top: 4%;
@@ -38,4 +38,5 @@ export default {
     column-gap: 2.2%;
     margin-top: 2%;
 }
+
 </style>
