@@ -24,6 +24,7 @@ export default {
 </script>
 
 <style scoped>
+
 .card {
     width: 200px;
     height: 100%;
@@ -32,6 +33,10 @@ export default {
     justify-content: space-between;
     text-align: center;
     font-family: 'Montserrat', Helvetica, sans-serif;
+}
+
+.image-wrap {
+    height: 400px;
 }
 
 .comic-creator {
