@@ -18,6 +18,7 @@ import org.springframework.web.server.ResponseStatusException;
 import com.techelevator.dao.UserDao;
 import com.techelevator.security.jwt.JWTFilter;
 import com.techelevator.security.jwt.TokenProvider;
+import com.techelevator.controller.RestMarvelService;
 
 @RestController
 @CrossOrigin
@@ -26,9 +27,9 @@ public class AuthenticationController {
     private final TokenProvider tokenProvider;
     private final AuthenticationManagerBuilder authenticationManagerBuilder;
     private UserDao userDao;
-    private MarvelService marvelService;
+    private RestMarvelService marvelService;
 
-    public AuthenticationController(TokenProvider tokenProvider, AuthenticationManagerBuilder authenticationManagerBuilder, UserDao userDao, MarvelService marvelService) {
+    public AuthenticationController(TokenProvider tokenProvider, AuthenticationManagerBuilder authenticationManagerBuilder, UserDao userDao, RestMarvelService marvelService) {
         this.tokenProvider = tokenProvider;
         this.authenticationManagerBuilder = authenticationManagerBuilder;
         this.userDao = userDao;
@@ -37,7 +38,7 @@ public class AuthenticationController {
 
     @RequestMapping(value = "/test", method = RequestMethod.GET)
     public Comic testService() throws JsonProcessingException {
-        return marvelService.getComicByUpc("75960620535600111");
+        return marvelService.getComicByUpc("759606204831000411");
 
 
     }

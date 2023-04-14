@@ -1,17 +1,22 @@
 <template>
     <div class="card">
-        <p class="add" tag="button" >Add</p>
         <div class="image-wrap">
             <router-link v-bind:to="{ name: 'comicdetails', params: { id: comic.comicId } }"><img class="comic-image" v-bind:src="'http://i.annihil.us/u/prod/marvel/i/mg/' + comic.image + '/portrait_xlarge.jpg'" /></router-link>
             <h3 class="comic-title">{{ comic.title }}</h3>
             <p class="comic-creator">{{ comic.writer }}, {{ comic.penciler }}</p>
         </div>
+        <add-comic />
     </div>
 </template>
 
 <script>
+import AddComic from '../components/AddComic.vue';
+
 export default {
     name: 'comic-card',
+    components: {
+        AddComic
+    },
     props: {
         comic: Object
     }
@@ -19,16 +24,21 @@ export default {
 </script>
 
 <style scoped>
+
 .card {
     width: 200px;
     height: 100%;
     display: flex;
-    flex-wrap: wrap;
     flex-direction: column;
     justify-content: space-between;
     text-align: center;
     font-family: 'Montserrat', Helvetica, sans-serif;
 }
+
+.image-wrap {
+    height: 400px;
+}
+
 .comic-creator {
     margin-top: 5px;
     text-align: left;
