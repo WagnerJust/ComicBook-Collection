@@ -168,7 +168,7 @@ label:after {
 	top: 0px;
 	left: 0px;
 	width: 2rem;
-	height: 1.65rem;
+	height: 1.63rem;
 	background: #fff;
 	transition: 0.2s;
 }

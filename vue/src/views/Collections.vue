@@ -1,5 +1,8 @@
 <template>
     <section class="container">
+        <div id="collection-banner">
+            <img id="image" src="..\public\marvel-panorama-1.jpg" />
+        </div>
         <h2 class="collections-title">My Collections</h2>
         <add-collection />
         <div class="collection-list">
@@ -69,6 +72,17 @@ export default {
 .container {
     margin-left: 12%;
     margin-right: 12%;
+}
+
+#collection-banner {
+    display: flex;
+    justify-content: center;
+    margin-top: 3%;
+}
+
+#image {
+    height: 500px;
+    width: 200%;
 }
 
 .collections-title {

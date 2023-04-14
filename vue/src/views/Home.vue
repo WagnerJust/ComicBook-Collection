@@ -33,11 +33,11 @@ export default {
 }
 
 .image-fit {
-  height: 500px;
-  width: 100%;
-  object-fit: cover;
-  margin: auto;
-  margin-top: 3%;
+	height: 500px;
+	width: 100%;
+	object-fit: cover;
+	margin: auto;
+	margin-top: 3%;
 }
 
 </style>

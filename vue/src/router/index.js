@@ -9,6 +9,7 @@ import MyCollection from '../views/MyCollection.vue'
 import NotFound from '../views/NotFound.vue'
 import Browse from '../views/Browse.vue'
 import NewComics from '../views/NewComics.vue'
+import ComicDetails from '../views/ComicDetails.vue'
 import store from '../store/index'
 
 
@@ -92,6 +93,14 @@ const router = new Router({
       path: "/newcomics",
       name: "newcomics",
       component: NewComics,
+      meta: {
+        requiresAuth: false
+      }
+    },
+    {
+      path: "/comic/:id",
+      name: "comicdetails",
+      component: ComicDetails,
       meta: {
         requiresAuth: false
       }
