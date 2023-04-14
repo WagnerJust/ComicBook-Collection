@@ -27,7 +27,7 @@ export default {
 	background-size: cover;
 	background-position: bottom;
 	opacity: 0.9;
-	height: 84vh;
+	height: 84.5vh;
 }
 
 .main {
