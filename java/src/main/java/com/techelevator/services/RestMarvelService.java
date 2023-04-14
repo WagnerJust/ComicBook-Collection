@@ -5,7 +5,6 @@ import com.fasterxml.jackson.databind.JsonNode;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.techelevator.model.Comic;
 import org.springframework.stereotype.Component;
-import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.client.RestTemplate;
 
 import java.math.BigInteger;
@@ -14,6 +13,8 @@ import java.security.NoSuchAlgorithmException;
 import java.text.SimpleDateFormat;
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Objects;
 
 @Component
@@ -28,18 +29,27 @@ public class RestMarvelService {
     private final String apiUrl = "http://gateway.marvel.com/v1/public/";
 
 
-    public Comic getComicByUpc(@PathVariable String upc) throws JsonProcessingException {
+    public Comic getComicByUpc(String upc) throws JsonProcessingException {
 
         String resp = restTemplate.getForObject(apiUrl+"comics?upc="+upc+endUrl, String.class);
         JsonNode comicNode = new ObjectMapper().readTree(resp);
-        return jsonComicMapper(comicNode);
+        return jsonComicMapper(comicNode.get("data").get("results").get(0));
+    }
 
+    public List<Comic> searchComicsBySeriesAndIssueNo(String series, String issueNo) throws JsonProcessingException {
+        ArrayList<Comic> comics = new ArrayList<>();
+        String resp = restTemplate.getForObject(apiUrl+"comics?titleStartsWith="+series+"&issueNumber="+issueNo+endUrl, String.class);
+        JsonNode comicsNode = new ObjectMapper().readTree(resp).get("data").get("results");
+        for (JsonNode comicNode : comicsNode){
+            comics.add(jsonComicMapper(comicNode));
+        }
+        return comics;
     }
     private Comic jsonComicMapper(JsonNode comicNode){
         DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd");
         Comic comic = new Comic();
-        comic.setSeriesName(comicNode.get("data").get("results").get(0).get("title").textValue());
-        JsonNode creators = (comicNode.get("data").get("results").get(0).get("creators").get("items"));
+        comic.setSeriesName(comicNode.get("title").textValue());
+        JsonNode creators = (comicNode.get("creators").get("items"));
         for (JsonNode creator: creators){
             if (Objects.equals(creator.get("role").textValue(), "inker")){
                 comic.setArtist(creator.get("name").textValue());
@@ -48,14 +58,14 @@ public class RestMarvelService {
                 comic.setAuthor(creator.get("name").textValue());
             }
         }
-        for (JsonNode date : comicNode.get("data").get("results").get(0).get("dates")){
+        for (JsonNode date : comicNode.get("dates")){
             if (Objects.equals(date.get("type").textValue(), "focDate")){
                 comic.setPublish_date(LocalDate.parse(date.get("date").textValue().substring(0, 10), formatter));
             }
         }
-        comic.setUpc(comicNode.get("data").get("results").get(0).get("upc").textValue());
-        comic.setIssueNumber(comicNode.get("data").get("results").get(0).get("issueNumber").intValue());
-        comic.setImageURL(comicNode.get("data").get("results").get(0).get("images").get(0).get("path").textValue());
+        comic.setUpc(comicNode.get("upc").textValue());
+        comic.setIssueNumber(comicNode.get("issueNumber").intValue());
+        comic.setImageURL(comicNode.get("images").get(0).get("path").textValue());
         return comic;
     }
     public static String getMd5(String input)
