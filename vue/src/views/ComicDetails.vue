@@ -1,6 +1,6 @@
 <template>
 	<section class="container">
-        <img class="comic-image" v-bind:src="'http://i.annihil.us/u/prod/marvel/i/mg/' + comic.image + '/portrait_incredible.jpg'" >
+        <img class="comic-image" v-bind:src="'http://i.annihil.us/u/prod/marvel/i/mg/' + comic.image + '/detail.jpg'" >
 		
         <div class="comic-details">
             <h1 class ="comic-details-text">Comic Details</h1>
