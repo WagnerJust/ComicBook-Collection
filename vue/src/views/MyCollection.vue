@@ -1,6 +1,6 @@
 <template>
     <section class="container">
-        <h2>"Collection Name Here"</h2>
+        <h2>Collection Name</h2>
         <div class="cards">
             <max-comic-card v-for="comic in this.comics" :key="comic.comicId" :comic="comic" />
         </div>
@@ -46,12 +46,14 @@ export default {
     justify-content: space-evenly;
     flex-wrap: wrap;
     column-gap: 2.2%;
-    margin-top: 2%;
+    margin-top: 3rem;
 }
 
 h2 {
     text-align: center;
-    margin: 2rem;
+    margin: 1.5rem;
+    font-size: 2.5rem;
+    font-family: 'Montserrat', Helvetica, sans-serif;
 }
 
 </style>

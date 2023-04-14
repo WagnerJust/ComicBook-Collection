@@ -1,20 +1,20 @@
 <template>
     <section class="container">
         <h2 class="collections-title">My Collections</h2>
+        <add-collection />
         <div class="collection-list">
-            <router-link class="collectionBoxes" 
+            <router-link class="collectionBox" 
             :to="{ name: 'collection', params: {collectionId: collection.collectionId} }" 
             v-for="collection in this.myCollections" 
-            :key="collection.collectionId"
-            :collection="collection">
+            :key="collection.collectionId">
                 <div class="collection-name">{{collection.collectionName}}</div>
                 <img class="collection-image" src="..\public\comic-collection.jpg" />
             </router-link>
         </div>
         <h2 class="collections-title">Public Collections</h2>
         <div class="collection-list">
-            <router-link class="collectionBoxes" 
-            :to="{ name: 'collection' }" 
+            <router-link class="collectionBox" 
+            :to="{ name: 'collection', params: {collectionId: collection.collectionId} }" 
             v-for="collection in this.publicCollections" 
             :key="collection.collectionId">
                 <div class="collection-name">{{collection.collectionName}}</div>
@@ -27,18 +27,22 @@
 
 <script>
 import collectionService from '../services/CollectionsService.js';
+import AddCollection from '../components/AddCollection.vue';
 
 export default {
     name: 'collections',
-    components: { 
 
-    },
     data() {
         return {
             myCollections: [],
             publicCollections: []
         }
     },
+
+    components: {
+        AddCollection
+    },
+
     created() {
 
         /* This call can be seen in the console. It is requesting all the current user's collections */
@@ -65,34 +69,35 @@ export default {
 .container {
     margin-left: 12%;
     margin-right: 12%;
-    font-family: 'Montserrat', Helvetica, sans-serif;
 }
 
 .collections-title {
     margin-top: 1.5rem;
     font-size: 2.5rem;
     text-align: center;
+    font-family: 'Montserrat', Helvetica, sans-serif;
 }
 
 .collection-list {
     display: flex;
     justify-content: space-evenly;
+    flex-wrap: wrap;
 }
 
-.collectionBoxes {
+.collectionBox {
     text-transform: uppercase;
     text-align: center;
     background-color: white;
     margin: 2rem;
 }
 
+.collectionBox:hover {
+    color: #ED1D24;
+}
+
 .collection-name {
     margin-top: .3rem;
     margin-bottom: .1rem;
-}
-
-.collectionBoxes:hover {
-    color: #ED1D24;
 }
 
 .collection-image:hover {
