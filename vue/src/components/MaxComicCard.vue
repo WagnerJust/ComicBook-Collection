@@ -1,7 +1,7 @@
 <template>
     <div class="card">
         <div class="image-wrap">
-            <img class="comic-image" v-bind:src="'http://i.annihil.us/u/prod/marvel/i/mg/' + comic.imageURL + '/portrait_xlarge.jpg'" />
+            <img class="comic-image" v-bind:src="'http://i.annihil.us/u/prod/marvel/i/mg/' + comic.imageURL + '/detail.jpg'" />
             <h3 class="series">{{ comic.seriesName }}</h3>
             <p class="comic-creator">{{ comic.author }}, {{ comic.artist }}</p>
             <p class="publish-date">{{ comic.publish_date }}</p>
