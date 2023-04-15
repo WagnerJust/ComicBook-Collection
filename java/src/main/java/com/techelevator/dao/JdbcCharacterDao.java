@@ -96,6 +96,27 @@ public class JdbcCharacterDao implements CharacterDao {
     }
 
     @Override
+    public List<ComicCharacter> getCharactersByCollectionId(int collectionId){
+        List<ComicCharacter> charactersList = new ArrayList<>();
+        String sql = "select distinct character_table.character_id, character_id_marvel_api, alias, real_name\n" +
+                "from character_table\n" +
+                "join character_comic ON character_comic.character_id = character_table.character_id\n" +
+                "join comic_data ON comic_data.comic_data_id = character_comic.comic_data_id\n" +
+                "join comic_collection ON comic_collection.comic_data_id = comic_data.comic_data_id\n" +
+                "where comic_collection.collection_id = ?" +
+                "order by alias asc";
+
+        SqlRowSet results = jdbcTemplate.queryForRowSet(sql, collectionId);
+        while (results.next()){
+            charactersList.add(mapRowToCharacter(results));
+        }
+        if (charactersList.size() == 0) {
+            return null;
+        }
+        return charactersList;
+    }
+
+    @Override
     public ComicCharacter addCharacter(ComicCharacter newCharacter) {
         ComicCharacter comicCharacter;
         String sql = "INSERT INTO character_table (character_id_marvel_api, alias, real_name) " +
@@ -140,7 +161,7 @@ public class JdbcCharacterDao implements CharacterDao {
     }
 
     @Override
-    public int countCollectionComicsWithCharacter(int collectionId, int characterId) {
+    public int numberComicsInCollectionWithCharacter(int collectionId, int characterId) {
         int result = -1;
         String sql = "SELECT COUNT(*) AS total FROM character_table\n" +
                 "JOIN character_comic ON character_comic.character_id = character_table.character_id\n" +
@@ -157,7 +178,7 @@ public class JdbcCharacterDao implements CharacterDao {
     }
 
     @Override
-    public int countUserComicsWithCharacter(int userId, int characterId) {
+    public int numberComicsWithCharacterTotal(int userId, int characterId) {
         int result = -1;
         String sql = "SELECT COUNT(DISTINCT comic_collection.comic_data_id) AS total FROM character_table\n" +
                 "JOIN character_comic ON character_comic.character_id = character_table.character_id\n" +

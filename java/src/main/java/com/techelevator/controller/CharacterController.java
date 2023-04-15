@@ -52,6 +52,17 @@ public class CharacterController {
     }
 
     @PreAuthorize("hasRole('USER')")
+    @GetMapping("/collections/{collectionId}/characters")
+    public List<ComicCharacter> getCharactersInCollection(@PathVariable int  collectionId){
+        List<ComicCharacter> characterList = characterDao.getCharactersByCollectionId(collectionId);
+        if(characterList == null || characterList.size() == 0){
+            throw new ResponseStatusException(HttpStatus.NO_CONTENT, "No characters found in collection");
+        } else return characterList;
+    }
+
+
+
+    @PreAuthorize("hasRole('USER')")
     @ResponseStatus(value = HttpStatus.CREATED)
     @PostMapping("/characters/add")
     public ComicCharacter addCharacter(@RequestBody ComicCharacter newCharacter){
@@ -83,17 +94,16 @@ public class CharacterController {
 
     @PreAuthorize("hasRole('USER')")
     @ResponseStatus(value = HttpStatus.OK)
-    @GetMapping("/collections/{collectionId}/stats")
-    public int countCollectionComicsWithCharacter(int characterId ,@PathVariable int collectionId){
-        return characterDao.countCollectionComicsWithCharacter(collectionId,characterId);
+    @GetMapping("/collections/{collectionId}/stats/{characterId}")
+    public int numberComicsInCollectionWithCharacter(@PathVariable int characterId ,@PathVariable int collectionId){
+        return characterDao.numberComicsInCollectionWithCharacter(collectionId,characterId);
     }
-
 
     @PreAuthorize("hasRole('USER')")
     @ResponseStatus(value = HttpStatus.OK)
     @GetMapping("/user/{userId}/characters/{characterId}")
-    public int countUserComicsWithCharacter(@PathVariable int userId, int characterId){
-        return characterDao.countUserComicsWithCharacter(userId, characterId);
+    public int numberComicsWithCharacterTotal(@PathVariable int userId, @PathVariable int characterId){
+        return characterDao.numberComicsWithCharacterTotal(userId, characterId);
     }
 
 
