@@ -9,7 +9,7 @@
             </div>
             <div id="public-section" class="field">
                 <label id="public-text" for="checkbox">Public? </label>
-                <input id="switch" type="checkbox" v-model="collection.public" /><label id="testLabel" for="switch">Toggle</label>
+                <label id="switch"><input type="checkbox" v-model="collection.public" /><span id="slider"></span></label>
             </div>
             <div class="field">
                 <button id="save-collection-button" type="submit" v-on:click="saveCollection()">Save Collection</button>
@@ -145,41 +145,54 @@ button:hover {
     margin-top: 1rem;
 }
 
-input[type=checkbox]{
-	height: 0;
-	width: 0;
-	visibility: hidden;
+/* The toggle switch - this code was copied and slightly edited from: https://www.w3schools.com/howto/howto_css_switch.asp */
+
+#switch {
+    position: relative;
+    display: inline-block;
+    width: 60px;
+    height: 34px;
 }
 
-#testLabel {
-	cursor: pointer;
-	text-indent: -9999px;
-	width: 4.2rem;
-	height: 2rem;
-	background: grey;
-	display: block;
-	position: relative;
-    border: 3px solid black;
+#switch input {
+    opacity: 0;
+    width: 0;
+    height: 0;
 }
 
-label:after {
-	content: '';
-	position: absolute;
-	top: 0px;
-	left: 0px;
-	width: 2rem;
-	height: 1.63rem;
-	background: #fff;
-	transition: 0.2s;
+#slider {
+    position: absolute;
+    cursor: pointer;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background-color: #ccc;
+    -webkit-transition: .4s;
+    transition: .4s;
 }
 
-input:checked + #testLabel {
-	background: #10e710;
+#slider:before {
+    position: absolute;
+    content: "";
+    height: 26px;
+    width: 26px;
+    left: 4px;
+    bottom: 4px;
+    background-color: white;
+    -webkit-transition: .4s;
+    transition: .4s;
 }
 
-input:checked + #testLabel:after {
-	left: calc(100%);
-	transform: translateX(-100%);
+input:checked + #slider {
+    background-color: #21f32c;
+    box-shadow: 0 0 1px #21f32c;
+}
+
+input:checked + #slider:before {
+    -webkit-transform: translateX(26px);
+    -ms-transform: translateX(26px);
+    transform: translateX(26px);
 }
 
 </style>
