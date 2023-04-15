@@ -3,8 +3,7 @@
 
       <section>
           <!-- <search-comics /> -->
-            <img class="image-container" src="../../public/star-wars.jpg" alt="star-wars image">
-          <test-search />
+        <test-search />
       </section>
   </div>
 </template>
@@ -23,11 +22,13 @@ export default {
 </script>
 
 <style>
-.image-container {
-    width: 100%;
-    height: 30em;
-    object-fit: cover;
-    object-position: 100% 70%;
-    position: absolute;
+
+.browse-main {
+    background-image: url('/public/star-wars.jpg');
+	background-repeat: no-repeat;
+	background-size: cover;
+	background-position: 0% 70%;
+	height: 450px;
 }
+
 </style>

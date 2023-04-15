@@ -1,10 +1,13 @@
 <template>
 	<section class="container">
 		<div class="new-comics">
-			<div>
-				<img class="image-fit" src="../../public/marvelbannersmall.jpg" alt="Marvel Banner" />
+			<div class="image-fit">
+				<!-- <img class="image-fit" src="../../public/marvelbannersmall.jpg" alt="Marvel Banner" /> -->
 			</div>
-			<new-comics-list />
+			<div class="components">
+				<new-comics-list />
+			</div>
+
 		</div>
 	</section>
 </template>
@@ -22,17 +25,17 @@ export default {
 
 <style scoped>
 
-.container {
+.components {
 	margin-left: 12%;
 	margin-right: 12%;
 }
 
 .image-fit {
-  height: 500px;
-  width: 100%;
-  object-fit: cover;
-  margin: auto;
-  margin-top: 3%;
+    background-image: url('/public/marvelbannersmall.jpg');
+	background-repeat: no-repeat;
+	background-size: cover;
+	background-position: 0% 0%;
+	height: 450px;
 }
 
 </style>

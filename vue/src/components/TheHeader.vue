@@ -72,6 +72,12 @@ nav > ul {
   justify-self: end;
 }
 
+.nav-bar > li:hover {
+  color: #ED1D24;
+  font-weight: 1000;
+  transition: all .15s ease-in-out;
+}
+
 div > ul {
   justify-content: flex-end;
   margin-right: 15%;

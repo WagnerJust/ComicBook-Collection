@@ -110,6 +110,10 @@ export default {
   margin-bottom: 1rem;
 }
 
+.form-input-group input {
+  padding: .5rem;
+}
+
 input {
   height: 2rem;
   width: 15rem;

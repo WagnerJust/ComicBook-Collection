@@ -1,11 +1,14 @@
 <template>
 	<section class="container">
 		<div class="home">
-			<div>
-				<img class="image-fit" src="https://w0.peakpx.com/wallpaper/691/675/HD-wallpaper-marvel-comics-marvel-logo.jpg" alt="Marvel iamge" />
+			<div class="image-container">
+				<!-- <img class="image-fit" src="https://w0.peakpx.com/wallpaper/691/675/HD-wallpaper-marvel-comics-marvel-logo.jpg" alt="Marvel iamge" /> -->
 			</div>
-			<new-comics-list />
-			<characters-list />
+			<div class="components">
+				<new-comics-list />
+				<characters-list />
+			</div>
+
 		</div>
 	</section>
 </template>
@@ -27,17 +30,16 @@ export default {
 
 <style scoped>
 
-.container {
+.image-container {
+    background-image: url('/public/marvel-title-1.png');
+	background-repeat: no-repeat;
+	background-size: cover;
+	background-position: 0%;
+	height: 500px;
+}
+
+.components {
 	margin-left: 12%;
 	margin-right: 12%;
 }
-
-.image-fit {
-	height: 500px;
-	width: 100%;
-	object-fit: cover;
-	margin: auto;
-	margin-top: 3%;
-}
-
 </style>
