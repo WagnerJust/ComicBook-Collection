@@ -47,8 +47,8 @@ public class ComicController {
     @PreAuthorize("hasRole('USER')")
     @ResponseStatus(value = HttpStatus.OK)
     @PutMapping("/collections/{collectionId}/add")
-    public boolean addComicToCollection(@PathVariable int collectionId, @RequestBody Comic comicToAdd){
-        return comicDao.addComicToCollection(comicToAdd.getComicId(), collectionId);
+    public void addComicToCollection(@PathVariable int collectionId, @RequestBody Comic comicToAdd){
+        comicDao.addComicToCollection(comicToAdd.getComicId(), collectionId);
     }
 
     @PreAuthorize("hasRole('USER')")
@@ -60,8 +60,8 @@ public class ComicController {
     @PreAuthorize("hasRole('USER')")
     @ResponseStatus(value = HttpStatus.OK)
     @DeleteMapping("/collections/{collectionId}/comics/{comicId}")
-    public boolean removeComicFromCollection(@PathVariable int collectionId, int comicId){
-        return comicDao.removeComicFromCollection(comicId, collectionId);
+    public void removeComicFromCollection(@PathVariable int collectionId, int comicId){
+        comicDao.removeComicFromCollection(comicId, collectionId);
     }
 
     @PreAuthorize("hasRole('USER')")

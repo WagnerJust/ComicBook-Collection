@@ -5,17 +5,17 @@ import com.techelevator.model.Comic;
 import java.util.List;
 
 public interface ComicDao {
-    public List<Comic> listAllComicsOfCollection (int collectionId);
-    public Comic getComic (int comicId);
-    public List<Comic> getComicsByAuthor(String author);
-    public List<Comic> getComicsByArtist(String artist);
-    public List<Comic> getComicsByCharacter(int characterId);
-    public List<Comic> getComicsBySeries(String series);
-    public Comic addComic (Comic comic);
-    public boolean addComicToCollection(int comicId, int collectionId);
-    public boolean removeComicFromCollection(int comicId, int collectionId);
-    public boolean updateComic (Comic comic);
-    public boolean deleteComic (int comicId);
-    public int countUniqueComicsOfUser(int userId);
+    List<Comic> listAllComicsOfCollection (int collectionId);
+    Comic getComic (int comicId);
+    List<Comic> getComicsByAuthor(String author);
+    List<Comic> getComicsByArtist(String artist);
+    List<Comic> getComicsByCharacter(int characterId);
+    List<Comic> getComicsBySeries(String series);
+    Comic addComic (Comic comic);
+    void addComicToCollection(int comicId, int collectionId);
+    void removeComicFromCollection(int comicId, int collectionId);
+    void updateComic (Comic comic);
+    void deleteComic (int comicId);
+    int countUniqueComicsOfUser(int userId);
 
 }

@@ -61,8 +61,8 @@ public class CharacterController {
     @PreAuthorize("hasRole('USER')")
     @ResponseStatus(value = HttpStatus.OK)
     @PutMapping("/characters/{characterId}")
-    public boolean updateCharacter(@PathVariable int characterId, @RequestBody ComicCharacter updatedCharacter){
-        return characterDao.updateCharacter(characterId, updatedCharacter);
+    public void updateCharacter(@PathVariable int characterId, @RequestBody ComicCharacter updatedCharacter){
+        characterDao.updateCharacter(characterId, updatedCharacter);
     }
 
 
@@ -70,15 +70,15 @@ public class CharacterController {
     @PreAuthorize("hasRole('USER')")
     @ResponseStatus(value = HttpStatus.OK)
     @DeleteMapping("/characters/delete/{characterId}")
-    public boolean deleteCharacter(@PathVariable int characterId){
-        return characterDao.deleteCharacter(characterId);
+    public void deleteCharacter(@PathVariable int characterId){
+        characterDao.deleteCharacter(characterId);
     }
 
     @PreAuthorize("hasRole('USER')")
     @ResponseStatus(value = HttpStatus.OK)
     @PostMapping("/comics/{comicId}/characters/{characterId}")
-    public boolean addCharacterToComic(@PathVariable int comicId, int characterId){
-        return characterDao.addCharacterToComic(characterId,comicId);
+    public void addCharacterToComic(@PathVariable int comicId, int characterId){
+        characterDao.addCharacterToComic(characterId,comicId);
     }
 
     @PreAuthorize("hasRole('USER')")

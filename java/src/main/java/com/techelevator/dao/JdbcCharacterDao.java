@@ -1,15 +1,15 @@
 package com.techelevator.dao;
 
 import com.techelevator.model.ComicCharacter;
-import org.springframework.dao.DataAccessException;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.jdbc.support.rowset.SqlRowSet;
-import org.springframework.stereotype.Component;
+import org.springframework.stereotype.Repository;
 
 import java.util.ArrayList;
 import java.util.List;
-@Component
-public class JdbcCharacterDao implements CharacterDao{
+
+@Repository
+public class JdbcCharacterDao implements CharacterDao {
 
     private final JdbcTemplate jdbcTemplate;
 
@@ -21,53 +21,43 @@ public class JdbcCharacterDao implements CharacterDao{
     @Override
     public ComicCharacter getCharacterById(int characterId) {
         ComicCharacter character = null;
-        try {
-            String sql = "SELECT * FROM character_table WHERE character_id = ?";
-            SqlRowSet results = jdbcTemplate.queryForRowSet(sql, characterId);
-            if(results.next()){
-                character = mapRowToCharacter(results);
-            }
-            if (character == null){
-                return null;
-            }
-        } catch(Exception e) {
-            throw new RuntimeException("Failed to find Character");
+        String sql = "SELECT * FROM character_table WHERE character_id = ?";
+        SqlRowSet results = jdbcTemplate.queryForRowSet(sql, characterId);
+        if (results.next()) {
+            character = mapRowToCharacter(results);
         }
+        if (character == null) {
+            return null;
+        }
+
         return character;
     }
 
     @Override
     public List<ComicCharacter> getCharacterByAlias(String characterName) {
         List<ComicCharacter> characters = new ArrayList<>();
-        try {
-            String sql = "SELECT * FROM character_table WHERE alias ILIKE ?";
-            SqlRowSet results = jdbcTemplate.queryForRowSet(sql, "%" + characterName + "%");
-            while (results.next()){
-                characters.add(mapRowToCharacter(results));
-            }
-            if (characters.size()==0){
-                return null;
-            }
-        } catch(Exception e) {
-            throw new RuntimeException("Failed to find Character");
+        String sql = "SELECT * FROM character_table WHERE alias ILIKE ?";
+        SqlRowSet results = jdbcTemplate.queryForRowSet(sql, "%" + characterName + "%");
+        while (results.next()) {
+            characters.add(mapRowToCharacter(results));
         }
+        if (characters.size() == 0) {
+            return null;
+        }
+
         return characters;
     }
 
     @Override
     public List<ComicCharacter> getCharacterByRealName(String characterName) {
         List<ComicCharacter> characters = new ArrayList<>();
-        try {
-            String sql = "SELECT * FROM character_table WHERE real_name ILIKE ?";
-            SqlRowSet results = jdbcTemplate.queryForRowSet(sql, "%" + characterName + "%");
-            while (results.next()){
-                characters.add(mapRowToCharacter(results));
-            }
-            if (characters.size()==0){
-                return null;
-            }
-        } catch(Exception e) {
-            throw new RuntimeException("Failed to find Character");
+        String sql = "SELECT * FROM character_table WHERE real_name ILIKE ?";
+        SqlRowSet results = jdbcTemplate.queryForRowSet(sql, "%" + characterName + "%");
+        while (results.next()) {
+            characters.add(mapRowToCharacter(results));
+        }
+        if (characters.size() == 0) {
+            return null;
         }
         return characters;
     }
@@ -75,37 +65,33 @@ public class JdbcCharacterDao implements CharacterDao{
     @Override
     public List<ComicCharacter> getAllCharacters() {
         List<ComicCharacter> characters = new ArrayList<>();
-        try {
-            SqlRowSet results = jdbcTemplate.queryForRowSet(
-                    "SELECT * FROM character_table");
-            while (results.next()){
-                characters.add(mapRowToCharacter(results));
-            }
-        } catch(Exception e) {
-            throw new RuntimeException("Failed to list Characters");
+
+        SqlRowSet results = jdbcTemplate.queryForRowSet(
+                "SELECT * FROM character_table");
+        while (results.next()) {
+            characters.add(mapRowToCharacter(results));
         }
+
         return characters;
     }
 
     @Override
     public List<ComicCharacter> getCharactersByComicId(int comicId) {
         List<ComicCharacter> characters = new ArrayList<>();
-        try {
-            String sql = "SELECT * \n" +
-                    "FROM character_table \n" +
-                    "JOIN character_comic ON character_comic.character_id = character_table.character_id\n" +
-                    "JOIN comic_data ON comic_data.comic_data_id = character_comic.comic_data_id\n" +
-                    "WHERE comic_data.comic_data_id = ?";
-            SqlRowSet results = jdbcTemplate.queryForRowSet(sql, comicId);
-            while (results.next()){
-                characters.add(mapRowToCharacter(results));
-            }
-            if (characters.size()==0){
-                return null;
-            }
-        } catch(Exception e) {
-            throw new RuntimeException("Failed to find Character");
+
+        String sql = "SELECT * \n" +
+                "FROM character_table \n" +
+                "JOIN character_comic ON character_comic.character_id = character_table.character_id\n" +
+                "JOIN comic_data ON comic_data.comic_data_id = character_comic.comic_data_id\n" +
+                "WHERE comic_data.comic_data_id = ?";
+        SqlRowSet results = jdbcTemplate.queryForRowSet(sql, comicId);
+        while (results.next()) {
+            characters.add(mapRowToCharacter(results));
         }
+        if (characters.size() == 0) {
+            return null;
+        }
+
         return characters;
     }
 
@@ -114,73 +100,59 @@ public class JdbcCharacterDao implements CharacterDao{
         ComicCharacter comicCharacter;
         String sql = "INSERT INTO character_table (character_id_marvel_api, alias, real_name) " +
                 "VALUES (?, ?, ?) RETURNING character_id;";
-        try{
-            Integer newId = jdbcTemplate.queryForObject(sql, Integer.class, newCharacter.getMarvelCharacterId(),
-                    newCharacter.getCharacterAlias(), newCharacter.getCharacterRealName());
-            comicCharacter = getCharacterById(newId);
-        } catch (DataAccessException e){
-            return null;
-        }
+
+        Integer newId = jdbcTemplate.queryForObject(sql, Integer.class, newCharacter.getMarvelCharacterId(),
+                newCharacter.getCharacterAlias(), newCharacter.getCharacterRealName());
+        comicCharacter = getCharacterById(newId);
+
         return comicCharacter;
     }
 
     @Override
-    public boolean updateCharacter(int characterId, ComicCharacter updatedCharacter) {
+    public void updateCharacter(int characterId, ComicCharacter updatedCharacter) {
         String sql = "UPDATE character_table " +
                 "SET character_id_marvel_api = ?, alias = ?, real_name = ? " +
                 "WHERE character_id = ?;";
-        try{
-            jdbcTemplate.update(sql, updatedCharacter.getMarvelCharacterId(), updatedCharacter.getCharacterAlias(),
-                    updatedCharacter.getCharacterRealName(), updatedCharacter.getCharacterId());
-        }catch (DataAccessException e){
-            return false;
-        }
-        return true;
+
+        jdbcTemplate.update(sql, updatedCharacter.getMarvelCharacterId(), updatedCharacter.getCharacterAlias(),
+                updatedCharacter.getCharacterRealName(), updatedCharacter.getCharacterId());
     }
 
     @Override
-    public boolean deleteCharacter(int characterId) {
+    public void deleteCharacter(int characterId) {
         String sql = "DELETE FROM character_table " +
                 "WHERE character_id = ?;";
         String sqlJoinTable = "DELETE FROM character_comic " +
                 "WHERE character_id = ?;";
-        try{
-            jdbcTemplate.update(sqlJoinTable, characterId);
-            jdbcTemplate.update(sql, characterId);
-        }catch (DataAccessException e){
-            return false;
-        }
-        return true;
+
+        jdbcTemplate.update(sqlJoinTable, characterId);
+        jdbcTemplate.update(sql, characterId);
+
     }
 
     @Override
-    public boolean addCharacterToComic(int characterId, int comicId) {
+    public void addCharacterToComic(int characterId, int comicId) {
         String sql = "INSERT INTO character_comic (character_id, comic_data_id) " +
                 "VALUES(?, ?);";
-        try{
-            jdbcTemplate.update(sql, characterId, comicId);
-        }catch (DataAccessException e){
-            return false;
-        }
-        return true;
+
+        jdbcTemplate.update(sql, characterId, comicId);
+
     }
 
     @Override
     public int countCollectionComicsWithCharacter(int collectionId, int characterId) {
         int result = -1;
         String sql = "SELECT COUNT(*) AS total FROM character_table\n" +
-                     "JOIN character_comic ON character_comic.character_id = character_table.character_id\n" +
-                     "JOIN comic_collection ON comic_collection.comic_data_id = character_comic.comic_data_id\n" +
-                     "JOIN collection ON comic_collection.collection_id = collection.collection_id\n" +
-                     "WHERE character_table.character_id = ? AND collection.collection_id = ?;";
-        try {
-            SqlRowSet rowSet = jdbcTemplate.queryForRowSet(sql, characterId, collectionId);
-            if (rowSet.next()){
-                result = rowSet.getInt("total");
-            }
-        }catch (DataAccessException e){
-            return -1;
+                "JOIN character_comic ON character_comic.character_id = character_table.character_id\n" +
+                "JOIN comic_collection ON comic_collection.comic_data_id = character_comic.comic_data_id\n" +
+                "JOIN collection ON comic_collection.collection_id = collection.collection_id\n" +
+                "WHERE character_table.character_id = ? AND collection.collection_id = ?;";
+
+        SqlRowSet rowSet = jdbcTemplate.queryForRowSet(sql, characterId, collectionId);
+        if (rowSet.next()) {
+            result = rowSet.getInt("total");
         }
+
         return result;
     }
 
@@ -188,17 +160,14 @@ public class JdbcCharacterDao implements CharacterDao{
     public int countUserComicsWithCharacter(int userId, int characterId) {
         int result = -1;
         String sql = "SELECT COUNT(DISTINCT comic_collection.comic_data_id) AS total FROM character_table\n" +
-                     "JOIN character_comic ON character_comic.character_id = character_table.character_id\n" +
-                     "JOIN comic_collection ON comic_collection.comic_data_id = character_comic.comic_data_id\n" +
-                     "JOIN collection ON comic_collection.collection_id = collection.collection_id\n" +
-                     "WHERE character_table.character_id = ? AND collection.user_id = ?;";
-        try {
-            SqlRowSet rowSet = jdbcTemplate.queryForRowSet(sql, characterId, userId);
-            if (rowSet.next()){
-                result = rowSet.getInt("total");
-            }
-        }catch (DataAccessException e){
-            return -1;
+                "JOIN character_comic ON character_comic.character_id = character_table.character_id\n" +
+                "JOIN comic_collection ON comic_collection.comic_data_id = character_comic.comic_data_id\n" +
+                "JOIN collection ON comic_collection.collection_id = collection.collection_id\n" +
+                "WHERE character_table.character_id = ? AND collection.user_id = ?;";
+
+        SqlRowSet rowSet = jdbcTemplate.queryForRowSet(sql, characterId, userId);
+        if (rowSet.next()) {
+            result = rowSet.getInt("total");
         }
         return result;
     }

@@ -11,9 +11,9 @@ public interface CharacterDao {
     List<ComicCharacter> getAllCharacters();
     List<ComicCharacter> getCharactersByComicId(int comicId);
     ComicCharacter addCharacter(ComicCharacter character);
-    boolean updateCharacter(int characterId, ComicCharacter character);
-    boolean deleteCharacter(int characterId);
-    boolean addCharacterToComic(int characterId, int comicId);
+    void updateCharacter(int characterId, ComicCharacter character);
+    void deleteCharacter(int characterId);
+    void addCharacterToComic(int characterId, int comicId);
     int countCollectionComicsWithCharacter(int collectionId, int characterId);
     int countUserComicsWithCharacter(int userId, int characterId);
 
