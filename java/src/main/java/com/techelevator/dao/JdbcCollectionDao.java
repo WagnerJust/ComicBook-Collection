@@ -69,7 +69,7 @@ public class JdbcCollectionDao implements CollectionDao {
 
         String sql = "SELECT *\n" +
                 "FROM collection\n" +
-                "WHERE public=true AND user_id = ?;";
+                "WHERE user_id = ?;";
         SqlRowSet results = jdbcTemplate.queryForRowSet(sql, id);
         while (results.next()) {
             collections.add(mapRowToCollection(results));

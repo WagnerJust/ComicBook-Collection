@@ -68,6 +68,8 @@ public class RestMarvelService {
         comic.setImageURL(comicNode.get("images").get(0).get("path").textValue());
         return comic;
     }
+
+
     public static String getMd5(String input)
     {
         try {
