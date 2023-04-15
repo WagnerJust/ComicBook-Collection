@@ -185,8 +185,8 @@ button:hover {
 }
 
 input:checked + #slider {
-    background-color: #21f32c;
-    box-shadow: 0 0 1px #21f32c;
+    background-color: #23ce2b;
+    box-shadow: 0 0 1px #23ce2b;
 }
 
 input:checked + #slider:before {
