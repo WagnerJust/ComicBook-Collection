@@ -23,7 +23,7 @@ export default {
         ComicCard 
     },
 	created() {
-		comicService.getComicsByCollectionId(8).then(response => {
+		comicService.getComicsByCollectionId(9).then(response => {
 		this.comics = response.data;
 		console.log("COMICS");
 		console.log(this.comics);

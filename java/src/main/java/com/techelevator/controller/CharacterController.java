@@ -43,7 +43,6 @@ public class CharacterController {
     }
 
     @PreAuthorize("hasAnyRole('USER','PREMIUM')")
-<<<<<<< HEAD
     @GetMapping("/characters")
     public List<ComicCharacter> getAllCharacters(){
         List<ComicCharacter> characterList = characterDao.getAllCharacters();
@@ -53,8 +52,6 @@ public class CharacterController {
     }
 
     @PreAuthorize("hasAnyRole('USER','PREMIUM')")
-=======
->>>>>>> 3729cd788b1e21a235bda07db9460a7f4fa1624b
     @GetMapping("/collections/{collectionId}/characters")
     public List<ComicCharacter> getCharactersInCollection(@PathVariable int  collectionId){
         List<ComicCharacter> characterList = characterDao.getCharactersByCollectionId(collectionId);
@@ -62,16 +59,6 @@ public class CharacterController {
             throw new ResponseStatusException(HttpStatus.NO_CONTENT, "No characters found in collection");
         } else return characterList;
     }
-
-    @PreAuthorize("hasAnyRole('USER','PREMIUM')")
-    @GetMapping("/characters")
-    public List<ComicCharacter> getAllCharacters(){
-        List<ComicCharacter> characterList = characterDao.getAllCharacters();
-        if(characterList == null || characterList.size() == 0){
-            throw new ResponseStatusException(HttpStatus.NO_CONTENT, "No characters found");
-        } else return characterList;
-    }
-
 
     @PreAuthorize("hasAnyRole('USER','PREMIUM')")
     @ResponseStatus(value = HttpStatus.CREATED)
@@ -86,8 +73,6 @@ public class CharacterController {
     public void updateCharacter(@PathVariable int characterId, @RequestBody ComicCharacter updatedCharacter){
         characterDao.updateCharacter(characterId, updatedCharacter);
     }
-
-
 
     @PreAuthorize("hasAnyRole('USER','PREMIUM')")
     @ResponseStatus(value = HttpStatus.OK)
@@ -110,10 +95,6 @@ public class CharacterController {
         return characterDao.numberComicsInCollectionWithCharacter(collectionId,characterId);
     }
 
-<<<<<<< HEAD
-=======
-
->>>>>>> 3729cd788b1e21a235bda07db9460a7f4fa1624b
     @PreAuthorize("hasAnyRole('USER','PREMIUM')")
     @ResponseStatus(value = HttpStatus.OK)
     @GetMapping("/user/{userId}/characters/{characterId}")
@@ -121,15 +102,11 @@ public class CharacterController {
         return characterDao.numberComicsWithCharacterTotal(userId, characterId);
     }
 
-
-
     @PreAuthorize("hasAnyRole('USER','PREMIUM')")
     @ResponseStatus(value = HttpStatus.OK)
     @GetMapping("/comics/{comicId}/characters")
     public List<ComicCharacter> getCharactersByComicId(@PathVariable int comicId){
         return characterDao.getCharactersByComicId(comicId);
     }
-
-
 
 }

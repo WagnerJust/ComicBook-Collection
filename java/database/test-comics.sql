@@ -11,21 +11,21 @@ INSERT INTO public.comic_data (upc, issue_number, series, publish_date, image_ur
 
 INSERT INTO public.users (username, password_hash, role) VALUES ('max', '$2a$10$kXnAbYWckcphV6uVqAtivutGkAgpPLIdCQGd.h/AtOiRZ8DW/u9w2', 'ROLE_USER');
 
-INSERT INTO public.collection (public, user_id, collection_name) VALUES (true, 6, 'The Marvel Collection');
-INSERT INTO public.collection (public, user_id, collection_name) VALUES (false, 6, 'The Spiderman Collection');
+INSERT INTO public.collection (public, user_id, collection_name) VALUES (true, 7, 'The Marvel Collection');
+INSERT INTO public.collection (public, user_id, collection_name) VALUES (false, 7, 'The Spiderman Collection');
 
-INSERT INTO public.comic_collection (collection_id, comic_data_id) VALUES (8, 8);
-INSERT INTO public.comic_collection (collection_id, comic_data_id) VALUES (8, 9);
-INSERT INTO public.comic_collection (collection_id, comic_data_id) VALUES (8, 10);
-INSERT INTO public.comic_collection (collection_id, comic_data_id) VALUES (8, 11);
-INSERT INTO public.comic_collection (collection_id, comic_data_id) VALUES (8, 12);
-INSERT INTO public.comic_collection (collection_id, comic_data_id) VALUES (8, 13);
-INSERT INTO public.comic_collection (collection_id, comic_data_id) VALUES (8, 14);
-INSERT INTO public.comic_collection (collection_id, comic_data_id) VALUES (8, 15);
-INSERT INTO public.comic_collection (collection_id, comic_data_id) VALUES (8, 16);
-INSERT INTO public.comic_collection (collection_id, comic_data_id) VALUES (8, 17);
 INSERT INTO public.comic_collection (collection_id, comic_data_id) VALUES (9, 8);
+INSERT INTO public.comic_collection (collection_id, comic_data_id) VALUES (9, 9);
+INSERT INTO public.comic_collection (collection_id, comic_data_id) VALUES (9, 10);
+INSERT INTO public.comic_collection (collection_id, comic_data_id) VALUES (9, 11);
 INSERT INTO public.comic_collection (collection_id, comic_data_id) VALUES (9, 12);
 INSERT INTO public.comic_collection (collection_id, comic_data_id) VALUES (9, 13);
+INSERT INTO public.comic_collection (collection_id, comic_data_id) VALUES (9, 14);
+INSERT INTO public.comic_collection (collection_id, comic_data_id) VALUES (9, 15);
 INSERT INTO public.comic_collection (collection_id, comic_data_id) VALUES (9, 16);
 INSERT INTO public.comic_collection (collection_id, comic_data_id) VALUES (9, 17);
+INSERT INTO public.comic_collection (collection_id, comic_data_id) VALUES (10, 8);
+INSERT INTO public.comic_collection (collection_id, comic_data_id) VALUES (10, 12);
+INSERT INTO public.comic_collection (collection_id, comic_data_id) VALUES (10, 13);
+INSERT INTO public.comic_collection (collection_id, comic_data_id) VALUES (10, 16);
+INSERT INTO public.comic_collection (collection_id, comic_data_id) VALUES (10, 17);

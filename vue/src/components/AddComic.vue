@@ -3,7 +3,7 @@
         <div class="collection-box" v-if="showCollections === true">
             <h5>Which collection?</h5>
             <ul>
-                <a :collection="collection" v-for="collection in this.myCollections" v-bind:key="collection.collectionId" v-on:click="addComic" ><li ref="collection.collectionId">{{collection.collectionName}}</li></a>
+                <a v-for="collection in myCollections" v-bind:key="collection.collectionId" v-on:click="addComic(collection.collectionId)"><li ref="test">{{collection.collectionName}}</li></a>
             </ul>
             <button id="cancel-button" v-on:click.prevent="showCollections = false">Cancel</button>
         </div>
@@ -21,16 +21,13 @@ export default {
         return {
             showCollections: false,
             myCollections: [],
-            collection: {
-                collectionId: '8'
-            }
         }
     },
     props: {
         comic: Object,
     },
     methods: {
-        addComic() {
+        addComic(collectionId) {
             let comic = {
                 comicId: this.comic.comicId,
                 upc: this.comic.upc,
@@ -41,13 +38,11 @@ export default {
                 publish_date: this.comic.publish_date,
                 imageURL: this.comic.imageURL,
             };
-            console.log("COMIC TO ADD")
-            console.log(comic)
-            comicService.addComicToCollection(this.collection.collectionId, comic).then(response => {
-                console.log("Collection ID");
-                console.log(this.collection.collectionId);
-                if (response.status === 201) {
-                    console.log("works!");
+            console.log("COLLECTION ID");
+            console.log(collectionId);
+            comicService.addComicToCollection(collectionId, comic).then(response => {
+                if (response.status === 200) {
+                    this.$router.push("/collections");
                 }
             })
         }
