@@ -10,12 +10,13 @@ public interface CharacterDao {
     List<ComicCharacter> getCharacterByRealName(String characterName);
     List<ComicCharacter> getAllCharacters();
     List<ComicCharacter> getCharactersByComicId(int comicId);
+    List<ComicCharacter> getCharactersByCollectionId(int collectionId);
     ComicCharacter addCharacter(ComicCharacter character);
     void updateCharacter(int characterId, ComicCharacter character);
     void deleteCharacter(int characterId);
     void addCharacterToComic(int characterId, int comicId);
-    int countCollectionComicsWithCharacter(int collectionId, int characterId);
-    int countUserComicsWithCharacter(int userId, int characterId);
+    int numberComicsInCollectionWithCharacter(int collectionId, int characterId);
+    int numberComicsWithCharacterTotal(int userId, int characterId);
 
     //todo: is this needed?
     //boolean removeCharacterFromComic(int characterId, int comicId);
