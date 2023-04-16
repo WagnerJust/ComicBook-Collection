@@ -11,7 +11,7 @@ components / SearchComics
 
         <div class="options-bar">
             <label class="radio-box">
-                <input type="radio" name="search-option" value="comidId" v-model="selectedOption" />
+                <input type="radio" name="search-option" value="UPC" v-model="selectedOption" />
                 <span class="name">UPC</span>
             </label>
             <label class="radio-box">
@@ -33,7 +33,7 @@ components / SearchComics
         </div>
 
         <div class="new-comics-list">
-            <comic-card v-bind:comic="comic" v-for="comic in filteredComics" v-bind:key="comic.comicId"/>
+            <comic-card :comic="comic" v-for="comic in filteredComics" :key="comic.upc"/>
         </div>
 
     </div>
@@ -41,7 +41,6 @@ components / SearchComics
 
 <script>
 import ComicCard from './ComicCard.vue';
-import comicService from '../services/ComicService.js';
 
 
 export default {
@@ -49,23 +48,20 @@ export default {
     components: { ComicCard },
     data() {
         return {
-            publicCollections: [],
             searchResults: [],
-            testComics: [],
             searchValue: "",
             selectedOption: "title",
         }
     },
 	created() {
-		comicService.getComicsByCollectionId(8).then(response => {
-		this.testComics = response.data;
-		console.log("COMICS");
-		console.log(this.comics);
-        });
+        console.log("TEST");
+		console.log(this.$store.state.comics);
+        console.log("NEXT");
+        console.log(this.comics)
 	},
     computed: {
         comics() {
-            return this.testComics
+            return this.$store.state.comics
         },
 
         filteredComics() {

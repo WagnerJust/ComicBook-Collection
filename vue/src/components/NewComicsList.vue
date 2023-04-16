@@ -21,7 +21,7 @@ export default {
 		comicService.getComicsByCollectionId(9).then(response => {
 		this.$store.state.comics = response.data;
 		console.log("COMICS");
-		console.log(this.comics);
+		console.log(this.$store.state.comics);
         });
 	}
 }
