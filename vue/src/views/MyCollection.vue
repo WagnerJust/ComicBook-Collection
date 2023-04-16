@@ -1,6 +1,6 @@
 <template>
     <section class="container">
-        <h2>Collection Name</h2>
+        <h2>{{collection.collectionName}}</h2>
         <div class="cards">
             <max-comic-card v-for="comic in this.comics" :key="comic.comicId" :comic="comic" />
         </div>
@@ -11,6 +11,7 @@
 <script>
 import MaxComicCard from '../components/MaxComicCard.vue';
 import comicService from '../services/ComicService.js'
+import collectionService from "../services/CollectionsService.js"
 
 export default {
     name: 'collection',
@@ -19,7 +20,8 @@ export default {
     },
     data() {
         return {
-            comics: []
+            comics: [],
+            collection: []
         }
     },
     created() {
@@ -29,6 +31,10 @@ export default {
             console.log("COMICS");
             console.log(this.comics);
         });
+        collectionService.getCollectionByCollectionId(this.$route.params.collectionId).then(response => {
+            this.collection = response.data;
+        });
+        
     }
 }
 </script>

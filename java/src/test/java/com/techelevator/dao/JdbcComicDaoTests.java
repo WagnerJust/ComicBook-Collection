@@ -1,6 +1,5 @@
 package com.techelevator.dao;
 
-import com.fasterxml.jackson.annotation.JsonTypeInfo;
 import com.techelevator.model.Comic;
 import org.junit.Assert;
 import org.junit.Before;
@@ -12,7 +11,7 @@ import java.time.LocalDate;
 public class JdbcComicDaoTests extends BaseDaoTests{
 
     protected final Comic COMIC_1 = new Comic("series1", 1, 1, "UPC1", "URL1", LocalDate.parse("2011-01-01"), "author1", "artist1");
-    protected final Comic COMIC_2 = new Comic("series2", 2, 2, "UPC2", "URL2", LocalDate.parse("2011-01-02"), "author2", "artist2");
+    protected final Comic COMIC_2 = new Comic("series2", 2, 2, "UPC2", "URL2", LocalDate.parse("2011-01-02"), "author1", "artist1");
 
     private Comic comicTest;
     private Comic comicTest2;

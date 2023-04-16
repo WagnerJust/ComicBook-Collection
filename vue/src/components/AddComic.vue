@@ -3,23 +3,53 @@
         <div class="collection-box" v-if="showCollections === true">
             <h5>Which collection?</h5>
             <ul>
-                <a v-for="collection in this.myCollections" v-bind:key="collection.collectionId"><li>{{collection.collectionName}}</li></a>
+                <a v-for="collection in this.myCollections" v-bind:key="collection.collectionId" v-on:click="addComic" ><li ref="collection.collectionId">{{collection.collectionName}}</li></a>
             </ul>
             <button id="cancel-button" v-on:click.prevent="showCollections = false">Cancel</button>
         </div>
-        <button v-if="showCollections === false" v-on:click.prevent="showCollections = true" v-bind:style="{}">Add To Collection</button>
+        <button v-if="showCollections === false" v-on:click.prevent="showCollections = true">Add To Collection</button>
     </div>
 </template>
 
 
 <script>
 import collectionService from '../services/CollectionsService.js';
+import comicService from '../services/ComicService.js';
 
 export default {
     data() {
         return {
             showCollections: false,
-            myCollections: []
+            myCollections: [],
+            collection: {
+                collectionId: '8'
+            }
+        }
+    },
+    props: {
+        comic: Object,
+    },
+    methods: {
+        addComic() {
+            let comic = {
+                comicId: this.comic.comicId,
+                upc: this.comic.upc,
+                seriesName: this.comic.seriesName,
+                issueNumber: this.comic.issueNumber,
+                artist: this.comic.artist,
+                author: this.comic.author,
+                publish_date: this.comic.publish_date,
+                imageURL: this.comic.imageURL,
+            };
+            console.log("COMIC TO ADD")
+            console.log(comic)
+            comicService.addComicToCollection(this.collection.collectionId, comic).then(response => {
+                console.log("Collection ID");
+                console.log(this.collection.collectionId);
+                if (response.status === 201) {
+                    console.log("works!");
+                }
+            })
         }
     },
     created() {

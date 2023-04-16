@@ -1,6 +1,6 @@
 <template>
     <div class="card">
-        <add-comic />
+        <add-comic :comic="comic" />
         <div class="image-wrap">
             <router-link v-bind:to="{ name: 'comicdetails', params: { id: comic.comicId } }"><img class="comic-image" v-bind:src="'http://i.annihil.us/u/prod/marvel/i/mg/' + comic.image + '/detail.jpg'" /></router-link>
             <h3 class="comic-title">{{ comic.title }}</h3>
