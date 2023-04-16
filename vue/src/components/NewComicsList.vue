@@ -2,7 +2,7 @@
     <section>
     <h2 class="new-comics-text">New Comics</h2>
     <div class="new-comics-list" >
-        <comic-card v-bind:comic="comic" v-for="comic in comics" v-bind:key="comic.comicId"/>
+        <comic-card v-bind:comic="comic" v-for="comic in this.$store.state.comics" v-bind:key="comic.comicId"/>
     </div>       
     </section>
 
@@ -14,17 +14,12 @@ import comicService from '../services/ComicService.js';
 
 export default {
     name: "new-comics-list",
-	data () {
-		return {
-			comics: []
-		}
-	},
     components: { 
         ComicCard 
     },
 	created() {
 		comicService.getComicsByCollectionId(9).then(response => {
-		this.comics = response.data;
+		this.$store.state.comics = response.data;
 		console.log("COMICS");
 		console.log(this.comics);
         });

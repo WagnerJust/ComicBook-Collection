@@ -1,23 +1,24 @@
 <template>
 	<section class="container">
-        <img class="comic-image" v-bind:src="'http://i.annihil.us/u/prod/marvel/i/mg/' + comic.image + '/detail.jpg'" >
-		
-        <div class="comic-details">
-            <h1 class ="comic-details-text">Comic Details</h1>
-            <h3> {{ comic.title }}</h3>
-            <p> Issue Number: {{ comic.issueNumber }}</p>
-            <p> Writer: {{ comic.writer }}</p>
-            <p> Penciler: {{ comic.penciler }}</p>
-			<comic-card v-bind:comic="comic" v-for="comic in comics" v-bind:key="comic.comicId"/>
-            <Details />
-            <add-comic class="add" v-bind:comic="comic"/>
-		</div>
+        <div class="card-container">
+            <div class="comic-image-div">
+                <img class="comic-image" v-bind:src="'http://i.annihil.us/u/prod/marvel/i/mg/' + comic.imageURL + '/detail.jpg'" >
+            </div>
+            <div class="comic-details">
+                <h3 class="series-name">{{ comic.seriesName }}</h3>
+                <p class="issue-number">Issue Number: {{ comic.issueNumber }}</p>
+                <p class="writer">Writer: {{ comic.author }}</p>
+                <p class="Penciler">Penciler: {{ comic.artist }}</p>
+                <div class="add-button">
+                    <add-comic v-bind:comic="comic"/>
+                </div>
+            </div>
+        </div>
+
 	</section>
 </template>
 
 <script>
-import ComicCard from '../components/ComicCard.vue';
-import Details from '../components/Details.vue';
 import AddComic from '../components/AddComic.vue';
 
 export default {
@@ -27,9 +28,7 @@ export default {
             return this.$store.state.comics.find((c) => c.comicId === this.$route.params.id);
         }
     },
-	components: { 
-		ComicCard,
-        Details,
+	components: {
         AddComic
 	},
 };
@@ -42,40 +41,39 @@ export default {
 	margin-right: 12%;
 }
 
-.image-fit {
-  height: 500px;
-  width: 100%;
-  object-fit: cover;
-  margin: auto;
-  margin-top: 3%;
-}
-
-.comic-details-text {
-    font-size: 6vh;
-    margin-bottom: 2%;
-    margin: 4%;
-    text-align: center;
-    font-family: 'Montserrat', Helvetica, sans-serif;
+.card-container {
+    display: flex
 }
 
 .comic-details {
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
+    align-items: center;
     font-size: 3vh;
-    text-align: center;
+    padding: 3rem;
     font-family: 'Montserrat', Helvetica, sans-serif;
-    float: right;
+}
+
+.comic-image-div {
+    display: flex;
+    margin-top: 2%;
 }
 
 .comic-image {
-    margin-top: 2%;
-    width: 40%;
+    height: 75vh;
     box-shadow: 0 6px 10px 0 rgba(0, 0, 0, 0.2), 0 10px 30px 0 rgba(0, 0, 0, 0.19);
-    position: relative;
-    transition: transform 250ms;
 }
 
-.add{
+.add-button {
+    display: inline;
     margin-top: 5%;
-    width: 20%;
+    height: 5rem;
+    width: 100%;
+}
+
+h3, p {
+    margin: 1rem;
 }
 
 </style>

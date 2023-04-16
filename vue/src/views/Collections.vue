@@ -77,7 +77,7 @@ export default {
 }
 
 #collection-banner {
-    background-image: url('/public/marvel-panorama-1.jpg');
+    background-image: url('/public/marvel-panorama-3.jpg');
 	background-repeat: no-repeat;
 	background-size: cover;
 	background-position: 0% 70%;
