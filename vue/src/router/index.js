@@ -85,7 +85,7 @@ const router = new Router({
       }
     },
     {
-      path: "/404",
+      path: "/:pathMatch(.*)*",
       name: "NotFound",
       component: NotFound
     },
