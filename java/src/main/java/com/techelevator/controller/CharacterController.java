@@ -22,7 +22,7 @@ public class CharacterController {
         this.characterDao = characterDao;
     }
 
-    @PreAuthorize("hasRole('USER')")
+    @PreAuthorize("hasAnyRole('USER','PREMIUM')")
     @GetMapping("/characters/{characterId}")
     public ComicCharacter getCharacterById(@PathVariable int characterId) {
         ComicCharacter character = characterDao.getCharacterById(characterId);
@@ -32,7 +32,7 @@ public class CharacterController {
         else return character;
     }
 
-    @PreAuthorize("hasRole('USER')")
+    @PreAuthorize("hasAnyRole('USER','PREMIUM')")
     @GetMapping("/characters/alias/{characterName}")
     public List<ComicCharacter> getCharacterByAlias(@PathVariable String characterName) {
         List<ComicCharacter> character = characterDao.getCharacterByAlias(characterName);
@@ -42,7 +42,7 @@ public class CharacterController {
         else return character;
     }
 
-    @PreAuthorize("hasRole('USER')")
+    @PreAuthorize("hasAnyRole('USER','PREMIUM')")
     @GetMapping("/characters")
     public List<ComicCharacter> getAllCharacters(){
         List<ComicCharacter> characterList = characterDao.getAllCharacters();
@@ -51,14 +51,14 @@ public class CharacterController {
         } else return characterList;
     }
 
-    @PreAuthorize("hasRole('USER')")
+    @PreAuthorize("hasAnyRole('USER','PREMIUM')")
     @ResponseStatus(value = HttpStatus.CREATED)
     @PostMapping("/characters/add")
     public ComicCharacter addCharacter(@RequestBody ComicCharacter newCharacter){
         return characterDao.addCharacter(newCharacter);
     }
 
-    @PreAuthorize("hasRole('USER')")
+    @PreAuthorize("hasAnyRole('USER','PREMIUM')")
     @ResponseStatus(value = HttpStatus.OK)
     @PutMapping("/characters/{characterId}")
     public void updateCharacter(@PathVariable int characterId, @RequestBody ComicCharacter updatedCharacter){
@@ -67,21 +67,21 @@ public class CharacterController {
 
 
 
-    @PreAuthorize("hasRole('USER')")
+    @PreAuthorize("hasAnyRole('USER','PREMIUM')")
     @ResponseStatus(value = HttpStatus.OK)
     @DeleteMapping("/characters/delete/{characterId}")
     public void deleteCharacter(@PathVariable int characterId){
         characterDao.deleteCharacter(characterId);
     }
 
-    @PreAuthorize("hasRole('USER')")
+    @PreAuthorize("hasAnyRole('USER','PREMIUM')")
     @ResponseStatus(value = HttpStatus.OK)
     @PostMapping("/comics/{comicId}/characters/{characterId}")
     public void addCharacterToComic(@PathVariable int comicId, int characterId){
         characterDao.addCharacterToComic(characterId,comicId);
     }
 
-    @PreAuthorize("hasRole('USER')")
+    @PreAuthorize("hasAnyRole('USER','PREMIUM')")
     @ResponseStatus(value = HttpStatus.OK)
     @GetMapping("/collections/{collectionId}/stats")
     public int countCollectionComicsWithCharacter(int characterId ,@PathVariable int collectionId){
@@ -89,7 +89,7 @@ public class CharacterController {
     }
 
 
-    @PreAuthorize("hasRole('USER')")
+    @PreAuthorize("hasAnyRole('USER','PREMIUM')")
     @ResponseStatus(value = HttpStatus.OK)
     @GetMapping("/user/{userId}/characters/{characterId}")
     public int countUserComicsWithCharacter(@PathVariable int userId, int characterId){
@@ -98,7 +98,7 @@ public class CharacterController {
 
 
 
-    @PreAuthorize("hasRole('USER')")
+    @PreAuthorize("hasAnyRole('USER','PREMIUM')")
     @ResponseStatus(value = HttpStatus.OK)
     @GetMapping("/comics/{comicId}/characters")
     public List<ComicCharacter> getCharactersByComicId(@PathVariable int comicId){
