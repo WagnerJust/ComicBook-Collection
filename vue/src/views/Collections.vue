@@ -1,30 +1,32 @@
 <template>
-    <section class="container">
+    <div>
         <div id="collection-banner">
-            <img id="image" src="..\public\marvel-panorama-1.jpg" />
         </div>
-        <h2 class="collections-title">My Collections</h2>
-        <add-collection />
-        <div class="collection-list">
-            <router-link class="collectionBox" 
-            :to="{ name: 'collection', params: {collectionId: collection.collectionId} }" 
-            v-for="collection in this.myCollections" 
-            :key="collection.collectionId">
-                <div class="collection-name">{{collection.collectionName}}</div>
-                <img class="collection-image" src="..\public\comic-collection.jpg" />
-            </router-link>
-        </div>
-        <h2 class="collections-title">Public Collections</h2>
-        <div class="collection-list">
-            <router-link class="collectionBox" 
-            :to="{ name: 'collection', params: {collectionId: collection.collectionId} }" 
-            v-for="collection in this.publicCollections" 
-            :key="collection.collectionId">
-                <div class="collection-name">{{collection.collectionName}}</div>
-                <img class="collection-image" src="..\public\comic-collection.jpg" />
-            </router-link>
-        </div>
-    </section>
+        <section class="container">
+
+            <h2 class="collections-title">My Collections</h2>
+            <add-collection />
+            <div class="collection-list">
+                <router-link class="collectionBox" 
+                :to="{ name: 'collection', params: {collectionId: collection.collectionId} }" 
+                v-for="collection in this.myCollections" 
+                :key="collection.collectionId">
+                    <div class="collection-name">{{collection.collectionName}}</div>
+                    <img class="collection-image" src="..\public\comic-collection.jpg" />
+                </router-link>
+            </div>
+            <h2 class="collections-title">Public Collections</h2>
+            <div class="collection-list">
+                <router-link class="collectionBox" 
+                :to="{ name: 'collection', params: {collectionId: collection.collectionId} }" 
+                v-for="collection in this.publicCollections" 
+                :key="collection.collectionId">
+                    <div class="collection-name">{{collection.collectionName}}</div>
+                    <img class="collection-image" src="..\public\comic-collection.jpg" />
+                </router-link>
+            </div>
+        </section>
+    </div>
 </template>
 
 
@@ -75,9 +77,11 @@ export default {
 }
 
 #collection-banner {
-    display: flex;
-    justify-content: center;
-    margin-top: 3%;
+    background-image: url('/public/marvel-panorama-1.jpg');
+	background-repeat: no-repeat;
+	background-size: cover;
+	background-position: 0% 70%;
+	height: 450px;
 }
 
 #image {

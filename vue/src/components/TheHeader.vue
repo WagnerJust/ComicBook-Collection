@@ -61,8 +61,6 @@ ul {
   font-family: 'Montserrat', Helvetica, sans-serif;
   font-weight: 800;
   font-size: 1.3em;
-
-
 }
 
 nav > ul {
