@@ -51,7 +51,7 @@ public class CharacterController {
         } else return characterList;
     }
 
-    @PreAuthorize("hasAnyRole('USER','PREMIUM')")
+
     @ResponseStatus(value = HttpStatus.CREATED)
     @PostMapping("/characters/add")
     public ComicCharacter addCharacter(@RequestBody ComicCharacter newCharacter){
@@ -83,17 +83,17 @@ public class CharacterController {
 
     @PreAuthorize("hasAnyRole('USER','PREMIUM')")
     @ResponseStatus(value = HttpStatus.OK)
-    @GetMapping("/collections/{collectionId}/stats")
-    public int countCollectionComicsWithCharacter(int characterId ,@PathVariable int collectionId){
-        return characterDao.countCollectionComicsWithCharacter(collectionId,characterId);
+    @GetMapping("/collections/{collectionId}/stats/{characterId}")
+    public int numberComicsInCollectionWithCharacter(@PathVariable int characterId ,@PathVariable int collectionId){
+        return characterDao.numberComicsInCollectionWithCharacter(collectionId,characterId);
     }
 
 
-    @PreAuthorize("hasAnyRole('USER','PREMIUM')")
+    @PreAuthorize("hasRole('USER')")
     @ResponseStatus(value = HttpStatus.OK)
     @GetMapping("/user/{userId}/characters/{characterId}")
-    public int countUserComicsWithCharacter(@PathVariable int userId, int characterId){
-        return characterDao.countUserComicsWithCharacter(userId, characterId);
+    public int numberComicsWithCharacterTotal(@PathVariable int userId, @PathVariable int characterId){
+        return characterDao.numberComicsWithCharacterTotal(userId, characterId);
     }
 
 
