@@ -38,7 +38,7 @@ public class CollectionController {
         } else return collection;
     }
 
-    @PreAuthorize("hasRole('USER')")
+    @PreAuthorize("hasAnyRole('USER','PREMIUM')")
     @GetMapping("/user/{userId}/collections")
     public List<ComicCollection> getCollectionsByUserId(@PathVariable int userId){
         List<ComicCollection> collection = collectionDao.listCollectionsByUser(userId);
@@ -47,19 +47,19 @@ public class CollectionController {
         } else return collection;
     }
 
-    @PreAuthorize("hasRole('USER')")
+    @PreAuthorize("hasAnyRole('USER','PREMIUM')")
     @ResponseStatus(value = HttpStatus.CREATED)
     @PostMapping("/collections/add")
     public ComicCollection createCollection(@RequestBody ComicCollection newCollection){
         return collectionDao.createCollection(newCollection);
     }
-    @PreAuthorize("hasRole('USER')")
+    @PreAuthorize("hasAnyRole('USER','PREMIUM')")
     @ResponseStatus(value = HttpStatus.OK)
     @PutMapping("/collections/update/{collectionId}")
     public ComicCollection updateCollectionName(@PathVariable int collectionId, @RequestBody ComicCollection comicCollectionToUpdate){
         return collectionDao.updateCollectionName(collectionId, comicCollectionToUpdate);
     }
-    @PreAuthorize("hasRole('USER')")
+    @PreAuthorize("hasAnyRole('USER','PREMIUM')")
     @ResponseStatus(value = HttpStatus.OK)
     @GetMapping("/collections/{collectionId}")
     public ComicCollection getCollectionByCollectionId(@PathVariable int collectionId) {

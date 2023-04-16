@@ -13,6 +13,9 @@ export default{
     getCharacterById(characterId){
         return http.get(`/characters/${characterId}`);
     },
+    getCharactersByCollectionId(collectionId){
+        return http.get(`/collections/${collectionId}/characters`);
+    },
 
     getCharacterByAlias(characterAlias){
         return http.get(`/characters/alias/${characterAlias}}`);

@@ -1,6 +1,6 @@
 <template>
     <div class="error-page">
-        <img src="..\public\batman-slapping-robin.png" />
+
     </div>
 </template>
 
@@ -8,10 +8,11 @@
 <style scoped>
 
 .error-page {
-    display: flex;
-    background-color: #ECF4FF;
-    justify-content: space-evenly;
-    height: 100vh;
+	background-image: url('/public/404-page.png');
+	background-repeat: no-repeat;
+    background-size: cover;
+	background-position: bottom;
+	height: 84.5vh;
 }
 
 .error-page > img {
