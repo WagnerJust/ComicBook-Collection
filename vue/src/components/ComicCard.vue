@@ -1,10 +1,11 @@
 <template>
     <div class="card">
-        <add-comic :comic="comic" />
+        <add-comic class="add-button" :comic="comic" />
         <div class="image-wrap">
-            <router-link v-bind:to="{ name: 'comicdetails', params: { id: comic.comicId } }"><img class="comic-image" v-bind:src="'http://i.annihil.us/u/prod/marvel/i/mg/' + comic.image + '/detail.jpg'" /></router-link>
-            <h3 class="comic-title">{{ comic.title }}</h3>
-            <p class="comic-creator">{{ comic.writer }}, {{ comic.penciler }}</p>
+            <router-link v-bind:to="{ name: 'comicdetails', params: { id: comic.comicId } }"><img class="comic-image" v-bind:src="'http://i.annihil.us/u/prod/marvel/i/mg/' + comic.imageURL + '/detail.jpg'" /></router-link>
+            <h3 class="comic-series">{{ comic.seriesName }}</h3>
+            <p class="comic-creator">{{ comic.author }}, {{ comic.artist }}</p>
+            <p class="comic-publish-date">{{ comic.publish_date }}</p>
         </div>
         
     </div>
@@ -27,8 +28,8 @@ export default {
 <style scoped>
 
 .card {
-    width: 200px;
-    height: 100%;
+    width: 18%;
+    height: 25%;
     display: flex;
     flex-direction: column;
     justify-content: space-between;
@@ -36,23 +37,10 @@ export default {
     font-family: 'Montserrat', Helvetica, sans-serif;
 }
 
-.image-wrap {
-    height: 400px;
-}
-
-.comic-creator {
-    margin-top: 5px;
-    text-align: left;
-    font-family: 'Oswald', Helvetica, sans-serif;
-    font-size: 1rem;
-    font-weight: 500;
-}
-
-.comic-title {
-    font-weight: 600;
-    margin-top: 1.5rem;
-    text-align: left;
-    font-size: 1.1rem;
+.add-button {
+    text-align: end;
+    margin-top: 5%;
+    margin-bottom: 5%;
 }
 
 .image-wrap:hover {
@@ -70,9 +58,27 @@ export default {
     transform: translateY(-10px);
 }
 
-.add {
-    text-align: end;
-    margin-bottom: 5%;
+.comic-series {
+    font-weight: 600;
+    margin-top: 1.5rem;
+    text-align: left;
+    font-size: 1.2rem;
+}
+
+.comic-creator {
+    margin-top: 5px;
+    text-align: left;
+    font-family: 'Oswald', Helvetica, sans-serif;
+    font-size: 1.1rem;
+    font-weight: 500;
+}
+
+.comic-publish-date {
+    text-align: left;
+    margin-top: 5px;
+    font-family: 'Oswald', Helvetica, sans-serif;
+    font-size: 1rem;
+    font-weight: 500;
 }
 
 </style>

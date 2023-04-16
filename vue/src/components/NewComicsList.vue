@@ -9,18 +9,26 @@
 </template>
 
 <script>
-import ComicCard from './ComicCard.vue'
+import ComicCard from './ComicCard.vue';
+import comicService from '../services/ComicService.js';
 
 export default {
     name: "new-comics-list",
-    computed: {
-        comics() {
-            return this.$store.state.comics
-        }
-    },
+	data () {
+		return {
+			comics: []
+		}
+	},
     components: { 
         ComicCard 
-    }
+    },
+	created() {
+		comicService.getComicsByCollectionId(8).then(response => {
+		this.comics = response.data;
+		console.log("COMICS");
+		console.log(this.comics);
+        });
+	}
 }
 </script>
 

@@ -2,21 +2,21 @@
     <section class="container">
         <h2>{{collection.collectionName}}</h2>
         <div class="cards">
-            <max-comic-card v-for="comic in this.comics" :key="comic.comicId" :comic="comic" />
+            <comic-card v-for="comic in this.comics" :key="comic.comicId" :comic="comic" />
         </div>
     </section>
 </template>
 
 
 <script>
-import MaxComicCard from '../components/MaxComicCard.vue';
+import ComicCard from '../components/ComicCard.vue';
 import comicService from '../services/ComicService.js'
 import collectionService from "../services/CollectionsService.js"
 
 export default {
     name: 'collection',
     components: { 
-        MaxComicCard
+        ComicCard
     },
     data() {
         return {

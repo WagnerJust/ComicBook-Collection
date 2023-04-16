@@ -3,7 +3,7 @@
         <div class="collection-box" v-if="showCollections === true">
             <h5>Which collection?</h5>
             <ul>
-                <a v-for="collection in this.myCollections" v-bind:key="collection.collectionId" v-on:click="addComic" ><li ref="collection.collectionId">{{collection.collectionName}}</li></a>
+                <a :collection="collection" v-for="collection in this.myCollections" v-bind:key="collection.collectionId" v-on:click="addComic" ><li ref="collection.collectionId">{{collection.collectionName}}</li></a>
             </ul>
             <button id="cancel-button" v-on:click.prevent="showCollections = false">Cancel</button>
         </div>
@@ -54,9 +54,7 @@ export default {
     },
     created() {
         collectionService.listByUserId(this.$store.state.user.id).then(response => {
-        this.myCollections = response.data;
-        console.log("My Collections");
-        console.log(this.myCollections);         
+        this.myCollections = response.data;       
         })
     }
 }
@@ -126,6 +124,7 @@ button:hover {
 
 h5 {
     margin: .2rem;
+    text-align: left;
 }
 
 #cancel-button {

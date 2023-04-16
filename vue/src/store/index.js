@@ -20,48 +20,7 @@ export default new Vuex.Store({
   state: {
     token: currentToken || '',
     user: currentUser || {},
-    comics: [
-      {
-        comicId: "67631",
-        title: "The Amazing Spider-Man (2018) #1",
-        issueNumber: "1",
-        writer: "Nick Spencer",
-        penciler: "Ryan Ottley",
-        image: "b/90/5b3feb60f1a30"
-      },
-      {
-        comicId: "44198",
-        title: "Thor: God of Thunder (2012) #1",
-        issueNumber: "1",
-        writer: "Jason Aaron",
-        penciler: "Esad Ribic",
-        image: "3/30/51646f6c2a712"
-      },
-      {
-        comicId: "103075",
-        title: "Star Wars: Doctor Aphra (2020) #30",
-        issueNumber: "30",
-        writer: "Alyssa Wong",
-        penciler: "Rachael Stott",
-        image: "9/60/641e07bbe938a"
-      },
-      {
-        comicId: "68616",
-        title: "Immortal Hulk (2018) #1",
-        issueNumber: "1",
-        writer: "Al Ewing",
-        penciler: "Joe Bennett",
-        image: "3/50/5b0f16d976240"
-      },
-      {
-        comicId: "4216",
-        title: "Civil War (2006) #1",
-        issueNumber: "1",
-        writer: "Mark Millar",
-        penciler: "Steve Mcniven",
-        image: "e/f0/511307b2f1200"
-      },
-    ],
+    comics: [],
     characters: [
       {
         characterId: "1009610",
@@ -111,12 +70,6 @@ export default new Vuex.Store({
       state.token = '';
       state.user = {};
       axios.defaults.headers.common = {};
-    },
-    SET_COMICS(state, data) {
-      state.testComics = data;
-    },
-    SET_COLLECTION(state, data) {
-      state.activeCollection = data;
     }
   }
 })

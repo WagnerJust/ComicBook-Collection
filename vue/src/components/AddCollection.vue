@@ -54,10 +54,6 @@ export default {
 
 <style scoped>
 
-form-text validate[required] form-validation-error {
-    position: left;
-}
-
 .container {
     display: flex;
     flex-direction: column;
