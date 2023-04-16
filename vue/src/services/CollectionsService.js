@@ -31,11 +31,11 @@ export default{
         return http.put(`/collections/update/${updatedCollection.collectionId}`, updatedCollection);
     },
 
-    countCharactersInCollection(collectionId){
-        return http.get(`/collections/${collectionId}/stats`);
+    numberComicsInCollectionWithCharacter(collectionId, characterId){
+        return http.get(`/collections/${collectionId}/stats/${characterId}`);
     },
 
-    countUserComicsWithCharacter(userId, characterId){
+    numberComicsWithCharacterTotal(userId, characterId){
         return http.get(`/user/${userId}/characters/${characterId}`);
     }
     
