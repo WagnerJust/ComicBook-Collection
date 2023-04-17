@@ -34,8 +34,7 @@ CREATE TABLE comic_data(
 CREATE TABLE character_table(
     character_id SERIAL,
     character_id_marvel_api int,
-    alias varchar(200),
-    real_name varchar(200),
+    name varchar(200),
     CONSTRAINT PK_character_id PRIMARY KEY (character_id)
 );
 

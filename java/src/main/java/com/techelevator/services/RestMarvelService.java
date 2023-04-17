@@ -4,6 +4,7 @@ import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.JsonNode;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.techelevator.model.Comic;
+import com.techelevator.model.ComicCharacter;
 import org.springframework.stereotype.Component;
 import org.springframework.web.client.RestTemplate;
 
@@ -45,6 +46,14 @@ public class RestMarvelService {
         }
         return comics;
     }
+
+//    public List<ComicCharacter> getCharactersByComicUpc(String upc) throws JsonProcessingException {
+//        String resp = restTemplate.getForObject(apiUrl+"comics?upc="+upc+endUrl, String.class);
+//        JsonNode comicNode = new ObjectMapper().readTree(resp);
+//        return jsonComicToCharacterMapper(comicNode.get("data").get("results").get(0));
+//    }
+
+
     private Comic jsonComicMapper(JsonNode comicNode){
         DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd");
         Comic comic = new Comic();
@@ -68,6 +77,11 @@ public class RestMarvelService {
         comic.setImageURL(comicNode.get("images").get(0).get("path").textValue().substring(39));
         return comic;
     }
+
+//    private ComicCharacter jsonComicToCharacterMapper(JsonNode comicNode){
+//        ComicCharacter character = new ComicCharacter();
+//        character.setCharacterName(comicNode.get(""));
+//    }
 
 
     // Copied this MD5 hashing function from https://www.geeksforgeeks.org/md5-hash-in-java/#

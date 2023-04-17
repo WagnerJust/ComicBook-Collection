@@ -32,15 +32,15 @@ public class CharacterController {
         else return character;
     }
 
-    @PreAuthorize("hasAnyRole('USER','PREMIUM')")
-    @GetMapping("/characters/alias/{characterName}")
-    public List<ComicCharacter> getCharacterByAlias(@PathVariable String characterName) {
-        List<ComicCharacter> character = characterDao.getCharacterByAlias(characterName);
-        if(character == null){
-            throw new ResponseStatusException(HttpStatus.NOT_FOUND, "Could not find Character");
-        }
-        else return character;
-    }
+//    @PreAuthorize("hasAnyRole('USER','PREMIUM')")
+//    @GetMapping("/characters/alias/{characterName}")
+//    public List<ComicCharacter> getCharacterByAlias(@PathVariable String characterName) {
+//        List<ComicCharacter> character = characterDao.getCharacterByAlias(characterName);
+//        if(character == null){
+//            throw new ResponseStatusException(HttpStatus.NOT_FOUND, "Could not find Character");
+//        }
+//        else return character;
+//    }
 
     @PreAuthorize("hasAnyRole('USER','PREMIUM')")
     @GetMapping("/characters")
@@ -88,19 +88,6 @@ public class CharacterController {
         characterDao.addCharacterToComic(characterId,comicId);
     }
 
-    @PreAuthorize("hasAnyRole('USER','PREMIUM')")
-    @ResponseStatus(value = HttpStatus.OK)
-    @GetMapping("/collections/{collectionId}/stats/{characterId}")
-    public int numberComicsInCollectionWithCharacter(@PathVariable int characterId ,@PathVariable int collectionId){
-        return characterDao.numberComicsInCollectionWithCharacter(collectionId,characterId);
-    }
-
-    @PreAuthorize("hasAnyRole('USER','PREMIUM')")
-    @ResponseStatus(value = HttpStatus.OK)
-    @GetMapping("/user/{userId}/characters/{characterId}")
-    public int numberComicsWithCharacterTotal(@PathVariable int userId, @PathVariable int characterId){
-        return characterDao.numberComicsWithCharacterTotal(userId, characterId);
-    }
 
     @PreAuthorize("hasAnyRole('USER','PREMIUM')")
     @ResponseStatus(value = HttpStatus.OK)

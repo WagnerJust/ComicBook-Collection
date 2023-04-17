@@ -28,11 +28,11 @@ INSERT INTO collection (public, user_id, collection_name) VALUES (false, 2, 'col
 INSERT INTO collection (public, user_id, collection_name) VALUES (true, 3, 'collection7');
 INSERT INTO collection (public, user_id, collection_name) VALUES (true, 3, 'collection8');
 
-INSERT INTO character_table (character_id_marvel_api, alias, real_name) VALUES (1, 'alias1', 'name1');
-INSERT INTO character_table (character_id_marvel_api, alias, real_name) VALUES (2, 'alias2', 'name2');
-INSERT INTO character_table (character_id_marvel_api, alias, real_name) VALUES (3, 'alias3', 'name3');
-INSERT INTO character_table (character_id_marvel_api, alias, real_name) VALUES (4, 'alias4', 'name4');
-INSERT INTO character_table (character_id_marvel_api, alias, real_name) VALUES (5, 'alias5', 'name5');
+INSERT INTO character_table (character_id_marvel_api, name) VALUES (1, 'name1');
+INSERT INTO character_table (character_id_marvel_api, name) VALUES (2, 'name2');
+INSERT INTO character_table (character_id_marvel_api, name) VALUES (3, 'name3');
+INSERT INTO character_table (character_id_marvel_api, name) VALUES (4, 'name4');
+INSERT INTO character_table (character_id_marvel_api, name) VALUES (5, 'name5');
 
 INSERT INTO comic_collection (collection_id, comic_data_id) VALUES (1, 1);
 INSERT INTO comic_collection (collection_id, comic_data_id) VALUES (3, 1);
