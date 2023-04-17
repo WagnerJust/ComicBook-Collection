@@ -1,13 +1,6 @@
 <template>
     <div class="container">
-        <div class="collection-box" v-if="showCollections === true">
-            <h5>Which collection?</h5>
-            <ul>
-                <a v-for="collection in myCollections" v-bind:key="collection.collectionId" v-on:click="deleteComic(collection.collectionId)"><li ref="test">{{collection.collectionName}}</li></a>
-            </ul>
-            <button id="cancel-button" v-on:click.prevent="showCollections = false">Cancel</button>
-        </div>
-        <button v-if="showCollections === false" v-on:click.prevent="showCollections = true">Delete from Collection</button>
+        <button id="delete-button" v-on:click="deleteComic()">Delete from Collection</button>
     </div>
 </template>
 
@@ -16,21 +9,19 @@ import collectionService from '../services/CollectionsService.js';
 import comicService from '../services/ComicService.js';
 
 export default {
-    data() {
-        return {
-            showCollections: false,
-            myCollections: [],
-        }
-    },
     props: {
         comic: Object,
     },
     methods: {
-        deleteComic(collectionId) {
-            let comicId = this.comic.comicId
-            console.log("COLLECTION ID");
+        deleteComic() {
+            let longCollectionId = this.$route.path;
+            console.log("Long Collection ID");
+            console.log(longCollectionId);
+            let collectionId = (longCollectionId.lastIndexOf('/')) - 1;
+            console.log("Collection ID");
             console.log(collectionId);
-            comicService.removeComicFromCollection(collectionId, comicId).then(response => {
+            let comicId = this.comic.comicId;
+            comicService.removeComicFromCollection(parseInt(collectionId), comicId).then(response => {
                 if (response.status === 200) {
                     this.$router.go("/collection/" + collectionId);
                 }
@@ -99,6 +90,12 @@ button {
   background-color: white;
   border: 1px solid black;
   font-family: 'Montserrat', Helvetica, sans-serif;
+}
+
+#delete-button {
+    width: 13rem;
+    height: 2.2rem;
+    font-size: 1rem;
 }
 
 button:hover {
