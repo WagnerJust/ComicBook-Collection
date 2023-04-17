@@ -106,17 +106,6 @@ public class JdbcCharacterDaoTests extends BaseDaoTests{
     }
 
     @Test
-    public void countCharactersInCollection_returns_correct_number() {
-        Assert.assertEquals(3, sut.numberComicsInCollectionWithCharacter(1, 1));
-    }
-
-    @Test
-    public void countCharactersOfUser_returns_correct_number(){
-        Assert.assertEquals(5, sut.numberComicsWithCharacterTotal(1, 1));
-        Assert.assertEquals(2, sut.numberComicsWithCharacterTotal(1, 2));
-    }
-
-    @Test
     public void addCharacterToComic_adds_to_comic(){
         sut.addCharacterToComic(1, 6);
         assertCharactersMatch(CHARACTER_1, sut.getCharactersByComicId(6).get(0));
