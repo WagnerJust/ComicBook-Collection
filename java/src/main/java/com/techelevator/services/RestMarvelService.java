@@ -30,11 +30,12 @@ public class RestMarvelService {
     private final String apiUrl = "http://gateway.marvel.com/v1/public/";
 
 
-    public Comic getComicByUpc(String upc) throws JsonProcessingException {
-
+    public List<Comic> getComicByUpc(String upc) throws JsonProcessingException {
+        ArrayList<Comic> comics = new ArrayList<>();
         String resp = restTemplate.getForObject(apiUrl+"comics?upc="+upc+endUrl, String.class);
         JsonNode comicNode = new ObjectMapper().readTree(resp);
-        return jsonComicMapper(comicNode.get("data").get("results").get(0));
+        comics.add(jsonComicMapper(comicNode.get("data").get("results").get(0)));
+        return comics;
     }
 
     public List<Comic> searchComicsBySeriesAndIssueNo(String series, String issueNo) throws JsonProcessingException {
@@ -47,11 +48,18 @@ public class RestMarvelService {
         return comics;
     }
 
-//    public List<ComicCharacter> getCharactersByComicUpc(String upc) throws JsonProcessingException {
-//        String resp = restTemplate.getForObject(apiUrl+"comics?upc="+upc+endUrl, String.class);
-//        JsonNode comicNode = new ObjectMapper().readTree(resp);
-//        return jsonComicToCharacterMapper(comicNode.get("data").get("results").get(0));
-//    }
+    public List<ComicCharacter> getCharactersByComicUpc(String upc) throws JsonProcessingException {
+        ArrayList<ComicCharacter> comicCharacters = new ArrayList<>();
+        String resp = restTemplate.getForObject(apiUrl+"comics?upc="+upc+endUrl, String.class);
+        JsonNode comicNode = new ObjectMapper().readTree(resp);
+        if (comicNode.get("data").get("results").get(0).get("characters").get("items").get("available").intValue() == 0){
+            return null;
+        }
+        for(JsonNode node : comicNode){
+            comicCharacters.add(jsonComicToCharacterMapper(comicNode.get("data").get("results").get(0).get("characters").get("items")));
+        }
+        return comicCharacters;
+    }
 
 
     private Comic jsonComicMapper(JsonNode comicNode){
@@ -68,7 +76,7 @@ public class RestMarvelService {
             }
         }
         for (JsonNode date : comicNode.get("dates")){
-            if (Objects.equals(date.get("type").textValue(), "focDate")){
+            if (Objects.equals(date.get("type").textValue(), "onsaleDate")){
                 comic.setPublish_date(LocalDate.parse(date.get("date").textValue().substring(0, 10), formatter));
             }
         }
@@ -78,10 +86,11 @@ public class RestMarvelService {
         return comic;
     }
 
-//    private ComicCharacter jsonComicToCharacterMapper(JsonNode comicNode){
-//        ComicCharacter character = new ComicCharacter();
-//        character.setCharacterName(comicNode.get(""));
-//    }
+    private ComicCharacter jsonComicToCharacterMapper(JsonNode comicNode){
+        ComicCharacter character = new ComicCharacter();
+        character.setCharacterName(comicNode.get("name").textValue());
+        return character;
+    }
 
 
     // Copied this MD5 hashing function from https://www.geeksforgeeks.org/md5-hash-in-java/#
