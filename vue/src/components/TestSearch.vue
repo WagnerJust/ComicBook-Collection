@@ -170,15 +170,14 @@ export default {
 .new-comics-list {
     grid-area: comics-list;
     display: flex;
+    height: 100%;
+    width: 100%;
     justify-content: space-evenly;
     flex-wrap: wrap;
     column-gap: 10px;
 
 }
 
-.comic-card {
-    width: 100%;
-    height: 300px;
-}
+
 
 </style>
