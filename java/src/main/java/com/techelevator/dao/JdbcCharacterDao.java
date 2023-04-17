@@ -160,39 +160,6 @@ public class JdbcCharacterDao implements CharacterDao {
 
     }
 
-    @Override
-    public int numberComicsInCollectionWithCharacter(int collectionId, int characterId) {
-        int result = -1;
-        String sql = "SELECT COUNT(*) AS total FROM character_table\n" +
-                "JOIN character_comic ON character_comic.character_id = character_table.character_id\n" +
-                "JOIN comic_collection ON comic_collection.comic_data_id = character_comic.comic_data_id\n" +
-                "JOIN collection ON comic_collection.collection_id = collection.collection_id\n" +
-                "WHERE character_table.character_id = ? AND collection.collection_id = ?;";
-
-        SqlRowSet rowSet = jdbcTemplate.queryForRowSet(sql, characterId, collectionId);
-        if (rowSet.next()) {
-            result = rowSet.getInt("total");
-        }
-
-        return result;
-    }
-
-    @Override
-    public int numberComicsWithCharacterTotal(int userId, int characterId) {
-        int result = -1;
-        String sql = "SELECT COUNT(DISTINCT comic_collection.comic_data_id) AS total FROM character_table\n" +
-                "JOIN character_comic ON character_comic.character_id = character_table.character_id\n" +
-                "JOIN comic_collection ON comic_collection.comic_data_id = character_comic.comic_data_id\n" +
-                "JOIN collection ON comic_collection.collection_id = collection.collection_id\n" +
-                "WHERE character_table.character_id = ? AND collection.user_id = ?;";
-
-        SqlRowSet rowSet = jdbcTemplate.queryForRowSet(sql, characterId, userId);
-        if (rowSet.next()) {
-            result = rowSet.getInt("total");
-        }
-        return result;
-    }
-
 
     private ComicCharacter mapRowToCharacter(SqlRowSet results) {
         ComicCharacter character = new ComicCharacter();
