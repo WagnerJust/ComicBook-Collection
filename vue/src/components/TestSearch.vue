@@ -6,7 +6,7 @@ components / SearchComics
         <div class="empty"></div>
 
         <div class="search-container">
-            <input class="search-box" type="search" placeholder="Search" v-model="searchValue" />
+            <input class="search-box" type="search" placeholder="Search" v-on:keyup.enter="searchUpc" v-model="searchValue" />
         </div>
 
         <div class="options-bar">
@@ -41,7 +41,7 @@ components / SearchComics
 
 <script>
 import ComicCard from './ComicCard.vue';
-
+import marvelService from '../services/MarvelService.js';
 
 export default {
     name: "test-search-comics",
@@ -72,6 +72,19 @@ export default {
                 return value.includes(searchValue);
             });
         }
+    },
+    methods: {
+
+        searchUpc(searchValue) {
+            console.log("SEARCH IS CALLED");
+            searchValue = this.searchValue;
+            marvelService.searchComicByUpc(searchValue).then(response => {
+            this.searchResults = response.data;
+            console.log("RESPONSE DATA");
+            console.log(response.data);
+            })
+        }
+        
     }
 }
 
