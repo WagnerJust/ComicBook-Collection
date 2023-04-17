@@ -2,7 +2,7 @@ import axios from 'axios'
 import store from '../store/index.js'
 
 const http = axios.create({
-    baseURL: "http://localhost:9000/marvel/",
+    baseURL: "http://localhost:9000/api/marvel/",
     headers: {
         "Authorization": `Bearer ${store.state.token}`
     }    
@@ -13,6 +13,10 @@ export default{
 
 
     //COMIC REQUESTS
+    searchComicByUpc(upc){
+        return http.get(`upc/${upc}`)
+    },
+
     searchComicByTitle(title){
         return http.get(`comics/title/${title}`)
     },
