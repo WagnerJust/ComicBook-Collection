@@ -23,17 +23,40 @@ public class StatisticsController {
     }
 
     @PreAuthorize("hasAnyRole('USER','PREMIUM')")
-    @GetMapping("/{collectionId}")
-    public List<Statistics> getCollectionStats(@PathVariable int collectionId) {
+    @GetMapping("/{collectionId}/character")
+    public List<Statistics> getCollectionCharacterStats(@PathVariable int collectionId) {
       List<Statistics> statisticsList = null;
 
-      statisticsList = statsDao.collectionStatistics(collectionId);
+      statisticsList = statsDao.collectionCharacterStats(collectionId);
         if(statisticsList == null){
             throw new ResponseStatusException(HttpStatus.NOT_FOUND, "Could not find statistics for collection");
         }
         else return statisticsList;
     }
 
+    @PreAuthorize("hasAnyRole('USER','PREMIUM')")
+    @GetMapping("/{collectionId}/author")
+    public List<Statistics> getCollectionAuthorStats(@PathVariable int collectionId) {
+        List<Statistics> statisticsList = null;
+
+        statisticsList = statsDao.collectionAuthorStats(collectionId);
+        if(statisticsList == null){
+            throw new ResponseStatusException(HttpStatus.NOT_FOUND, "Could not find statistics for collection");
+        }
+        else return statisticsList;
+    }
+
+    @PreAuthorize("hasAnyRole('USER','PREMIUM')")
+    @GetMapping("/{collectionId}/series")
+    public List<Statistics> getCollectionSeriesStats(@PathVariable int collectionId) {
+        List<Statistics> statisticsList = null;
+
+        statisticsList = statsDao.collectionSeriesStats(collectionId);
+        if(statisticsList == null){
+            throw new ResponseStatusException(HttpStatus.NOT_FOUND, "Could not find statistics for collection");
+        }
+        else return statisticsList;
+    }
     @PreAuthorize("hasAnyRole('USER','PREMIUM')")
     @GetMapping("/")
     public List<Statistics> getSiteStats() {

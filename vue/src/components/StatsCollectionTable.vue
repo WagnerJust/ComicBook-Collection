@@ -2,15 +2,15 @@
     <div class='stats-tables'>
          <div class="options-bar">
             <label class="radio-box">
-                <input type="radio" name="search-option" value="characters" v-model="selectedOption" />
+                <input type="radio" name="search-option" value="characters" v-model="selectedOption" v-on:click="characterStats()"/>
                 <span class="name">Characters</span>
             </label>
             <label class="radio-box">
-                <input type="radio" name="search-option" value="author" v-model="selectedOption">
+                <input type="radio" name="search-option" value="author" v-model="selectedOption" v-on:click="authorStats()">
                 <span class="name">Authors</span>
             </label>
             <label class="radio-box">
-                <input type="radio" name="search-option" value="series" v-model="selectedOption">
+                <input type="radio" name="search-option" value="series" v-model="selectedOption" v-on:click="seriesStats()">
                 <span class="name">Series</span>
             </label>
         </div>
@@ -81,8 +81,34 @@ export default {
 
         }
     },
+    methods:{
+        characterStats(){
+            statsService.getCharactersStats(this.$route.params.id)
+        .then(response => {
+            this.collectionStats = response.data;
+            console.log('stats');
+            console.log(this.collectionStats);
+        });},
+
+        authorStats(){
+            statsService.getAuthorStats(this.$route.params.id)
+        .then(response => {
+            this.collectionStats = response.data;
+            console.log('stats');
+            console.log(this.collectionStats);
+        });},
+
+        seriesStats(){
+            statsService.getSeriesStats(this.$route.params.id)
+        .then(response => {
+            this.collectionStats = response.data;
+            console.log('stats');
+            console.log(this.collectionStats);
+        });}
+    },
+
     created(){
-        statsService.getStatsForCollection(this.$route.params.id)
+        statsService.getCharactersStats(this.$route.params.id)
         .then(response => {
             this.collectionStats = response.data;
         })
@@ -101,7 +127,6 @@ table.stats {
   display: inline-flexbox;
   align-content: center;
   justify-content: center;
-  ;
   
   text-align: left;
   border-collapse: collapse;
