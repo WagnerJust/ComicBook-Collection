@@ -65,11 +65,12 @@ public class RestMarvelService {
         }
         comic.setUpc(comicNode.get("upc").textValue());
         comic.setIssueNumber(comicNode.get("issueNumber").intValue());
-        comic.setImageURL(comicNode.get("images").get(0).get("path").textValue());
+        comic.setImageURL(comicNode.get("images").get(0).get("path").textValue().substring(39));
         return comic;
     }
 
 
+    // Copied this MD5 hashing function from https://www.geeksforgeeks.org/md5-hash-in-java/#
     public static String getMd5(String input)
     {
         try {

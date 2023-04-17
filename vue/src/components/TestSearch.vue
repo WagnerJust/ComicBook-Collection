@@ -11,11 +11,11 @@ components / SearchComics
 
         <div class="options-bar">
             <label class="radio-box">
-                <input type="radio" name="search-option" value="UPC" v-model="selectedOption" />
+                <input type="radio" name="search-option" value="upc" v-model="selectedOption" />
                 <span class="name">UPC</span>
             </label>
             <label class="radio-box">
-                <input type="radio" name="search-option" value="title" v-model="selectedOption">
+                <input type="radio" name="search-option" value="seriesName" v-model="selectedOption">
                 <span class="name">Title</span>
             </label>
             <label class="radio-box">
@@ -23,11 +23,11 @@ components / SearchComics
                 <span class="name">Issue Number</span>
             </label>
             <label class="radio-box">
-                <input type="radio" name="search-option" value="writer" v-model="selectedOption">
+                <input type="radio" name="search-option" value="author" v-model="selectedOption">
                 <span class="name">Writer</span>
             </label>
             <label class="radio-box">
-                <input type="radio" name="search-option" value="penciler" v-model="selectedOption">
+                <input type="radio" name="search-option" value="artist" v-model="selectedOption">
                 <span class="name">Artist</span>
             </label>
         </div>
@@ -50,7 +50,7 @@ export default {
         return {
             searchResults: [],
             searchValue: "",
-            selectedOption: "title",
+            selectedOption: "seriesName",
         }
     },
 	created() {
@@ -66,9 +66,9 @@ export default {
 
         filteredComics() {
             const searchValue = this.searchValue.toLowerCase();
-            const selectedOption = this.selectedOption;
+            const selectedOptionFilter = this.selectedOption;
             return this.comics.filter((comic) => {
-                const value = comic[selectedOption].toLowerCase();
+                const value = comic[selectedOptionFilter].toLowerCase();
                 return value.includes(searchValue);
             });
         }
