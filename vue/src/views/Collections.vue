@@ -98,7 +98,7 @@ export default {
 
 .collection-list {
     display: flex;
-    justify-content: space-evenly;
+    justify-content: flex-start;
     flex-wrap: wrap;
 }
 
