@@ -1,18 +1,19 @@
 package com.techelevator.controller;
 
 
+import com.fasterxml.jackson.core.JsonProcessingException;
+import com.techelevator.dao.CharacterDao;
 import com.techelevator.dao.ComicDao;
 import com.techelevator.model.Comic;
-import com.techelevator.model.ComicCollection;
+import com.techelevator.model.ComicCharacter;
+import com.techelevator.services.RestMarvelService;
 import org.springframework.http.HttpStatus;
-import org.springframework.security.access.method.P;
 import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.server.ResponseStatusException;
 
-import java.security.Principal;
 import java.util.List;
 
 @RestController
@@ -22,9 +23,13 @@ import java.util.List;
 public class ComicController {
 
     ComicDao comicDao;
+    RestMarvelService marvelService;
+    CharacterDao characterDao;
 
-    public ComicController(ComicDao comicDao) {
+    public ComicController(ComicDao comicDao, RestMarvelService marvelService, CharacterDao characterDao) {
         this.comicDao = comicDao;
+        this.marvelService = marvelService;
+        this.characterDao = characterDao;
     }
 
 
@@ -64,8 +69,18 @@ public class ComicController {
 
     @PreAuthorize("hasAnyRole('USER','PREMIUM')")
     @PostMapping("/comics")
-    public Comic addComic(@RequestBody Comic comic){
-        return comicDao.addComic(comic);
+    public Comic addComic(@RequestBody Comic comic) throws JsonProcessingException {
+        Comic newComic = null;
+        if (comicDao.getComicByUpc(comic.getUpc()) != null){
+            throw new ResponseStatusException(HttpStatus.BAD_REQUEST, "Comic already exists in Database");
+        }else{
+            newComic = comicDao.addComic(comic);
+            List<ComicCharacter> characters = marvelService.getCharactersByComicUpc(newComic.getUpc());
+            for(ComicCharacter character : characters){
+                characterDao.addCharacterToComic(characterDao.addCharacter(character).getCharacterId(), newComic.getComicId());
+            }
+        }
+        return newComic;
     }
 
     @PreAuthorize("hasAnyRole('USER','PREMIUM')")
