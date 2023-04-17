@@ -30,11 +30,12 @@ public class RestMarvelService {
     private final String apiUrl = "http://gateway.marvel.com/v1/public/";
 
 
-    public Comic getComicByUpc(String upc) throws JsonProcessingException {
-
+    public List<Comic> getComicByUpc(String upc) throws JsonProcessingException {
+        ArrayList<Comic> comics = new ArrayList<>();
         String resp = restTemplate.getForObject(apiUrl+"comics?upc="+upc+endUrl, String.class);
         JsonNode comicNode = new ObjectMapper().readTree(resp);
-        return jsonComicMapper(comicNode.get("data").get("results").get(0));
+        comics.add(jsonComicMapper(comicNode.get("data").get("results").get(0)));
+        return comics;
     }
 
     public List<Comic> searchComicsBySeriesAndIssueNo(String series, String issueNo) throws JsonProcessingException {
@@ -51,6 +52,9 @@ public class RestMarvelService {
         ArrayList<ComicCharacter> comicCharacters = new ArrayList<>();
         String resp = restTemplate.getForObject(apiUrl+"comics?upc="+upc+endUrl, String.class);
         JsonNode comicNode = new ObjectMapper().readTree(resp);
+        if (comicNode.get("data").get("results").get(0).get("characters").get("items").get("available").intValue() == 0){
+            return null;
+        }
         for(JsonNode node : comicNode){
             comicCharacters.add(jsonComicToCharacterMapper(comicNode.get("data").get("results").get(0).get("characters").get("items")));
         }

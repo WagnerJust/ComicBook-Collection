@@ -28,7 +28,7 @@ public class MarvelController {
 
     @PreAuthorize("hasAnyRole('USER','PREMIUM')")
     @GetMapping("/marvel/upc/{upc}")
-    public Comic getMarvelComicByUpc(@PathVariable String upc) throws JsonProcessingException {
+    public List<Comic> getMarvelComicByUpc(@PathVariable String upc) throws JsonProcessingException {
         return restMarvelService.getComicByUpc(upc);
     }
 }

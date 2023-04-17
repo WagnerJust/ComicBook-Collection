@@ -38,18 +38,7 @@ public class AuthenticationController {
         this.marvelService = marvelService;
     }
 
-    @RequestMapping(value = "/test", method = RequestMethod.GET)
-    public Comic testService() throws JsonProcessingException {
-        return marvelService.getComicByUpc("759606204831000411");
 
-
-    }
-
-    @RequestMapping(value = "/test2", method = RequestMethod.GET)
-    public List<Comic> testService2() throws JsonProcessingException {
-        return marvelService.searchComicsBySeriesAndIssueNo("Guardians of the", "1");
-
-    }
 
     @RequestMapping(value = "/login", method = RequestMethod.POST)
     public ResponseEntity<LoginResponseDto> login(@Valid @RequestBody LoginDto loginDto) {

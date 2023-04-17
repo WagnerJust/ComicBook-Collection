@@ -33,19 +33,19 @@ components / SearchComics
         </div>
 
         <div class="new-comics-list">
-            <comic-card :comic="comic" v-for="comic in searchResults" :key="comic.upc"/>
+            <comic-card-marvel-api :comic="comic" v-for="comic in searchResults" :key="comic.upc"/>
         </div>
 
     </div>
 </template>
 
 <script>
-import ComicCard from './ComicCard.vue';
+import ComicCardMarvelApi from './ComicCardMarvelApi.vue';
 import marvelService from '../services/MarvelService.js';
 
 export default {
     name: "test-search-comics",
-    components: { ComicCard },
+    components: { ComicCardMarvelApi },
     data() {
         return {
             searchResults: [ 

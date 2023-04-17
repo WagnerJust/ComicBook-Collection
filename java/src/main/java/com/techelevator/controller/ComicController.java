@@ -44,6 +44,15 @@ public class ComicController {
     }
 
     @PreAuthorize("hasAnyRole('USER','PREMIUM')")
+    @GetMapping("/comics/upc/{upc}")
+    public Comic getComicByUpc(@PathVariable String upc){
+        Comic comic = comicDao.getComicByUpc(upc);
+        if(comic == null){
+            throw new ResponseStatusException(HttpStatus.NOT_FOUND, "Could not find comic");
+        } else return comic;
+    }
+
+    @PreAuthorize("hasAnyRole('USER','PREMIUM')")
     @GetMapping("/comics/{comicId}")
     public Comic getComicById(@PathVariable int comicId){
         Comic comic = comicDao.getComic(comicId);
@@ -72,7 +81,7 @@ public class ComicController {
     public Comic addComic(@RequestBody Comic comic) throws JsonProcessingException {
         Comic newComic = null;
         if (comicDao.getComicByUpc(comic.getUpc()) != null){
-            throw new ResponseStatusException(HttpStatus.BAD_REQUEST, "Comic already exists in Database");
+            return null;
         }else{
             newComic = comicDao.addComic(comic);
             List<ComicCharacter> characters = marvelService.getCharactersByComicUpc(newComic.getUpc());

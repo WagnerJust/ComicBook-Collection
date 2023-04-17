@@ -22,6 +22,9 @@ export default{
         return http.get(`/comics/characters/real/${characterName}`);
     },
 
+    getComicByUpc(upc){
+        return http.get(`/comics/upc/${upc}`);
+    },
     
     getComicsByCharacterAlias(characterAlias){
         return http.get(`/comics/characters/alias/${characterAlias}`);
@@ -46,6 +49,7 @@ export default{
     removeComicFromCollection(collectionId,comicId){
         return http.delete(`/collections/${collectionId}/comics/${comicId}`);
     }
+
 
     
 
