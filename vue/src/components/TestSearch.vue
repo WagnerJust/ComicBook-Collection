@@ -6,7 +6,7 @@ components / SearchComics
         <div class="empty"></div>
 
         <div class="search-container">
-            <input class="search-box" type="search" placeholder="Search" v-model="searchValue" />
+            <input class="search-box" type="search" placeholder="Search" v-on:keyup.enter="searchUpc" v-model="searchValue" />
         </div>
 
         <div class="options-bar">
@@ -16,7 +16,7 @@ components / SearchComics
             </label>
             <label class="radio-box">
                 <input type="radio" name="search-option" value="seriesName" v-model="selectedOption">
-                <span class="name">Title</span>
+                <span class="name">Series</span>
             </label>
             <label class="radio-box">
                 <input type="radio" name="search-option" value="issueNumber" v-model="selectedOption">
@@ -33,24 +33,27 @@ components / SearchComics
         </div>
 
         <div class="new-comics-list">
-            <comic-card :comic="comic" v-for="comic in filteredComics" :key="comic.upc"/>
+            <comic-card-marvel-api :comic="comic" v-for="comic in searchResults" :key="comic.upc"/>
         </div>
 
     </div>
 </template>
 
 <script>
-import ComicCard from './ComicCard.vue';
-
+import ComicCardMarvelApi from './ComicCardMarvelApi.vue';
+import marvelService from '../services/MarvelService.js';
 
 export default {
     name: "test-search-comics",
-    components: { ComicCard },
+    components: { ComicCardMarvelApi },
     data() {
         return {
-            searchResults: [],
+            searchResults: [ 
+
+            ],
             searchValue: "",
             selectedOption: "seriesName",
+            
         }
     },
 	created() {
@@ -61,17 +64,30 @@ export default {
 	},
     computed: {
         comics() {
-            return this.$store.state.comics
+            return this.searchResults
         },
 
-        filteredComics() {
-            const searchValue = this.searchValue.toLowerCase();
-            const selectedOptionFilter = this.selectedOption;
-            return this.comics.filter((comic) => {
-                const value = comic[selectedOptionFilter].toLowerCase();
-                return value.includes(searchValue);
-            });
+        // filteredComics() {
+        //     const searchValue = this.searchValue.toLowerCase();
+        //     const selectedOptionFilter = this.selectedOption;
+        //     return this.comics.filter((comic) => {
+        //         const value = comic[selectedOptionFilter].toLowerCase();
+        //         return value.includes(searchValue);
+        //     });
+        // }
+    },
+    methods: {
+
+        searchUpc(searchValue) {
+            console.log("SEARCH IS CALLED");
+            searchValue = this.searchValue;
+            marvelService.searchComicByUpc(searchValue).then(response => {
+            this.searchResults = response.data;
+            console.log("RESPONSE DATA");
+            console.log(response.data);
+            })
         }
+        
     }
 }
 

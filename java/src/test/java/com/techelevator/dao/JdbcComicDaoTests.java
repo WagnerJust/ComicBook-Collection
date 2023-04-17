@@ -40,6 +40,11 @@ public class JdbcComicDaoTests extends BaseDaoTests{
     }
 
     @Test
+    public void getComicByUpc_returns_correct_comic(){
+        assertComicsMatch(COMIC_1, sut.getComicByUpc("UPC1"));
+    }
+
+    @Test
     public void listAllComicsOfCollection_returns_correct_list() {
         Assert.assertEquals(3, sut.listAllComicsOfCollection(1).size());
 

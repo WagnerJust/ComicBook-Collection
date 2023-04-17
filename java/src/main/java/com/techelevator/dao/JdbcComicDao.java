@@ -45,6 +45,20 @@ public class JdbcComicDao implements ComicDao {
             comic = mapRowToComic(results);
         }
 
+        return comic;
+    }
+
+    @Override
+    public Comic getComicByUpc(String upc) {
+        Comic comic = null;
+        String sql = "SELECT * " +
+                "FROM comic_data " +
+                "WHERE upc = ?;";
+
+        SqlRowSet results = jdbcTemplate.queryForRowSet(sql, upc);
+        if (results.next()) {
+            comic = mapRowToComic(results);
+        }
 
         return comic;
     }
