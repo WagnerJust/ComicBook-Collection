@@ -14,7 +14,7 @@ public interface ComicDao {
     List<Comic> getComicsBySeries(String series);
     Comic addComic (Comic comic);
     void addComicToCollection(int comicId, int collectionId);
-    void removeComicFromCollection(int comicId, int collectionId);
+    void removeComicFromCollection(int collectionId, int comicId);
     void updateComic (Comic comic);
     void deleteComic (int comicId);
     int countUniqueComicsOfUser(int userId);
