@@ -1,7 +1,6 @@
 <template>
   <div class="browse-main">
-
-      <section>
+      <section class="search-main">
           <!-- <search-comics /> -->
         <test-search />
       </section>
@@ -29,6 +28,11 @@ export default {
 	background-size: cover;
 	background-position: 0% 70%;
 	height: 450px;
+}
+
+.search-main {
+    margin-left: 12%;
+	margin-right: 12%;
 }
 
 </style>
