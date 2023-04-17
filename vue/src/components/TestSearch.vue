@@ -16,7 +16,7 @@ components / SearchComics
             </label>
             <label class="radio-box">
                 <input type="radio" name="search-option" value="seriesName" v-model="selectedOption">
-                <span class="name">Title</span>
+                <span class="name">Series</span>
             </label>
             <label class="radio-box">
                 <input type="radio" name="search-option" value="issueNumber" v-model="selectedOption">
@@ -33,7 +33,7 @@ components / SearchComics
         </div>
 
         <div class="new-comics-list">
-            <comic-card :comic="comic" v-for="comic in filteredComics" :key="comic.upc"/>
+            <comic-card :comic="comic" v-for="comic in searchResults" :key="comic.upc"/>
         </div>
 
     </div>
@@ -48,9 +48,12 @@ export default {
     components: { ComicCard },
     data() {
         return {
-            searchResults: [],
+            searchResults: [ 
+
+            ],
             searchValue: "",
             selectedOption: "seriesName",
+            
         }
     },
 	created() {
@@ -61,17 +64,17 @@ export default {
 	},
     computed: {
         comics() {
-            return this.$store.state.comics
+            return this.searchResults
         },
 
-        filteredComics() {
-            const searchValue = this.searchValue.toLowerCase();
-            const selectedOptionFilter = this.selectedOption;
-            return this.comics.filter((comic) => {
-                const value = comic[selectedOptionFilter].toLowerCase();
-                return value.includes(searchValue);
-            });
-        }
+        // filteredComics() {
+        //     const searchValue = this.searchValue.toLowerCase();
+        //     const selectedOptionFilter = this.selectedOption;
+        //     return this.comics.filter((comic) => {
+        //         const value = comic[selectedOptionFilter].toLowerCase();
+        //         return value.includes(searchValue);
+        //     });
+        // }
     },
     methods: {
 
