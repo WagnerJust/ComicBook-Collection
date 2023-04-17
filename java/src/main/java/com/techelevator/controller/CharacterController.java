@@ -32,15 +32,15 @@ public class CharacterController {
         else return character;
     }
 
-    @PreAuthorize("hasAnyRole('USER','PREMIUM')")
-    @GetMapping("/characters/alias/{characterName}")
-    public List<ComicCharacter> getCharacterByAlias(@PathVariable String characterName) {
-        List<ComicCharacter> character = characterDao.getCharacterByAlias(characterName);
-        if(character == null){
-            throw new ResponseStatusException(HttpStatus.NOT_FOUND, "Could not find Character");
-        }
-        else return character;
-    }
+//    @PreAuthorize("hasAnyRole('USER','PREMIUM')")
+//    @GetMapping("/characters/alias/{characterName}")
+//    public List<ComicCharacter> getCharacterByAlias(@PathVariable String characterName) {
+//        List<ComicCharacter> character = characterDao.getCharacterByAlias(characterName);
+//        if(character == null){
+//            throw new ResponseStatusException(HttpStatus.NOT_FOUND, "Could not find Character");
+//        }
+//        else return character;
+//    }
 
     @PreAuthorize("hasAnyRole('USER','PREMIUM')")
     @GetMapping("/characters")

@@ -6,7 +6,7 @@ import java.util.List;
 
 public interface CharacterDao {
     ComicCharacter getCharacterById(int characterId);
-    List<ComicCharacter> getCharacterByAlias(String characterName);
+//    List<ComicCharacter> getCharacterByAlias(String characterName);
     List<ComicCharacter> getCharacterByRealName(String characterName);
     List<ComicCharacter> getAllCharacters();
     List<ComicCharacter> getCharactersByComicId(int comicId);

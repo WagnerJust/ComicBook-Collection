@@ -45,6 +45,10 @@ public class RestMarvelService {
         }
         return comics;
     }
+
+
+
+
     private Comic jsonComicMapper(JsonNode comicNode){
         DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd");
         Comic comic = new Comic();

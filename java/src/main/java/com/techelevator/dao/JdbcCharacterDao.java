@@ -33,25 +33,25 @@ public class JdbcCharacterDao implements CharacterDao {
         return character;
     }
 
-    @Override
-    public List<ComicCharacter> getCharacterByAlias(String characterName) {
-        List<ComicCharacter> characters = new ArrayList<>();
-        String sql = "SELECT * FROM character_table WHERE alias ILIKE ?";
-        SqlRowSet results = jdbcTemplate.queryForRowSet(sql, "%" + characterName + "%");
-        while (results.next()) {
-            characters.add(mapRowToCharacter(results));
-        }
-        if (characters.size() == 0) {
-            return null;
-        }
-
-        return characters;
-    }
+//    @Override
+//    public List<ComicCharacter> getCharacterByAlias(String characterName) {
+//        List<ComicCharacter> characters = new ArrayList<>();
+//        String sql = "SELECT * FROM character_table WHERE alias ILIKE ?";
+//        SqlRowSet results = jdbcTemplate.queryForRowSet(sql, "%" + characterName + "%");
+//        while (results.next()) {
+//            characters.add(mapRowToCharacter(results));
+//        }
+//        if (characters.size() == 0) {
+//            return null;
+//        }
+//
+//        return characters;
+//    }
 
     @Override
     public List<ComicCharacter> getCharacterByRealName(String characterName) {
         List<ComicCharacter> characters = new ArrayList<>();
-        String sql = "SELECT * FROM character_table WHERE real_name ILIKE ?";
+        String sql = "SELECT * FROM character_table WHERE name ILIKE ?";
         SqlRowSet results = jdbcTemplate.queryForRowSet(sql, "%" + characterName + "%");
         while (results.next()) {
             characters.add(mapRowToCharacter(results));
@@ -98,13 +98,13 @@ public class JdbcCharacterDao implements CharacterDao {
     @Override
     public List<ComicCharacter> getCharactersByCollectionId(int collectionId){
         List<ComicCharacter> charactersList = new ArrayList<>();
-        String sql = "select distinct character_table.character_id, character_id_marvel_api, alias, real_name\n" +
+        String sql = "select distinct character_table.character_id, character_id_marvel_api, name\n" +
                 "from character_table\n" +
                 "join character_comic ON character_comic.character_id = character_table.character_id\n" +
                 "join comic_data ON comic_data.comic_data_id = character_comic.comic_data_id\n" +
                 "join comic_collection ON comic_collection.comic_data_id = comic_data.comic_data_id\n" +
                 "where comic_collection.collection_id = ?" +
-                "order by alias asc";
+                "order by name asc";
 
         SqlRowSet results = jdbcTemplate.queryForRowSet(sql, collectionId);
         while (results.next()){
@@ -119,11 +119,11 @@ public class JdbcCharacterDao implements CharacterDao {
     @Override
     public ComicCharacter addCharacter(ComicCharacter newCharacter) {
         ComicCharacter comicCharacter;
-        String sql = "INSERT INTO character_table (character_id_marvel_api, alias, real_name) " +
-                "VALUES (?, ?, ?) RETURNING character_id;";
+        String sql = "INSERT INTO character_table (character_id_marvel_api, name) " +
+                "VALUES (?, ?) RETURNING character_id;";
 
         Integer newId = jdbcTemplate.queryForObject(sql, Integer.class, newCharacter.getMarvelCharacterId(),
-                newCharacter.getCharacterAlias(), newCharacter.getCharacterRealName());
+                newCharacter.getCharacterName());
         comicCharacter = getCharacterById(newId);
 
         return comicCharacter;
@@ -132,11 +132,11 @@ public class JdbcCharacterDao implements CharacterDao {
     @Override
     public void updateCharacter(int characterId, ComicCharacter updatedCharacter) {
         String sql = "UPDATE character_table " +
-                "SET character_id_marvel_api = ?, alias = ?, real_name = ? " +
+                "SET character_id_marvel_api = ?, name = ? " +
                 "WHERE character_id = ?;";
 
-        jdbcTemplate.update(sql, updatedCharacter.getMarvelCharacterId(), updatedCharacter.getCharacterAlias(),
-                updatedCharacter.getCharacterRealName(), updatedCharacter.getCharacterId());
+        jdbcTemplate.update(sql, updatedCharacter.getMarvelCharacterId(),
+                updatedCharacter.getCharacterName(), updatedCharacter.getCharacterId());
     }
 
     @Override
@@ -198,8 +198,7 @@ public class JdbcCharacterDao implements CharacterDao {
         ComicCharacter character = new ComicCharacter();
         character.setCharacterId(results.getInt("character_id"));
         character.setMarvelCharacterId(results.getInt("character_id_marvel_api"));
-        character.setCharacterRealName(results.getString("real_name"));
-        character.setCharacterAlias(results.getString("alias"));
+        character.setCharacterName(results.getString("name"));
         return character;
     }
 }
