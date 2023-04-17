@@ -18,7 +18,7 @@
             <h2 class="collections-title">Public Collections</h2>
             <div class="collection-list">
                 <router-link class="collectionBox" 
-                :to="{ name: 'collection', params: {id: collection.collectionId} }" 
+                :to="{ name: 'public-collection', params: {id: collection.collectionId} }" 
                 v-for="collection in this.publicCollections" 
                 :key="collection.collectionId">
                     <div class="collection-name">{{collection.collectionName}}</div>

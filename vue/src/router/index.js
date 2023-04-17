@@ -6,6 +6,7 @@ import Logout from '../views/Logout.vue'
 import Register from '../views/Register.vue'
 import Collections from '../views/Collections.vue'
 import MyCollection from '../views/MyCollection.vue'
+import PublicCollection from '../views/MyCollection.vue'
 import NotFound from '../views/NotFound.vue'
 import Browse from '../views/Browse.vue'
 import NewComics from '../views/NewComics.vue'
@@ -74,6 +75,13 @@ const router = new Router({
       component: MyCollection,
       meta: {
         requiresAuth: true
+      }
+    },  {
+      path: "/public-collection/:id",
+      name: "public-collection",
+      component: PublicCollection,
+      meta: {
+        requiresAuth: false
       }
     },
     {
