@@ -56,15 +56,15 @@ export default {
     },
     created() {
         /* This call can be seen in the console. It is requesting the comics from collectionId: 1 */
-        comicService.getComicsByCollectionId(this.$route.params.collectionId).then(response => {
+        comicService.getComicsByCollectionId(this.$route.params.id).then(response => {
             this.comics = response.data;
             console.log("COMICS");
             console.log(this.comics);
         });
-        collectionService.getCollectionByCollectionId(this.$route.params.collectionId).then(response => {
+        collectionService.getCollectionByCollectionId(this.$route.params.id).then(response => {
             this.collection = response.data;
         });
-        characterService.getCharactersByCollectionId(this.$route.params.collectionId)
+        characterService.getCharactersByCollectionId(this.$route.params.id)
         .then(response => {
             this.charactersInCollection = response.data;
         });

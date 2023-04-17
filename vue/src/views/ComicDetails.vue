@@ -8,7 +8,7 @@
                 <h3 class="series-name">{{ comic.seriesName }}</h3>
                 <p class="issue-number">Issue Number: {{ comic.issueNumber }}</p>
                 <p class="writer">Writer: {{ comic.author }}</p>
-                <p class="Penciler">Penciler: {{ comic.artist }}</p>
+                <p class="penciler">Penciler: {{ comic.artist }}</p>
                 <div class="add-button">
                     <add-comic v-bind:comic="comic"/>
                 </div>
