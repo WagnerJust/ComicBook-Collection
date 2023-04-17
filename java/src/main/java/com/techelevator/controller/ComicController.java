@@ -95,8 +95,8 @@ public class ComicController {
     @PreAuthorize("hasAnyRole('USER','PREMIUM')")
     @ResponseStatus(value = HttpStatus.OK)
     @DeleteMapping("/collections/{collectionId}/comics/{comicId}")
-    public void removeComicFromCollection(@PathVariable int collectionId, int comicId){
-        comicDao.removeComicFromCollection(comicId, collectionId);
+    public void removeComicFromCollection(@PathVariable int collectionId, @PathVariable int comicId){
+        comicDao.removeComicFromCollection(collectionId, comicId);
     }
 
     @PreAuthorize("hasAnyRole('USER','PREMIUM')")

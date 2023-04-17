@@ -148,11 +148,10 @@ public class JdbcComicDao implements ComicDao {
     }
 
     @Override
-    public void removeComicFromCollection(int comicId, int collectionId) {
-        String sql = "DELETE FROM comic_collection " +
-                "WHERE comic_data_id = ?;";
-
-        jdbcTemplate.update(sql, collectionId);
+    public void removeComicFromCollection(int collectionId, int comicId) {
+        String sql = "DELETE FROM comic_collection\n" +
+                "WHERE collection_id = ? AND comic_data_id = ?";
+        jdbcTemplate.update(sql, collectionId, comicId);
 
     }
 
