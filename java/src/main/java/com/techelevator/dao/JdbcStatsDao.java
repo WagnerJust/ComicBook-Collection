@@ -22,12 +22,14 @@ public class JdbcStatsDao implements StatsDao{
     @Override
     public List<Statistics> collectionCharacterStats(int collectionId) {
         List<Statistics> statisticsList = new ArrayList<>();
-        String sql = "select count(comic_data.author) as num_comics_author, comic_data.author\n" +
+        String sql = "select count(character_table.name) as num_comics_character, character_table.name\n" +
                 "from comic_data\n" +
+                "join character_comic ON character_comic.comic_data_id = comic_data.comic_data_id\n" +
                 "join comic_collection ON comic_collection.comic_data_id = comic_data.comic_data_id\n" +
+                "join character_table ON character_table.character_id = character_comic.character_id\n" +
                 "join collection ON collection.collection_id = comic_collection.collection_id\n" +
                 "where collection.collection_id = ?\n" +
-                "group by comic_data.author\n" +
+                "group by character_table.name\n" +
                 "order by 1 desc;";
 
         SqlRowSet results =  jdbcTemplate.queryForRowSet(sql, collectionId);
@@ -112,13 +114,10 @@ public class JdbcStatsDao implements StatsDao{
             case "series":
                 statistics.setNum_comics_series(results.getInt(1));
                 statistics.setSeries(results.getString(2));
-//            case "all":
-//                statistics.setNum_comics_character(results.getInt("num_comics_character"));
-//                statistics.setName(results.getString("name"));
-//                statistics.setNum_comics_author(results.getInt("num_comics_author"));
-//                statistics.setAuthor(results.getString("author"));
-//                statistics.setNum_comics_series(results.getInt("num_comics_series"));
+//            case "site":
+//
 //                statistics.setSeries(results.getString("series"));
+//                statistics.setNum_collections_siteWide(results.getInt("num_collections_siteWide"));
             default:
                 break;
         }
