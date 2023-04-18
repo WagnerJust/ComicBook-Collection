@@ -23,14 +23,9 @@ import AggregateStatistics from '../components/AggregateStatistics.vue';
 export default {
 	name: "home",
 	components: { 
-<<<<<<< HEAD
-		NewComicsList,
-		CharactersList,
-	AggregateStatistics 
-=======
         PublicCollections,
-		CharactersList 
->>>>>>> 6441db236638a47078036b440a1185bb32a3bbb0
+		CharactersList,
+		AggregateStatistics
 	},
 };
 </script>
