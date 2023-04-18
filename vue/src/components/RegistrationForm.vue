@@ -186,6 +186,7 @@ h1 {
 .submit-button {
   position: relative;
   bottom: -30px;
+  width: 9rem;
 }
 
 .form-input-group {
@@ -215,6 +216,7 @@ button {
   background-color: rgba(255, 255, 255, 1);
   border: 1px solid rgba(236, 29, 36, 1);
   font-family: 'Montserrat', Helvetica, sans-serif;
+  font-size: 1rem;
 }
 
 button:hover {

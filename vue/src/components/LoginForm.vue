@@ -106,6 +106,7 @@ export default {
   bottom: -30px;
 }
 
+
 .form-input-group {
   margin-bottom: 1rem;
 }
@@ -138,6 +139,7 @@ button {
   background-color: rgba(255, 255, 255, 1);
   border: 1px solid rgba(236, 29, 36, 1);
   font-family: 'Montserrat', Helvetica, sans-serif;
+  font-size: 1rem;
 }
 
 button:hover {
