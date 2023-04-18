@@ -2,21 +2,23 @@
     <section>
     <h2 class="new-comics-text">Latest Releases:</h2>
     <div class="new-comics-list" >
-        <comic-card v-bind:comic="comic" v-for="comic in comics" v-bind:key="comic.comicId"/>
+        <comic-card-marvel-api :comic="comic" v-for="comic in comics" :key="comic.upc"/>
     </div>       
     </section>
 
 </template>
 
 <script>
-import ComicCard from './ComicCard.vue';
+//import ComicCard from './ComicCard.vue';
 import comicService from '../services/ComicService.js';
 import marvelService from '../services/MarvelService.js';
+import ComicCardMarvelApi from './ComicCardMarvelApi.vue';
 
 export default {
     name: "new-comics-list",
     components: { 
-        ComicCard 
+       // ComicCard,
+        ComicCardMarvelApi 
     },
     data() {
         return {
