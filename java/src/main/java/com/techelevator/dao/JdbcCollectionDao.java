@@ -92,11 +92,12 @@ public class JdbcCollectionDao implements CollectionDao {
 
     @Override
     public void deleteCollection(int userId, int collectionId) {
-
-        String sql = "DELETE FROM collection WHERE user_id = ? AND collection_id = ?; ";
-        jdbcTemplate.update(sql, userId, collectionId);
-        sql = "DELETE FROM comic_collection WHERE collection_id = ?;";
+        String sql = "DELETE FROM comic_collection WHERE collection_id = ?;";
         jdbcTemplate.update(sql, collectionId);
+
+        sql = "DELETE FROM collection WHERE user_id = ? AND collection_id = ?; ";
+        jdbcTemplate.update(sql, userId, collectionId);
+
 
     }
 
