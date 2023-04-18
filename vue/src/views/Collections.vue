@@ -1,7 +1,6 @@
 <template>
     <div>
-        <div id="collection-banner">
-        </div>
+        <div id="collection-banner"></div>
         <section class="container">
 
             <h2 class="collections-title">My Collections</h2>

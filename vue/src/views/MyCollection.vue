@@ -3,7 +3,7 @@
         <div id="collection-banner"></div>
         <div class="container">
             <h2>{{collection.collectionName}}</h2>
-            <edit-collection />
+            <edit-collection v-if="this.$route.name === 'collection'" />
             <div class="cards">
                 <comic-card v-for="comic in this.comics" :key="comic.comicId" :comic="comic" />
             </div>
