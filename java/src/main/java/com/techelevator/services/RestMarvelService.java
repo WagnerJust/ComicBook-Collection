@@ -24,6 +24,7 @@ public class RestMarvelService {
     String pubKey = "05a84f9109e4d58747820908b4af220b";
     String pvtKey = "964627a1c7a39f27cf1ea484b136e425134025ab";
     String ts = new SimpleDateFormat("yyyy.MM.dd.HH.mm.ss").format(new java.util.Date());
+    String today = new SimpleDateFormat("yyyy-MM-dd").format(new java.util.Date());
     String hash = getMd5(ts+pvtKey+pubKey);
     String endUrl = "&ts="+ts+"&apikey="+pubKey+"&hash="+hash;
     private final RestTemplate restTemplate = new RestTemplate();
@@ -41,6 +42,20 @@ public class RestMarvelService {
     public List<Comic> searchComicsBySeriesAndIssueNo(String series, String issueNo) throws JsonProcessingException {
         ArrayList<Comic> comics = new ArrayList<>();
         String resp = restTemplate.getForObject(apiUrl+"comics?titleStartsWith="+series+"&issueNumber="+issueNo+endUrl, String.class);
+        JsonNode comicsNode = new ObjectMapper().readTree(resp).get("data").get("results");
+        for (JsonNode comicNode : comicsNode){
+            Comic comicAdd = jsonComicMapper(comicNode);
+            if (comicAdd != null) {
+                comics.add(comicAdd);
+            }
+        }
+        return comics;
+    }
+
+    public List<Comic> getLatestReleases() throws JsonProcessingException {
+        ArrayList<Comic> comics = new ArrayList<>();
+        String url = apiUrl+"comics?"+endUrl+"&dateDescriptor=lastWeek&orderBy=-onsaleDate&limit=20";
+        String resp = restTemplate.getForObject(url, String.class);
         JsonNode comicsNode = new ObjectMapper().readTree(resp).get("data").get("results");
         for (JsonNode comicNode : comicsNode){
             Comic comicAdd = jsonComicMapper(comicNode);

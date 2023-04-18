@@ -31,4 +31,10 @@ public class MarvelController {
     public List<Comic> getMarvelComicByUpc(@PathVariable String upc) throws JsonProcessingException {
         return restMarvelService.getComicByUpc(upc);
     }
+
+    @PreAuthorize("hasAnyRole('USER','PREMIUM')")
+    @GetMapping("/marvel/latest")
+    public List<Comic> getLatestReleases() throws JsonProcessingException {
+        return restMarvelService.getLatestReleases();
+    }
 }
