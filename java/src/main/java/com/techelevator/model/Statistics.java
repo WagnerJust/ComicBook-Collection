@@ -7,6 +7,8 @@ public class Statistics {
 
     private int num_comics_character;
 
+    private int num_comics_siteWide;
+    private int num_collections_siteWide;
     private String name;
 
     private int num_comics_author;
@@ -64,5 +66,21 @@ public class Statistics {
 
     public void setSeries(String series) {
         this.series = series;
+    }
+
+    public int getNum_comics_siteWide() {
+        return num_comics_siteWide;
+    }
+
+    public void setNum_comics_siteWide(int num_comics_siteWide) {
+        this.num_comics_siteWide = num_comics_siteWide;
+    }
+
+    public int getNum_collections_siteWide() {
+        return num_collections_siteWide;
+    }
+
+    public void setNum_collections_siteWide(int num_collections_siteWide) {
+        this.num_collections_siteWide = num_collections_siteWide;
     }
 }

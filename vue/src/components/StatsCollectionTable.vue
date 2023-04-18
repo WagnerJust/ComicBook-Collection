@@ -6,11 +6,11 @@
                 <span class="name">Characters</span>
             </label>
             <label class="radio-box">
-                <input type="radio" name="search-option" value="author" v-model="selectedOption" v-on:click="authorStats()">
+                <input type="radio" name="search-option" value="author" v-model="selectedOption" v-on:click="authorStats()"/>
                 <span class="name">Authors</span>
             </label>
             <label class="radio-box">
-                <input type="radio" name="search-option" value="series" v-model="selectedOption" v-on:click="seriesStats()">
+                <input type="radio" name="search-option" value="series" v-model="selectedOption" v-on:click="seriesStats()"/>
                 <span class="name">Series</span>
             </label>
         </div>
@@ -39,7 +39,7 @@
                     </tr>
                 </thead>
                 <tbody>
-                    <tr v-for="character in collectionStats" v-bind:key="character.name">
+                    <tr v-for="character in collectionStats" v-bind:key="character.author">
                         <td>{{character.author}}</td>
                         <td>{{character.num_comics_author}}</td>
                     </tr>
@@ -55,7 +55,7 @@
                     </tr>
                 </thead>
                 <tbody>
-                    <tr v-for="character in collectionStats" v-bind:key="character.name">
+                    <tr v-for="character in collectionStats" v-bind:key="character.series">
                         <td>{{character.series}}</td>
                         <td>{{character.num_comics_series}}</td>
                     </tr>
@@ -86,7 +86,7 @@ export default {
             statsService.getCharactersStats(this.$route.params.id)
         .then(response => {
             this.collectionStats = response.data;
-            console.log('stats');
+            console.log('character stats');
             console.log(this.collectionStats);
         });},
 
@@ -94,7 +94,7 @@ export default {
             statsService.getAuthorStats(this.$route.params.id)
         .then(response => {
             this.collectionStats = response.data;
-            console.log('stats');
+            console.log('author stats');
             console.log(this.collectionStats);
         });},
 
@@ -102,7 +102,7 @@ export default {
             statsService.getSeriesStats(this.$route.params.id)
         .then(response => {
             this.collectionStats = response.data;
-            console.log('stats');
+            console.log('series stats');
             console.log(this.collectionStats);
         });}
     },
