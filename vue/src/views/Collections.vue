@@ -3,7 +3,6 @@
         <div id="collection-banner"></div>
         <div class="container">
             <personal-collections />
-            <public-collections />
         </div>
     </section>
 </template>
@@ -11,13 +10,12 @@
 
 <script>
 import PersonalCollections from '../components/PersonalCollections.vue';
-import PublicCollections from '../components/PublicCollections.vue';
+
 
 export default {
     name: 'collections',
     components: {
-        PersonalCollections,
-        PublicCollections
+        PersonalCollections
     }
 }
 </script>

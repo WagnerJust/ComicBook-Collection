@@ -134,4 +134,5 @@ export default {
     transition: .3s ease;
     color: #ED1D24;
 }
+
 </style>
