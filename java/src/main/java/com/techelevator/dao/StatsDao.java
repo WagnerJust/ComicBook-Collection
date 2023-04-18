@@ -10,5 +10,5 @@ public interface StatsDao {
     List<Statistics> collectionAuthorStats(int collectionId);
     List<Statistics> collectionSeriesStats(int collectionId);
 
-    List<Statistics> siteStatistics();
+    Statistics siteStatistics();
 }

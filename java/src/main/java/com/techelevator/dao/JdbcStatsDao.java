@@ -82,21 +82,18 @@ public class JdbcStatsDao implements StatsDao{
     }
 
     @Override
-    public List<Statistics> siteStatistics() {
-        List<Statistics> statisticsList = new ArrayList<>();
-        String sql = "select count(character_comic.character_id) as num_comics_character , character_table.name, count(comic_data.author) as num_comics_author, comic_data.author, count(comic_data.series) as num_comics_series, comic_data.series\n" +
-                "from character_table\n" +
-                "join character_comic ON character_comic.character_id = character_table.character_id\n" +
-                "join comic_data ON comic_data.comic_data_id = character_comic.comic_data_id\n" +
+    public Statistics siteStatistics() {
+        Statistics statistics = null;
+        String sql = "select count(DISTINCT comic_data.comic_data_id) as num_comics_siteWide, count(DISTINCT collection.collection_id) as num_collections_siteWide\n" +
+                "from comic_data\n" +
                 "join comic_collection ON comic_collection.comic_data_id = comic_data.comic_data_id\n" +
-                "join collection ON collection.collection_id = comic_collection.collection_id\n" +
-                "group by character_table.name, comic_data.author,  comic_data.series;";
+                "join collection ON collection.collection_id = comic_collection.collection_id";
 
         SqlRowSet results = jdbcTemplate.queryForRowSet(sql);
         while(results.next()){
-            statisticsList.add(mapRowToStatistics(results, "all"));
+            statistics = mapRowToStatistics(results, "site");
         }
-        return statisticsList;
+        return statistics;
 
     }
 
@@ -114,10 +111,9 @@ public class JdbcStatsDao implements StatsDao{
             case "series":
                 statistics.setNum_comics_series(results.getInt(1));
                 statistics.setSeries(results.getString(2));
-//            case "site":
-//
-//                statistics.setSeries(results.getString("series"));
-//                statistics.setNum_collections_siteWide(results.getInt("num_collections_siteWide"));
+            case "site":
+                statistics.setNum_comics_siteWide(results.getInt("num_comics_siteWide"));
+                statistics.setNum_collections_siteWide(results.getInt("num_collections_siteWide"));
             default:
                 break;
         }

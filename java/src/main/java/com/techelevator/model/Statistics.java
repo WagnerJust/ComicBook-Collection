@@ -7,8 +7,7 @@ public class Statistics {
 
     private int num_comics_character;
 
-    private int num_comics_siteWide;
-    private int num_collections_siteWide;
+
     private String name;
 
     private int num_comics_author;
@@ -18,6 +17,8 @@ public class Statistics {
     private int num_comics_series;
 
     private String series;
+    private int num_comics_siteWide;
+    private int num_collections_siteWide;
 
 
     public int getNum_comics_character() {

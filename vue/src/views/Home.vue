@@ -7,6 +7,7 @@
 			<div class="components">
 				<new-comics-list />
 				<characters-list />
+				<aggregate-statistics/>
 			</div>
 
 		</div>
@@ -17,12 +18,14 @@
 <script>
 import NewComicsList from '../components/NewComicsList.vue';
 import CharactersList from '../components/CharactersList.vue';
+import AggregateStatistics from '../components/AggregateStatistics.vue';
 
 export default {
 	name: "home",
 	components: { 
 		NewComicsList,
-		CharactersList 
+		CharactersList,
+	AggregateStatistics 
 	},
 };
 </script>

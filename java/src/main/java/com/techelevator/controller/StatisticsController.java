@@ -57,16 +57,16 @@ public class StatisticsController {
         }
         else return statisticsList;
     }
-    @PreAuthorize("hasAnyRole('USER','PREMIUM')")
+    @PreAuthorize("permitAll")
     @GetMapping("/")
-    public List<Statistics> getSiteStats() {
-        List<Statistics> statisticsList = null;
+    public Statistics getSiteStats() {
+        Statistics statistics = null;
 
-        statisticsList = statsDao.siteStatistics();
-        if(statisticsList == null){
+        statistics = statsDao.siteStatistics();
+        if(statistics == null){
             throw new ResponseStatusException(HttpStatus.NOT_FOUND, "Could not find statistics for site");
         }
-        else return statisticsList;
+        else return statistics;
     }
 }
 
