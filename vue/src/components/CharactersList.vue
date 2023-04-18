@@ -28,6 +28,7 @@ export default {
 
 .characters-text {
     margin-top: 4%;
+    font-size: 2.5rem;
     font-family: 'Montserrat', Helvetica, sans-serif;
 }
 

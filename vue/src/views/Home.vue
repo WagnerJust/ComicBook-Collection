@@ -5,7 +5,7 @@
 				<!-- <img class="image-fit" src="https://w0.peakpx.com/wallpaper/691/675/HD-wallpaper-marvel-comics-marvel-logo.jpg" alt="Marvel iamge" /> -->
 			</div>
 			<div class="components">
-				<new-comics-list />
+				<public-collections />
 				<characters-list />
 				<aggregate-statistics/>
 			</div>
@@ -16,16 +16,21 @@
 
 
 <script>
-import NewComicsList from '../components/NewComicsList.vue';
+import PublicCollections from '../components/PublicCollections.vue';
 import CharactersList from '../components/CharactersList.vue';
 import AggregateStatistics from '../components/AggregateStatistics.vue';
 
 export default {
 	name: "home",
 	components: { 
+<<<<<<< HEAD
 		NewComicsList,
 		CharactersList,
 	AggregateStatistics 
+=======
+        PublicCollections,
+		CharactersList 
+>>>>>>> 6441db236638a47078036b440a1185bb32a3bbb0
 	},
 };
 </script>
