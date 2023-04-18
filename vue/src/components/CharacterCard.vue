@@ -14,7 +14,7 @@ export default {
 }
 </script>
 
-<style>
+<style scoped>
 .character {
     width: 18%;
     height: 25%;

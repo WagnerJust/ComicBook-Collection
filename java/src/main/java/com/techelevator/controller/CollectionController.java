@@ -69,7 +69,7 @@ public class CollectionController {
     @PreAuthorize("hasAnyRole('USER','PREMIUM')")
     @ResponseStatus(value = HttpStatus.OK)
     @DeleteMapping("/user/{userId}/collections/{collectionId}")
-    public void deleteCollection(@PathVariable int userId, int collectionId){
+    public void deleteCollection(@PathVariable int userId, @PathVariable int collectionId){
         collectionDao.deleteCollection(userId, collectionId);
     }
 

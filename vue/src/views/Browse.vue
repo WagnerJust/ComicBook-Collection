@@ -20,7 +20,7 @@ export default {
 }
 </script>
 
-<style>
+<style scoped>
 
 .browse-main {
     background-image: url('/public/star-wars.jpg');

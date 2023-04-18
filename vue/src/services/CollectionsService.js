@@ -37,6 +37,10 @@ export default{
 
     numberComicsWithCharacterTotal(userId, characterId){
         return http.get(`/user/${userId}/characters/${characterId}`);
+    },
+
+    deleteCollection(userId, collectionId) {
+        return http.delete(`/user/${userId}/collections/${collectionId}`);
     }
     
 }
