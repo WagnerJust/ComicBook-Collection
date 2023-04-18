@@ -10,8 +10,14 @@ const http = axios.create({
 
 export default{
 
-    getStatsForCollection(collectionId){
-        return http.get(`/${collectionId}`);
+    getCharactersStats(collectionId){
+        return http.get(`/${collectionId}/character`);
+    },
+    getAuthorStats(collectionId){
+        return http.get(`/${collectionId}/author`);
+    },
+    getSeriesStats(collectionId){
+        return http.get(`/${collectionId}/series`);
     },
 
     getSiteStats(){

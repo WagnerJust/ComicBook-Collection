@@ -7,7 +7,7 @@
             </ul>
             <button id="cancel-button" v-on:click.prevent="showCollections = false">Cancel</button>
         </div>
-        <button v-if="showCollections === false" v-on:click.prevent="showCollections = true">Add To Collection</button>
+        <button id="add-button" v-if="showCollections === false" v-on:click.prevent="showCollections = true">Add To Collection</button>
     </div>
 </template>
 
@@ -70,6 +70,7 @@ export default {
     border: 1px solid black;
     width: 100%;
     padding: 5px;
+    font-size: 1.3rem;
 }
 
 ul {
@@ -109,6 +110,12 @@ button {
   background-color: white;
   border: 1px solid black;
   font-family: 'Montserrat', Helvetica, sans-serif;
+}
+
+#add-button {
+    width: 11.5rem;
+    height: 2.5rem;
+    font-size: 1.1rem;
 }
 
 button:hover {

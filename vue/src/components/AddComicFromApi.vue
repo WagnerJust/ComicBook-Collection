@@ -45,8 +45,7 @@ export default {
     created() {
         collectionService.listByUserId(this.$store.state.user.id).then(response => {
         this.myCollections = response.data;       
-        })
-        comicService.addComic(this.comic);
+        });
         comicService.getComicByUpc(this.comic.upc).then(response => {
         this.comicNew = response.data;
         });
