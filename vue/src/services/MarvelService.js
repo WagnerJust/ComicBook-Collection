@@ -21,6 +21,10 @@ export default{
         return http.get(`${series}/${issueNo}`)
     },
 
+    getLatestReleases(){
+        return http.get(`latest/`)
+    },
+
     
 
     
