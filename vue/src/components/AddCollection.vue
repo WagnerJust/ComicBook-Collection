@@ -1,9 +1,9 @@
 <template>
     <div class="container">
-        <button id="show-form-button" v-if="showForm === false" v-on:click.prevent="showForm = true">
+        <button id="show-form-button" v-show="showForm === false" v-on:click.prevent="showForm = true">
             - Add New Collection -
         </button>
-        <form class="collection-form" name="collection-form" autocomplete="off" v-if="showForm === true">
+        <form id="collection-form" class="collection-form" name="collection-form" autocomplete="off" v-show="showForm === true">
             <div class="field">
                 <input required id="collection-form-name-input" name="collection-form-name-input" type="text" placeholder="Collection Name" v-model="collection.collectionName" onInvalid="this.setCustomValidity('Your collection must have a name.')" oninput="setCustomValidity('')" />
             </div>
@@ -15,7 +15,7 @@
                 <button id="save-collection-button" type="submit" v-on:click="saveCollection()">Save Collection</button>
                 <button id="reset-collection-button" type="reset" >Reset Form</button>              
             </div>
-            <a id="cancel-button" v-on:click="showForm = false">Cancel</a> 
+            <a id="cancel-button" type="reset" v-on:click="resetForm">Cancel</a> 
         </form>
     </div>
 </template>
@@ -46,6 +46,14 @@ export default {
                         this.$router.go("/collections")
                     }
                 })                
+            }
+        },
+        resetForm() {
+            this.showForm = false;
+            this.collection = {
+                userId: this.$store.state.user.id,
+                collectionId: '',
+                public: false
             }
         }
     }
