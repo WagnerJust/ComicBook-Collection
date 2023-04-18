@@ -1,47 +1,61 @@
 <template>
-    <div class="container">
-        <button id="show-form-button" v-show="showForm === false" v-on:click.prevent="showForm = true">
-            - Add New Collection -
-        </button>
-        <form id="collection-form" class="collection-form" name="collection-form" autocomplete="off" v-show="showForm === true">
-            <div class="field">
-                <input required id="collection-form-name-input" name="collection-form-name-input" type="text" placeholder="Collection Name" v-model="collection.collectionName" onInvalid="this.setCustomValidity('Your collection must have a name.')" oninput="setCustomValidity('')" />
-            </div>
-            <div id="public-section" class="field">
-                <label id="public-text" for="checkbox">Public? </label>
-                <label id="switch"><input type="checkbox" v-model="collection.public" /><span id="slider"></span></label>
-            </div>
-            <div class="field">
-                <button id="save-collection-button" type="submit" v-on:click="saveCollection()">Save Collection</button>
-                <button id="reset-collection-button" type="reset" >Reset Form</button>              
-            </div>
-            <a id="cancel-button" type="reset" v-on:click="resetForm">Cancel</a> 
-        </form>
+    <div class='container'>
+        <button id="edit-form-button" @click="showForm = true">Edit Collection</button>
+            <form id="collection-form" name="collection-form" autocomplete="off" v-if="showForm">
+                <div class="field">
+                    <input id="collection-form-name-input" name="collection-form-name-input" type="text" placeholder= updateName() v-model="collection.collectionName" />
+                </div>
+                <div id="public-section" class="field">
+                    <label id="public-text" for="checkbox">Public? </label>
+                    <label id="switch"><input type="checkbox" v-model="collection.public" /><span id="slider"></span></label>
+                </div>
+                <div class="field">
+                    <button id="save-collection-button" type="submit" @click="updateCollection()" >Update Collection</button>
+                    <button id="reset-collection-button" type="reset" >Reset Form</button>              
+                </div>
+                <a id="cancel-button" type="reset" v-on:click="resetForm">Cancel</a> 
+            </form>
     </div>
 </template>
+
 
 <script>
 import collectionService from '../services/CollectionsService.js';
 
 export default {
-    name: "add-collection",
+    name: "edit-collection",
     data() {
         return {
             showForm: false,
-            collection: {
-                userId: this.$store.state.user.id,
-                collectionId: '',
-                public: false
-            }
+            collection: []
         }
     },
+    computed: {
+
+        updateName() {
+            let collectionName = this.collection.collectionName
+            return collectionName
+        }
+
+    },
+    created() {
+
+        collectionService.getCollectionByCollectionId(this.$route.params.id).then(response => {
+            this.collection = response.data;
+            console.log("TEST");
+            console.log(this.collection)
+        });
+
+    },
     methods: {
-        saveCollection() {
+        updateCollection() {
             let x = document.forms["collection-form"]["collection-form-name-input"].value;
             if (x == "") {
                 return false;
             } else {
-                collectionService.createCollection(this.collection).then(response => {
+                console.log("TEST")
+                console.log(this.collection)
+                collectionService.updateCollection(this.collection).then(response => {
                     if (response.status === 201) {
                         this.$router.go("/collections")
                     }
@@ -60,8 +74,9 @@ export default {
 }
 </script>
 
-<style scoped>
 
+<style scoped>
+    
 .container {
     display: flex;
     flex-direction: column;
@@ -71,9 +86,14 @@ export default {
     font-family: 'Montserrat', Helvetica, sans-serif;
 }
 
+#edit-form-button {
+    width: 10rem;
+    font-size: 1rem;
+}
+
+
 #show-form-button {
     width: 15rem;
-    font-size: 1rem;
 }
 
 .field {
@@ -141,6 +161,7 @@ button:hover {
 
 #save-collection-button {
     margin-right: 1rem;
+    width: 9rem;
 }
 
 #cancel-button {

@@ -43,7 +43,10 @@ public class RestMarvelService {
         String resp = restTemplate.getForObject(apiUrl+"comics?titleStartsWith="+series+"&issueNumber="+issueNo+endUrl, String.class);
         JsonNode comicsNode = new ObjectMapper().readTree(resp).get("data").get("results");
         for (JsonNode comicNode : comicsNode){
-            comics.add(jsonComicMapper(comicNode));
+            Comic comicAdd = jsonComicMapper(comicNode);
+            if (comicAdd != null) {
+                comics.add(comicAdd);
+            }
         }
         return comics;
     }
@@ -83,7 +86,11 @@ public class RestMarvelService {
         }
         comic.setUpc(comicNode.get("upc").textValue());
         comic.setIssueNumber(comicNode.get("issueNumber").intValue());
-        comic.setImageURL(comicNode.get("images").get(0).get("path").textValue().substring(39));
+        try {
+            comic.setImageURL(comicNode.get("images").get(0).get("path").textValue().substring(39));
+        }catch (Exception e){
+            return null;
+        }
         return comic;
     }
 

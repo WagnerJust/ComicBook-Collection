@@ -20,10 +20,6 @@ export default {
                 if (response.status === 200) {
                     this.$router.push('/collections')
                 }
-            }).catch(error => {
-                if (error.response) {
-                    alert("You cannot have comics in a collection that you wish to delete.");
-                }
             })
         }
     }

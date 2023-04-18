@@ -1,20 +1,22 @@
 <template>
-    <section class="container">
-        <h2>{{collection.collectionName}}</h2>
-        <div class="cards">
-            <comic-card v-for="comic in this.comics" :key="comic.comicId" :comic="comic" />
+    <section class="main">
+        <div id="collection-banner"></div>
+        <div class="container">
+            <h2>{{collection.collectionName}}</h2>
+            <edit-collection v-if="this.$route.name === 'collection'" />
+            <div class="cards">
+                <comic-card v-for="comic in this.comics" :key="comic.comicId" :comic="comic" />
+            </div>
+            <h2>Statistics</h2>
+            <stats-collection-table/>
+            <delete-collection v-if="this.$route.name === 'collection'" />
         </div>
-        <h2>Statistics</h2>
-        <stats-collection-table/>
-        <delete-collection v-if="this.$route.name === 'collection'" />
     </section>
-
-
-    
 </template>
 
 
 <script>
+import EditCollection from '../components/EditCollection.vue';
 import ComicCard from '../components/ComicCard.vue';
 import DeleteCollection from '../components/DeleteCollection.vue';
 import comicService from '../services/ComicService.js';
@@ -24,6 +26,7 @@ import StatsCollectionTable from '../components/StatsCollectionTable.vue';
 export default {
     name: 'collection',
     components: { 
+        EditCollection,
         ComicCard,
         DeleteCollection,
         StatsCollectionTable
@@ -40,21 +43,29 @@ export default {
 
     },
     created() {
-        /* This call can be seen in the console. It is requesting the comics from collectionId: 1 */
+
         comicService.getComicsByCollectionId(this.$route.params.id).then(response => {
             this.comics = response.data;
-            console.log("COMICS");
-            console.log(this.comics);
         });
+
         collectionService.getCollectionByCollectionId(this.$route.params.id).then(response => {
             this.collection = response.data;
         });
+
     }
 }
 </script>
 
 
 <style scoped>
+
+#collection-banner {
+    background-image: url('/public/marvel-panorama-2.jpg');
+	background-repeat: no-repeat;
+	background-size: cover;
+	background-position: 0% 70%;
+	height: 450px;
+}
 
 .container {
     margin-left: 12%;
@@ -66,7 +77,7 @@ export default {
     justify-content: space-evenly;
     flex-wrap: wrap;
     column-gap: 2.2%;
-    margin-top: 3rem;
+    margin-top: 1.5rem;
 }
 
 h2 {
@@ -75,11 +86,6 @@ h2 {
     font-size: 2.5rem;
     font-family: 'Montserrat', Helvetica, sans-serif;
 }
-
-
-
-
-
 
 </style>
 
