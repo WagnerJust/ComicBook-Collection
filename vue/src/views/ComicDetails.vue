@@ -32,7 +32,7 @@ export default {
 
     created() {
         
-            ComicService.getComicById(this.$route.params.id).then(response => {
+            ComicService.getComicByUpc(this.$route.params.id).then(response => {
             this.comic = response.data;
             console.log("ID")
             console.log(this.$route.params.id)

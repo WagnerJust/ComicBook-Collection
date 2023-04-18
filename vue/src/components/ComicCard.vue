@@ -3,7 +3,7 @@
         <add-comic class="add-button" :comic="comic" v-if="this.$route.name != 'collection'" />
         <delete-comic :comic="comic" v-if="this.$route.name === 'collection'" />
         <div class="image-wrap">
-            <router-link v-bind:to="{ name: 'comicdetails', params: { id: comic.comicId } }"><img class="comic-image" v-bind:src="'http://i.annihil.us/u/prod/marvel/i/mg/' + comic.imageURL + '/detail.jpg'" /></router-link>
+            <router-link v-bind:to="{ name: 'comicdetails', params: { id: comic.upc } }"><img class="comic-image" v-bind:src="'http://i.annihil.us/u/prod/marvel/i/mg/' + comic.imageURL + '/detail.jpg'" /></router-link>
             <h3 class="comic-series">{{ comic.seriesName }} #{{comic.issueNumber}}</h3>
             <p class="comic-creator">Writer: {{ comic.author }}</p>
             <p class="comic-creator">Penciler: {{ comic.artist }}</p>

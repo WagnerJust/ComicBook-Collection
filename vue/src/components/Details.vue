@@ -2,7 +2,7 @@
     <div class="card">
         <p class="add" tag="button" >Add</p>
         <div class="image-wrap">
-            <router-link v-bind:to="{ name: 'comicdetails', params: { id: comic.comicId } }"><img class="comic-image" v-bind:src="'http://i.annihil.us/u/prod/marvel/i/mg/' + comic.image + '/portrait_xlarge.jpg'" /></router-link>
+            <router-link v-bind:to="{ name: 'comicdetails', params: { id: comic.upc } }"><img class="comic-image" v-bind:src="'http://i.annihil.us/u/prod/marvel/i/mg/' + comic.image + '/portrait_xlarge.jpg'" /></router-link>
             <h3 class="comic-title">{{ comic.title }}</h3>
             <p class="comic-creator">{{ comic.writer }}, {{ comic.penciler }}</p>
         </div>
