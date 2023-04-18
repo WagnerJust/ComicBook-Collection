@@ -66,8 +66,8 @@ export default {
 
 .collections-title {
     margin-top: 1.5rem;
+    margin-left: 1.3rem;
     font-size: 2.5rem;
-    text-align: center;
     font-family: 'Montserrat', Helvetica, sans-serif;
 }
 
