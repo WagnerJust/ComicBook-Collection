@@ -20,18 +20,28 @@
 
 <script>
 import AddComic from '../components/AddComic.vue';
+import ComicService from '../services/ComicService.js';
 
 export default {
-	name: "new-comics",
-    computed: {
-        comic() {
-            return this.$store.state.comics.find((c) => c.comicId === this.$route.params.id);
+	name: "comic-details",
+    data() {
+        return {
+            comic: [],
         }
+    },
+
+    created() {
+        
+            ComicService.getComicById(this.$route.params.id).then(response => {
+            this.comic = response.data;
+            console.log("ID")
+            console.log(this.$route.params.id)
+        });
     },
 	components: {
         AddComic
 	},
-};
+}
 </script>
 
 <style scoped>
