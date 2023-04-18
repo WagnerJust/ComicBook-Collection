@@ -24,7 +24,7 @@ export default {
 }
 </script>
 
-<style>
+<style scoped>
 
 .characters-text {
     margin-top: 4%;

@@ -6,7 +6,7 @@
         </div>
         <h2>Statistics</h2>
         <stats-collection-table/>
-         
+        <delete-collection v-if="this.$route.name === 'collection'" />
     </section>
 
 
@@ -16,14 +16,16 @@
 
 <script>
 import ComicCard from '../components/ComicCard.vue';
-import comicService from '../services/ComicService.js'
-import collectionService from "../services/CollectionsService.js"
+import DeleteCollection from '../components/DeleteCollection.vue';
+import comicService from '../services/ComicService.js';
+import collectionService from "../services/CollectionsService.js";
 import StatsCollectionTable from '../components/StatsCollectionTable.vue';
 
 export default {
     name: 'collection',
     components: { 
         ComicCard,
+        DeleteCollection,
         StatsCollectionTable
     },
     data() {

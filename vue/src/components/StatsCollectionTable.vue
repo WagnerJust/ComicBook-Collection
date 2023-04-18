@@ -119,7 +119,7 @@ export default {
 }
 </script>
 
-<style>
+<style scoped>
 table.stats {
   font-family: "Comic Sans MS", cursive, sans-serif;
   border: 1px solid#ed1d24;
