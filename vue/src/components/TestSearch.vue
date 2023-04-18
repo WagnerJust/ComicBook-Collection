@@ -9,7 +9,7 @@ components / SearchComics
             <input class="search-box" type="search" placeholder="Search" v-on:keyup.enter="searchUpc" v-model="searchValue" />
         </div>
 
-        <div class="options-bar">
+        <div class="options-bar" v-show="!marvelApi">
             <label class="radio-box">
                 <input type="radio" name="search-option" value="upc" v-model="selectedOption" />
                 <span class="name">UPC</span>
@@ -31,10 +31,26 @@ components / SearchComics
                 <span class="name">Artist</span>
             </label>
         </div>
+         <div class="options-bar" v-show="marvelApi">
+              <label class="radio-box">
+                <input type="radio" name="search-option" value="upc" v-model="selectedOptionApi" />
+                <span class="name">UPC</span>
+            </label>
+            <label class="radio-box">
+                <input type="radio" name="search-option" value="seriesAndIssue" v-model="selectedOptionApi">
+                <span class="name">Series and Issue Number</span>
+            </label>
+         </div>
+        <div id="marvel-toggle" class="field">
+                <label id="toggle-text" for="checkbox">Search This Site</label>
+                <label id="switch"><input type="checkbox" v-model="marvelApi" /><span id="slider"></span></label>
+                <label id="toggle-text" for="checkbox">Search Marvel API</label>
+        </div>
 
         <div class="new-comics-list">
             <comic-card-marvel-api :comic="comic" v-for="comic in searchResults" :key="comic.upc"/>
         </div>
+        
 
     </div>
 </template>
@@ -54,6 +70,8 @@ export default {
             ],
             searchValue: "",
             selectedOption: "seriesName",
+            selectedOptionApi: "upc",
+            marvelApi:true
             
         }
     },
@@ -111,6 +129,7 @@ export default {
         "empty"
         "search-box"
         "options-bar"
+        "marvel-toggle"
         "comics-list";
     justify-items: center;
     font-family: 'Montserrat', Helvetica, sans-serif;
@@ -197,6 +216,56 @@ export default {
 
 }
 
+/* The toggle switch - this code was copied and slightly edited from: https://www.w3schools.com/howto/howto_css_switch.asp */
 
+#switch {
+    position: relative;
+    display: inline-block;
+    width: 60px;
+    height: 34px;
+}
+
+#switch input {
+    opacity: 0;
+    width: 0;
+    height: 0;
+}
+
+#slider {
+    position: absolute;
+    cursor: pointer;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background-color: #ccc;
+    -webkit-transition: .4s;
+    transition: .4s;
+}
+
+#slider:before {
+    position: absolute;
+    content: "";
+    height: 26px;
+    width: 26px;
+    left: 4px;
+    bottom: 4px;
+    background-color: white;
+    -webkit-transition: .4s;
+    transition: .4s;
+}
+
+input:checked + #slider {
+    background-color: #23ce2b;
+    box-shadow: 0 0 1px #23ce2b;
+}
+
+input:checked + #slider:before {
+    -webkit-transform: translateX(26px);
+    -ms-transform: translateX(26px);
+    transform: translateX(26px);
+}
 
 </style>
+
+
