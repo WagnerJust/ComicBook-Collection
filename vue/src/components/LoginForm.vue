@@ -20,7 +20,7 @@
       </form>
     </div>
     <div class="new-user">
-      <p>Not a Member?</p>
+      <p id="not-a-member">Not a Member?</p>
       <router-link :to="{ name: 'register' }" tag="button" class="register">SIGN UP</router-link>
     </div>
   </div>
@@ -90,6 +90,7 @@ export default {
 .welcome {
   position: relative;
   top: -90px;
+  font-size: 1.2rem;
 }
 
 .new-user {
@@ -123,6 +124,10 @@ input {
 .thank-you {
   position: relative;
   top: -40px;
+}
+
+#not-a-member {
+  font-size: 1.2rem;
 }
 
 button {

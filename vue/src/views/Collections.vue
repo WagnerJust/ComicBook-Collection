@@ -52,6 +52,8 @@ export default {
 
     methods: {
         getRandomImages() {
+            console.log("IMAGES")
+            console.log(this.images.keys())
             const imgs = this.images.keys().map(key => this.images(key))
             const randomIndex = Math.floor(Math.random() * imgs.length)
             return imgs[randomIndex]

@@ -24,7 +24,7 @@
       </form>
     </div>
     <div class="existing-user">
-      <p>Have an account?</p>
+      <p id="have-an-account">Have an account?</p>
       <router-link :to="{ name: 'login' }" tag="button" class="register">SIGN IN</router-link>
     </div>
   </div>
@@ -172,11 +172,12 @@ h1 {
 .welcome {
   position: relative;
   top: -60px;
+  font-size: 1.2rem;
 }
 
 .existing-user {
   position: relative;
-  bottom: -75px;
+  bottom: -50px;
 }
 
 .existing-user > p {
@@ -185,7 +186,7 @@ h1 {
 
 .submit-button {
   position: relative;
-  bottom: -30px;
+  bottom: -10px;
   width: 9rem;
 }
 
@@ -200,6 +201,10 @@ h1 {
 input {
   height: 2rem;
   width: 15rem;
+}
+
+#have-an-account {
+  font-size: 1.2rem;
 }
 
 button {
