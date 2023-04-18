@@ -52,11 +52,12 @@ public class RestMarvelService {
         ArrayList<ComicCharacter> comicCharacters = new ArrayList<>();
         String resp = restTemplate.getForObject(apiUrl+"comics?upc="+upc+endUrl, String.class);
         JsonNode comicNode = new ObjectMapper().readTree(resp);
-        if (comicNode.get("data").get("results").get(0).get("characters").get("items").get("available").intValue() == 0){
+        if (comicNode.get("data").get("results").get(0).get("characters").get("available").intValue() == 0){
             return null;
         }
-        for(JsonNode node : comicNode){
-            comicCharacters.add(jsonComicToCharacterMapper(comicNode.get("data").get("results").get(0).get("characters").get("items")));
+        JsonNode charactersNode =comicNode.get("data").get("results").get(0).get("characters").get("items");
+        for(JsonNode node : charactersNode){
+            comicCharacters.add(jsonComicToCharacterMapper(node));
         }
         return comicCharacters;
     }

@@ -42,6 +42,7 @@ components / SearchComics
 <script>
 import ComicCardMarvelApi from './ComicCardMarvelApi.vue';
 import marvelService from '../services/MarvelService.js';
+import comicService from '../services/ComicService.js';
 
 export default {
     name: "test-search-comics",
@@ -83,6 +84,8 @@ export default {
             searchValue = this.searchValue;
             marvelService.searchComicByUpc(searchValue).then(response => {
             this.searchResults = response.data;
+            comicService.addComic(response.data[0]);
+        
             console.log("RESPONSE DATA");
             console.log(response.data);
             })
