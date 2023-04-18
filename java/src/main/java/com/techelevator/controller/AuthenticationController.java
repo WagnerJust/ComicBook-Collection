@@ -39,10 +39,8 @@ public class AuthenticationController {
     }
 
     @RequestMapping(value = "/test", method = RequestMethod.GET)
-    public List<ComicCharacter> testService() throws JsonProcessingException {
-        return marvelService.getCharactersByComicUpc("75960605921800211");
-
-
+    public List<Comic> getLatestReleases() throws JsonProcessingException {
+        return marvelService.getLatestReleases();
     }
 
 
