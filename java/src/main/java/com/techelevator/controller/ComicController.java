@@ -85,8 +85,10 @@ public class ComicController {
         }else{
             newComic = comicDao.addComic(comic);
             List<ComicCharacter> characters = marvelService.getCharactersByComicUpc(newComic.getUpc());
-            for(ComicCharacter character : characters){
-                characterDao.addCharacterToComic(characterDao.addCharacter(character).getCharacterId(), newComic.getComicId());
+            if (characters != null) {
+                for (ComicCharacter character : characters) {
+                    characterDao.addCharacterToComic(characterDao.addCharacter(character).getCharacterId(), newComic.getComicId());
+                }
             }
         }
         return newComic;

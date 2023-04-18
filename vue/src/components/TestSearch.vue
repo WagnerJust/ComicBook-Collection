@@ -6,7 +6,16 @@ components / SearchComics
         <div class="empty"></div>
 
         <div class="search-container">
-            <input class="search-box" type="search" placeholder="Search" v-on:keyup.enter="searchUpc" v-model="searchValue" />
+            <input class="search-box" v-show="!marvelApi" type="search" placeholder="Search" v-on:keyup.enter="searchDb" v-model="searchValueDb" />
+        </div>
+        <div class="search-container">
+            <input class="search-box" v-show="searchBarApiUpc" type="search" placeholder="UPC" v-on:keyup.enter="searchUpc" v-model="searchValue" />
+        </div>
+        <div class="search-container">
+            <input class="search-box" v-if="searchBarApiIssueNo" type="search" placeholder="Series" v-on:keyup.enter="searchSeriesIssue" v-model="searchValueSeries" />
+        </div>
+        <div class="search-containerTwo">
+            <input class="search-boxTwo" v-if="searchBarApiIssueNo" type="search" placeholder="Issue Number" v-on:keyup.enter="searchSeriesIssue" v-model="searchValueIssue" />
         </div>
 
         <div class="options-bar" v-show="!marvelApi">
@@ -17,10 +26,6 @@ components / SearchComics
             <label class="radio-box">
                 <input type="radio" name="search-option" value="seriesName" v-model="selectedOption">
                 <span class="name">Series</span>
-            </label>
-            <label class="radio-box">
-                <input type="radio" name="search-option" value="issueNumber" v-model="selectedOption">
-                <span class="name">Issue Number</span>
             </label>
             <label class="radio-box">
                 <input type="radio" name="search-option" value="author" v-model="selectedOption">
@@ -69,9 +74,13 @@ export default {
 
             ],
             searchValue: "",
+            searchValueDb: "",
+            searchValueSeries: "",
+            searchValueIssue: "",
             selectedOption: "seriesName",
             selectedOptionApi: "upc",
-            marvelApi:true
+            marvelApi:true,
+            
             
         }
     },
@@ -85,6 +94,20 @@ export default {
         comics() {
             return this.searchResults
         },
+
+        searchBarApiUpc(){
+            if(this.marvelApi == true && this.selectedOptionApi == "upc"){
+            return true;
+            }
+            return false;
+        },
+
+        searchBarApiIssueNo(){
+            if(this.marvelApi == true && this.selectedOptionApi == "seriesAndIssue"){
+            return true;
+            }
+            return false;
+        }
 
         // filteredComics() {
         //     const searchValue = this.searchValue.toLowerCase();
@@ -105,8 +128,25 @@ export default {
             comicService.addComic(response.data[0]);
         
             console.log("RESPONSE DATA");
+            console.log(response.data[0]);
+            })
+        },
+
+        searchSeriesIssue() {
+            console.log("SEARCH SERIES CALLED");
+            this.searchValueSeries 
+            marvelService.searchComicBySeriesAndIssue(this.searchValueSeries, this.searchValueIssue).then(response =>{
+                this.searchResults = response.data;
+                response.data.forEach(element => {
+                    console.log("ADDCOMIC CALLED WITH:")
+                    console.log(element)
+                    comicService.addComic(element);
+                    
+                });
+                console.log("RESPONSE DATA");
             console.log(response.data);
             })
+
         }
         
     }
@@ -128,6 +168,7 @@ export default {
     grid-template-areas:
         "empty"
         "search-box"
+        "search-boxTwo"
         "options-bar"
         "marvel-toggle"
         "comics-list";
@@ -141,6 +182,11 @@ export default {
 
 .search-container {
     grid-area: search-box;
+    content: image-set("/public/search-icon.png" 2px);
+}
+
+.search-containerTwo {
+    grid-area: search-boxTwo;
     content: image-set("/public/search-icon.png" 2px);
 }
 
@@ -188,6 +234,21 @@ export default {
 
 .search-box {
     grid-area: search-box;
+    width: 50rem;
+    height: 5rem;
+    border-radius: 50px;
+    border: 1px solid #ccc;
+    padding: 10px 20px 10px 60px;
+    font-size: 20px;
+    box-shadow: 0 6px 10px 0 rgba(0, 0, 0, 0.2), 0 10px 30px 0 rgba(0, 0, 0, 0.19);
+    background-image: url("/public/search-icon.png");
+    background-repeat: no-repeat;
+    background-size: 1.1em 1.1em;
+    background-position: 3% 48%;;
+}
+
+.search-boxTwo {
+    grid-area: search-boxTwo;
     width: 50rem;
     height: 5rem;
     border-radius: 50px;
