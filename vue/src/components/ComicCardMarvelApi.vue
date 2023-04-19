@@ -44,10 +44,6 @@ export default {
     margin-bottom: 5%;
 }
 
-.image-wrap {
-    align-self: flex-start;
-    justify-content: flex-start;
-}
 .image-wrap:hover {
     color: #ED1D24;
 }

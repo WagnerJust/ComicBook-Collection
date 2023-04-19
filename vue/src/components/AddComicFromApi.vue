@@ -3,11 +3,11 @@
         <div class="collection-box" v-if="showCollections === true">
             <h5>Which collection?</h5>
             <ul>
-                <a v-for="collection in myCollections" v-bind:key="collection.collectionId" v-on:click="addComic(collection.collectionId)"><li ref="test">{{collection.collectionName}}</li></a>
+                <a v-for="collection in myCollections" v-bind:key="collection.collectionId" v-on:click="addComic(collection.collectionId)"><li>{{collection.collectionName}}</li></a>
             </ul>
             <button id="cancel-button" v-on:click.prevent="showCollections = false">Cancel</button>
         </div>
-        <button v-if="showCollections === false" v-on:click.prevent="showCollections = true">Add To Collection</button>
+        <button id="add-button" v-if="showCollections === false" v-on:click.prevent="showCollections = true">Add To Collection</button>
     </div>
 </template>
 
@@ -63,15 +63,12 @@ export default {
     margin-bottom: 1rem;
 }
 
-.not-logged-in {
-    width: 100%;
-}
-
 .collection-box {
     background-color: white;
     border: 1px solid black;
     width: 100%;
     padding: 5px;
+    font-size: 1.3rem;
 }
 
 ul {
@@ -111,6 +108,12 @@ button {
   background-color: white;
   border: 1px solid black;
   font-family: 'Montserrat', Helvetica, sans-serif;
+}
+
+#add-button {
+    width: 11.5rem;
+    height: 2.5rem;
+    font-size: 1.1rem;
 }
 
 button:hover {

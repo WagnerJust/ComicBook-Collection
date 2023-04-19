@@ -3,7 +3,7 @@
         <div class="collection-box" v-if="showCollections === true">
             <h5>Which collection?</h5>
             <ul>
-                <a v-for="collection in myCollections" v-bind:key="collection.collectionId" v-on:click="addComic(collection.collectionId)"><li ref="test">{{collection.collectionName}}</li></a>
+                <a v-for="collection in myCollections" v-bind:key="collection.collectionId" v-on:click="addComic(collection.collectionId)"><li>{{collection.collectionName}}</li></a>
             </ul>
             <button id="cancel-button" v-on:click.prevent="showCollections = false">Cancel</button>
         </div>

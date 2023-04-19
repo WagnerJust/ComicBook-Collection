@@ -38,7 +38,6 @@ export default {
 
 .card {
     width: 18%;
-    height: 25%;
     margin-bottom: 1rem;
     display: flex;
     flex-direction: column;
