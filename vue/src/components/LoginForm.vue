@@ -2,7 +2,7 @@
   <div class="loginFormContainer">
     <div class="welcome">Welcome Back!</div>
     <div>
-      <form @submit.prevent="login">
+      <form @submit.prevent="login" autocomplete="off">
         <h1 class="login-text">LOGIN</h1>
         <div role="alert" v-if="invalidCredentials">
           Invalid username and password!

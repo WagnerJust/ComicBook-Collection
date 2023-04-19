@@ -82,7 +82,7 @@ public class JdbcStatsDao implements StatsDao{
     @Override
     public Statistics siteStatistics() {
         Statistics statistics = null;
-        String sql = "select count(DISTINCT comic_data.comic_data_id) as num_comics_siteWide, count(DISTINCT collection.collection_id) as num_collections_siteWide\n" +
+        String sql = "select count(comic_data.comic_data_id) as num_comics_siteWide, count(DISTINCT collection.collection_id) as num_collections_siteWide\n" +
                 "from comic_data\n" +
                 "join comic_collection ON comic_collection.comic_data_id = comic_data.comic_data_id\n" +
                 "join collection ON collection.collection_id = comic_collection.collection_id";
