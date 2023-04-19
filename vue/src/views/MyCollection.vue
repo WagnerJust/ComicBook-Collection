@@ -8,7 +8,7 @@
                 <comic-card v-for="comic in this.comics" :key="comic.comicId" :comic="comic" />
             </div>
             <h2>Statistics</h2>
-            <stats-collection-table/>
+            <stats-collection-table id="stats" />
             <delete-collection v-if="this.$route.name === 'collection'" />
         </div>
     </section>
@@ -85,6 +85,10 @@ h2 {
     margin: 1.5rem;
     font-size: 2.5rem;
     font-family: 'Montserrat', Helvetica, sans-serif;
+}
+
+#stats {
+    margin-top: 0px;
 }
 
 </style>

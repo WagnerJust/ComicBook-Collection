@@ -62,7 +62,6 @@
                 </tbody>
             </table>
         </div>
-
   </div>
 
 </template>
@@ -120,6 +119,12 @@ export default {
 </script>
 
 <style scoped>
+.stats-tables {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
 table.stats {
   font-family: "Comic Sans MS", cursive, sans-serif;
   border: 1px solid#ed1d24;
