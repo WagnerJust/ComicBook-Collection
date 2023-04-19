@@ -100,6 +100,9 @@ public class RestMarvelService {
             }
         }
         comic.setUpc(comicNode.get("upc").textValue());
+        if (Objects.equals(comic.getUpc(), "")){
+            return null;
+        }
         comic.setIssueNumber(comicNode.get("issueNumber").intValue());
         try {
             comic.setImageURL(comicNode.get("images").get(0).get("path").textValue().substring(39));
