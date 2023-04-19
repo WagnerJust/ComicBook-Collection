@@ -54,12 +54,12 @@ public class RestMarvelService {
 
     public List<Comic> getLatestReleases() throws JsonProcessingException {
         ArrayList<Comic> comics = new ArrayList<>();
-        String url = apiUrl+"comics?"+endUrl+"&dateDescriptor=lastWeek&orderBy=-onsaleDate&limit=20";
+        String url = apiUrl+"comics?"+endUrl+"&dateDescriptor=lastWeek&orderBy=-onsaleDate&limit=40";
         String resp = restTemplate.getForObject(url, String.class);
         JsonNode comicsNode = new ObjectMapper().readTree(resp).get("data").get("results");
         for (JsonNode comicNode : comicsNode){
             Comic comicAdd = jsonComicMapper(comicNode);
-            if (comicAdd != null) {
+            if (comicAdd != null && comics.size() < 20) {
                 comics.add(comicAdd);
             }
         }
