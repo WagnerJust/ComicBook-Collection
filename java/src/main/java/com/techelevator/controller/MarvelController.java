@@ -20,13 +20,13 @@ public class MarvelController {
     }
 
 
-    @PreAuthorize("hasAnyRole('USER','PREMIUM')")
+    @PreAuthorize("permitAll")
     @GetMapping("/marvel/{series}/{issueNo}")
     public List<Comic> searchMarvelBySeriesAndIssueNo(@PathVariable String series, @PathVariable String issueNo) throws JsonProcessingException {
         return restMarvelService.searchComicsBySeriesAndIssueNo(series, issueNo);
     }
 
-    @PreAuthorize("hasAnyRole('USER','PREMIUM')")
+    @PreAuthorize("permitAll")
     @GetMapping("/marvel/upc/{upc}")
     public List<Comic> getMarvelComicByUpc(@PathVariable String upc) throws JsonProcessingException {
         return restMarvelService.getComicByUpc(upc);
