@@ -32,7 +32,7 @@ public class MarvelController {
         return restMarvelService.getComicByUpc(upc);
     }
 
-    @PreAuthorize("hasAnyRole('USER','PREMIUM')")
+    @PreAuthorize("permitAll")
     @GetMapping("/marvel/latest")
     public List<Comic> getLatestReleases() throws JsonProcessingException {
         return restMarvelService.getLatestReleases();
