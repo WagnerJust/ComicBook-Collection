@@ -17,12 +17,14 @@ export default {
             let longCollectionId = this.$route.path;
             console.log("Long Collection ID");
             console.log(longCollectionId);
-            let collectionId = (longCollectionId.lastIndexOf('/')) - 1;
+            let collectionId = longCollectionId.substring(longCollectionId.lastIndexOf('/') + 1)
             console.log("Collection ID");
             console.log(collectionId);
             let comicId = this.comic.comicId;
-            comicService.removeComicFromCollection(parseInt(collectionId), comicId).then(response => {
+            comicService.removeComicFromCollection(collectionId, comicId).then(response => {
                 if (response.status === 200) {
+                    console.log("Delete Status")
+                    console.log(response.status);
                     this.$router.go("/collection/" + collectionId);
                 }
             })
