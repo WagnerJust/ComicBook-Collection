@@ -2,7 +2,7 @@
   <div class="registrationFormContainer">
     <div class="welcome">Hello, Friend!</div>
     <div id="registrationForm" class="text-center">
-      <form @submit.prevent="register">
+      <form @submit.prevent="register" autocomplete="off">
         <h1>CREATE ACCOUNT</h1>
         <div role="alert" v-if="registrationErrors">
           {{ registrationErrorMsg }}
