@@ -1,6 +1,6 @@
 <template>
     <div class="container">
-        <button id="delete-button" v-on:click="deleteComic()">Delete from Collection</button>
+        <button id="delete-button" v-on:click="deleteComic()">Delete From Collection</button>
     </div>
 </template>
 

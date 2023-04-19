@@ -59,7 +59,7 @@ public class CollectionController {
     public ComicCollection updateCollectionName(@PathVariable int collectionId, @RequestBody ComicCollection comicCollectionToUpdate){
         return collectionDao.updateCollectionName(collectionId, comicCollectionToUpdate);
     }
-    @PreAuthorize("hasAnyRole('USER','PREMIUM')")
+    @PreAuthorize("permitAll")
     @ResponseStatus(value = HttpStatus.OK)
     @GetMapping("/collections/{collectionId}")
     public ComicCollection getCollectionByCollectionId(@PathVariable int collectionId) {

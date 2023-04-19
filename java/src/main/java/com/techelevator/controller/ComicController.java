@@ -34,7 +34,7 @@ public class ComicController {
 
 
 
-    @PreAuthorize("hasAnyRole('USER','PREMIUM')")
+    @PreAuthorize("permitAll")
     @GetMapping("/collections/{collectionId}/comics")
     public List<Comic> getComicsByCollectionId(@PathVariable int collectionId){
         List<Comic> comicsList = comicDao.listAllComicsOfCollection(collectionId);

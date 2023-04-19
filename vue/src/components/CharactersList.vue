@@ -27,7 +27,7 @@ export default {
 <style scoped>
 
 .characters-text {
-    margin-top: 4%;
+    margin-top: 2%;
     font-size: 2.5rem;
     font-family: 'Montserrat', Helvetica, sans-serif;
 }
