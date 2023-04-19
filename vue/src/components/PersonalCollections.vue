@@ -100,8 +100,8 @@ export default {
 }
 
 .collection-card {
-
     width: 240px;
+    height: 320px;
     box-shadow: 0 6px 10px 0 rgba(0, 0, 0, 0.2), 0 10px 30px 0 rgba(0, 0, 0, 0.19);
     display: grid;
     grid-template-areas:

@@ -90,6 +90,7 @@ export default {
         console.log("NEXT");
         console.log(this.comics)
 	},
+
     computed: {
         comics() {
             return this.searchResults
@@ -109,14 +110,6 @@ export default {
             return false;
         }
 
-        // filteredComics() {
-        //     const searchValue = this.searchValue.toLowerCase();
-        //     const selectedOptionFilter = this.selectedOption;
-        //     return this.comics.filter((comic) => {
-        //         const value = comic[selectedOptionFilter].toLowerCase();
-        //         return value.includes(searchValue);
-        //     });
-        // }
     },
     methods: {
 

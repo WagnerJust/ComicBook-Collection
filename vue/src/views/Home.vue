@@ -11,6 +11,7 @@
 			</div>
 
 		</div>
+		<the-footer />
 	</section>
 </template>
 
@@ -19,13 +20,15 @@
 import PublicCollections from '../components/PublicCollections.vue';
 import CharactersList from '../components/CharactersList.vue';
 import AggregateStatistics from '../components/AggregateStatistics.vue';
+import TheFooter from '../components/TheFooter.vue';
 
 export default {
 	name: "home",
 	components: { 
         PublicCollections,
 		CharactersList,
-		AggregateStatistics
+		AggregateStatistics,
+		TheFooter
 	},
 };
 </script>
