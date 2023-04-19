@@ -84,7 +84,16 @@ public class RestMarvelService {
     private Comic jsonComicMapper(JsonNode comicNode){
         DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd");
         Comic comic = new Comic();
-        comic.setSeriesName(comicNode.get("title").textValue());
+        comic.setUpc(comicNode.get("upc").textValue());
+        if (Objects.equals(comic.getUpc(), "")){
+            return null;
+        }
+        String seriesName = comicNode.get("title").textValue();
+        if(seriesName.contains("#")){
+            comic.setSeriesName(seriesName.substring(0, seriesName.indexOf("#")));
+        }else {
+            comic.setSeriesName(seriesName);
+        }
         JsonNode creators = (comicNode.get("creators").get("items"));
         for (JsonNode creator: creators){
             if (Objects.equals(creator.get("role").textValue(), "inker")){
@@ -98,10 +107,6 @@ public class RestMarvelService {
             if (Objects.equals(date.get("type").textValue(), "onsaleDate")){
                 comic.setPublish_date(LocalDate.parse(date.get("date").textValue().substring(0, 10), formatter));
             }
-        }
-        comic.setUpc(comicNode.get("upc").textValue());
-        if (Objects.equals(comic.getUpc(), "")){
-            return null;
         }
         comic.setIssueNumber(comicNode.get("issueNumber").intValue());
         try {
