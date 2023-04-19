@@ -1,13 +1,13 @@
 <template>
     <div class="card">
-        <add-comic class="add-button" :comic="comic" v-if="this.$route.name != 'collection'" />
+        <add-comic class="add-button" :comic="comic" v-if="this.$route.name != 'collection' && $store.state.token != '' " />
         <delete-comic :comic="comic" v-if="this.$route.name === 'collection'" />
         <div class="image-wrap">
             <router-link v-bind:to="{ name: 'comicdetails', params: { id: comic.upc } }"><img class="comic-image" v-bind:src="'http://i.annihil.us/u/prod/marvel/i/mg/' + comic.imageURL + '/detail.jpg'" /></router-link>
             <h3 class="comic-series">{{ comic.seriesName }} #{{comic.issueNumber}}</h3>
-            <p class="comic-creator">Writer: {{ comic.author }}</p>
-            <p class="comic-creator">Penciler: {{ comic.artist }}</p>
-            <p class="comic-publish-date">Published: {{ comic.publish_date }}</p>
+            <p class="comic-creator" v-if="comic.author != null" >Writer: {{ comic.author }}</p>
+            <p class="comic-creator" v-if="comic.artist != null" >Penciler: {{ comic.artist }}</p>
+            <p class="comic-publish-date" v-if="comic.publish_date != null" >Published: {{ comic.publish_date }}</p>
         </div>
         
     </div>
@@ -19,6 +19,11 @@ import DeleteComic from '../components/DeleteComic.vue'
 
 export default {
     name: 'comic-card',
+    data() {
+        return {
+            collectionIds: []
+        }
+    },
     components: {
         AddComic,
         DeleteComic
@@ -34,6 +39,7 @@ export default {
 .card {
     width: 18%;
     height: 25%;
+    margin-bottom: 1rem;
     display: flex;
     flex-direction: column;
     justify-content: flex-start;

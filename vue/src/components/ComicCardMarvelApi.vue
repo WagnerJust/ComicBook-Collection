@@ -1,11 +1,12 @@
 <template>
     <div class="card">
-        <add-comic-marvel-api class="add-button" :comic="comic" />
+        <add-comic-marvel-api class="add-button" :comic="comic"  v-if="$store.state.token != ''" />
         <div class="image-wrap">
             <router-link v-bind:to="{ name: 'comicdetails', params: { id: comic.upc } }"><img class="comic-image" v-bind:src="'http://i.annihil.us/u/prod/marvel/i/mg/' + comic.imageURL + '/detail.jpg'" /></router-link>
-            <div><h3 class="comic-series">{{ comic.seriesName }} #{{comic.issueNumber}}</h3>
-            <p class="comic-creator">{{ comic.author }}, {{ comic.artist }}</p>
-            <p class="comic-publish-date">{{ comic.publish_date }}</p></div>
+            <h3 class="comic-series">{{ comic.seriesName }}</h3>
+            <p class="comic-creator" v-if="comic.author != null" >Writer: {{ comic.author }}</p>
+            <p class="comic-creator" v-if="comic.artist != null" >Penciler: {{ comic.artist }}</p>
+            <p class="comic-publish-date" v-if="comic.publish_date != null" >Published: {{ comic.publish_date }}</p>
         </div>
         
     </div>
@@ -29,7 +30,7 @@ export default {
 
 .card {
     width: 18%;
-    height: 25%;
+    margin-bottom: 1rem;
     display: flex;
     flex-direction: column;
     justify-content: flex-start;

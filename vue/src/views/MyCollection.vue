@@ -34,13 +34,8 @@ export default {
     data() {
         return {
             comics: [],
-            collection: []
-
+            collection: [],
         }
-    },
-    methods:{
-    
-
     },
     created() {
 
