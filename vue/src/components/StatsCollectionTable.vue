@@ -55,9 +55,9 @@
                     </tr>
                 </thead>
                 <tbody>
-                    <tr v-for="character in collectionStats" v-bind:key="character.series">
-                        <td>{{character.series}}</td>
-                        <td>{{character.num_comics_series}}</td>
+                    <tr v-for="series in collectionStats" v-bind:key="series.series">
+                        <td>{{series.series}}</td>
+                        <td>{{series.num_comics_series}}</td>
                     </tr>
                 </tbody>
             </table>

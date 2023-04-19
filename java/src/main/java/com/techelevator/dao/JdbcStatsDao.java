@@ -64,9 +64,7 @@ public class JdbcStatsDao implements StatsDao{
     public List<Statistics> collectionSeriesStats(int collectionId) {
         List<Statistics> statisticsList = new ArrayList<>();
         String sql = "select count(comic_data.series) as num_comics_series, comic_data.series\n" +
-                "from character_table\n" +
-                "join character_comic ON character_comic.character_id = character_table.character_id\n" +
-                "join comic_data ON comic_data.comic_data_id = character_comic.comic_data_id\n" +
+                "from comic_data\n" +
                 "join comic_collection ON comic_collection.comic_data_id = comic_data.comic_data_id\n" +
                 "join collection ON collection.collection_id = comic_collection.collection_id\n" +
                 "where collection.collection_id = ?\n" +
@@ -111,9 +109,11 @@ public class JdbcStatsDao implements StatsDao{
             case "series":
                 statistics.setNum_comics_series(results.getInt(1));
                 statistics.setSeries(results.getString(2));
+                break;
             case "site":
                 statistics.setNum_comics_siteWide(results.getInt("num_comics_siteWide"));
                 statistics.setNum_collections_siteWide(results.getInt("num_collections_siteWide"));
+                break;
             default:
                 break;
         }

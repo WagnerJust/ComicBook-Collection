@@ -5,9 +5,10 @@
 				<!-- <img class="image-fit" src="https://w0.peakpx.com/wallpaper/691/675/HD-wallpaper-marvel-comics-marvel-logo.jpg" alt="Marvel iamge" /> -->
 			</div>
 			<div class="components">
+				<aggregate-statistics/>
 				<public-collections />
 				<characters-list />
-				<aggregate-statistics/>
+			
 			</div>
 
 		</div>
@@ -35,6 +36,13 @@ export default {
 
 
 <style scoped>
+
+aggregate-statistics{
+	display: block;
+	margin: 10,10,10,10;
+	padding: 10,10,10,10;
+
+}
 
 .image-container {
     background-image: url('/public/marvel-title-1.png');

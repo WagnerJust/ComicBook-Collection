@@ -1,20 +1,7 @@
 <template>
-     <div class='site-stats'>
-            <table class='stats'>
-                <thead>
-                    <tr>
-                        <th># Comics Collected</th>
-                        <th># Collections Made</th>
-                    </tr>
-                </thead>
-                <tbody>
-                    <tr>
-                        <td>{{comicsStat.num_comics_siteWide}}</td>
-                        <td>{{comicStat.num_collections_siteWide}}</td>
-                    </tr>
-                </tbody>
-            </table>
-        </div>
+    <div class='site-stats'>
+      <h2>{{comicStats.num_comics_siteWide}}  COMICS HAVE BEEN COLLECTED IN {{comicStats.num_collections_siteWide}} COLLECTIONS! </h2>
+    </div>
 </template>
 
 <script>
@@ -23,14 +10,17 @@ import StatsService from '../services/StatsService'
 export default {
     data(){
         return{
-            comicsStat: {}
+            comicStats: {
+              num_comics_siteWide: 0,
+              num_collections_siteWide: 0
+            }
         }
     },
     created(){
         StatsService.getSiteStats()
         .then(response => {
-            this.comicsStat = response.data;
-            console.log("stats", this.comicsStat);
+            this.comicStats = response.data;
+            console.log("stats", this.comicStats);
         })
     }
 
@@ -39,7 +29,10 @@ export default {
 </script>
 
 <style>
-table.stats {
+
+.site-stats{
+}
+/* table.stats {
   font-family: "Comic Sans MS", cursive, sans-serif;
   border: 1px solid#ed1d24;
   background-color: #EEEEEE;
@@ -73,7 +66,7 @@ table.stats thead th {
 }
 table.stats thead th:first-child {
   border-left: none;
-}
+} */
 
 
 </style>
