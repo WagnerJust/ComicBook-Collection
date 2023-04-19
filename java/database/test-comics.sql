@@ -63,7 +63,7 @@ INSERT INTO public.collection (public, user_id, collection_name) VALUES (true, 7
 INSERT INTO public.collection (public, user_id, collection_name) VALUES (true, 7, 'The Marvel Collection');
 INSERT INTO public.collection (public, user_id, collection_name) VALUES (false, 7, 'The Spider-Man Collection');
 INSERT INTO public.collection (public, user_id, collection_name) VALUES (true, 8, 'Robin''s Collection');
-INSERT INTO public.collection (public, user_id, collection_name) VALUES (true, 8, 'Iron Man''s GREATEST Moments');
+INSERT INTO public.collection (public, user_id, collection_name) VALUES (true, 8, 'Iron Man''s BEST Moments');
 INSERT INTO public.collection (public, user_id, collection_name) VALUES (false, 8, 'The Spider-Man Collection');
 
 INSERT INTO public.comic_collection (collection_id, comic_data_id) VALUES (1, 1);
