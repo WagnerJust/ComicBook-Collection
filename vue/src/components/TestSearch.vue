@@ -156,23 +156,20 @@ export default {
 
 <style scoped>
 
-/* .search-comics {
-    display: ;
-} */
 
 
 
 .search-comics {
     display: grid;
-    grid-template-rows: 410px 1fr 1.5fr auto;
+    grid-template-rows: 345px 1fr 1fr 2fr auto;
+    grid-template-columns: 1fr 268px 160px 376px 1fr;
     grid-template-areas:
-        "empty"
-        "search-box"
-        "search-boxTwo"
-        "options-bar"
-        "marvel-toggle"
-        "comics-list";
-    justify-items: center;
+        ". . . . ."
+        ". options-bar options-bar marvel-toggle ."
+        ". search-box search-box search-box ."
+        ". search-boxTwo search-boxTwo . ."
+        ". comics-list comics-list . .";
+
     font-family: 'Montserrat', Helvetica, sans-serif;
 }
 
@@ -183,6 +180,7 @@ export default {
 .search-container {
     grid-area: search-box;
     content: image-set("/public/search-icon.png" 2px);
+    justify-self: center;
 }
 
 .search-containerTwo {
@@ -192,16 +190,17 @@ export default {
 
 .options-bar {
     grid-area: options-bar;
-    align-self: center;
+    align-self: flex-start;
     display: flex;
     flex-wrap: wrap;
     border-radius: 0.5rem;
     background-color: #e1edff;
     box-shadow: 0 6px 10px 0 rgba(0, 0, 0, 0.2), 0 10px 30px 0 rgba(0, 0, 0, 0.19);
     padding: 0.25rem;
-    width: 600px;
+    width: 400px;
     font-size: 20px;
     margin-bottom: 20px;
+    justify-self: start;
 }
 
 .options-bar .radio-box {
@@ -235,8 +234,8 @@ export default {
 .search-box {
     grid-area: search-box;
     width: 50rem;
-    height: 5rem;
-    border-radius: 50px;
+    height: 4rem;
+    border-radius: 0.5rem;
     border: 1px solid #ccc;
     padding: 10px 20px 10px 60px;
     font-size: 20px;
@@ -250,8 +249,8 @@ export default {
 .search-boxTwo {
     grid-area: search-boxTwo;
     width: 50rem;
-    height: 5rem;
-    border-radius: 50px;
+    height: 4rem;
+    border-radius: 0.5rem;
     border: 1px solid #ccc;
     padding: 10px 20px 10px 60px;
     font-size: 20px;
@@ -260,6 +259,17 @@ export default {
     background-repeat: no-repeat;
     background-size: 1.1em 1.1em;
     background-position: 3% 48%;;
+}
+
+#marvel-toggle {
+    grid-area: marvel-toggle;
+    background-color: rgba(0, 0, 0, 0.7);
+    padding: 5px 5px 5px 5px;
+    border-radius: 0.5rem;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    box-shadow: 0 6px 10px 0 rgba(0, 0, 0, 0.2), 0 10px 30px 0 rgba(0, 0, 0, 0.19);
 }
 
 
@@ -283,7 +293,7 @@ export default {
     position: relative;
     display: inline-block;
     width: 60px;
-    height: 34px;
+    height: 30px;
 }
 
 #switch input {
@@ -299,7 +309,7 @@ export default {
     left: 0;
     right: 0;
     bottom: 0;
-    background-color: #ccc;
+    background-color: #232ece;
     -webkit-transition: .4s;
     transition: .4s;
 }
@@ -307,8 +317,8 @@ export default {
 #slider:before {
     position: absolute;
     content: "";
-    height: 26px;
-    width: 26px;
+    height: 22px;
+    width: 24px;
     left: 4px;
     bottom: 4px;
     background-color: white;
@@ -317,14 +327,21 @@ export default {
 }
 
 input:checked + #slider {
-    background-color: #23ce2b;
-    box-shadow: 0 0 1px #23ce2b;
+    background-color: #ED1D24;
+    box-shadow: 0 0 1px #ED1D24;
 }
 
 input:checked + #slider:before {
     -webkit-transform: translateX(26px);
     -ms-transform: translateX(26px);
     transform: translateX(26px);
+}
+
+#marvel-toggle #toggle-text {
+    color: white;
+    font-weight: 600;
+    text-transform: uppercase;
+    text-align: center;
 }
 
 </style>
