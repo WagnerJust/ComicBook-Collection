@@ -1,20 +1,21 @@
 <template>
   <div class="browse-main">
-      <section class="search-main">
-          <!-- <search-comics /> -->
-        <test-search />
+      <section class="page">
+          <div class="search-main">
+            <test-search />
+          </div>
+
       </section>
   </div>
 </template>
 
 <script>
-// import SearchComics from '../components/SearchComics.vue';
+
 import TestSearch from '../components/TestSearch.vue';
 
 export default {
     name: "browse",
     components: {
-        // SearchComics,
         TestSearch
     }
 }
@@ -23,6 +24,10 @@ export default {
 <style scoped>
 
 .browse-main {
+    min-height: 100vh;
+}
+
+.page {
     background-image: url('/public/star-wars.jpg');
 	background-repeat: no-repeat;
 	background-size: cover;

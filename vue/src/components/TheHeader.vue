@@ -40,7 +40,6 @@ div .header {
   margin: 0;
   padding: 0;
   box-sizing: border-box;
-  /* background-image: url("https://mightymega.com/wp-content/uploads/2013/05/marvel_panoramic_posters_2.jpg"); */
 }
 
 .logo {

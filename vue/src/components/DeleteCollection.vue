@@ -37,14 +37,19 @@ export default {
 
 #delete-button {
     cursor: pointer;
-    color: black;
+    color: white;
+    font-weight: 800;
     background-color: red;
     height: 2rem;
-    width: 10rem;
+    width: 11rem;
+    box-shadow: 0 6px 10px 0 rgba(0, 0, 0, 0.2), 0 10px 30px 0 rgba(0, 0, 0, 0.19);
+    transition: all .4s;
+    border: rgba(0, 0, 0, 0.19);
 }
 
 #delete-button:hover {
     color: white;
+    transform: scale(1.1);
 }
 
 </style>
