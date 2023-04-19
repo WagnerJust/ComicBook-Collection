@@ -44,7 +44,7 @@ aggregate-statistics{
 }
 
 .image-container {
-    background-image: url('/public/marvel-title-1.png');
+    background-image: url('/public/main-1.png');
 	background-repeat: no-repeat;
 	background-size: cover;
 	background-position: 0%;
