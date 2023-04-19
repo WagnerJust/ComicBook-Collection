@@ -1,7 +1,7 @@
 <template>
   <div class="header">
     <div>
-      <router-link v-bind:to="{ name: 'home' }"><img class="logo" src="..\public\Logo.png" alt="Manage My Comcis!" /></router-link>
+      <router-link v-bind:to="{ name: 'home' }"><img class="logo" src="..\public\MMC-logo.png" alt="Manage My Comcis!" /></router-link>
     </div>
     <nav>
       <ul class="nav-bar">
@@ -46,8 +46,8 @@ div .header {
   grid-area: logo;
   margin-left: 15%;
   width: 80%;
-  margin-top: 5%;
-  margin-bottom: 5%;
+  margin-top: 4%;
+  margin-bottom: 4%;
 }
 
 ul .login-register {
