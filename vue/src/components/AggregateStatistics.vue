@@ -30,7 +30,11 @@ export default {
 
 <style>
 
-.site-stats{
+.site-stats {
+  font-family: 'Montserrat', Helvetica, sans-serif;
+  background-color: #a4e9d5;
+  text-align: center;
+  padding-top: 1rem;
 }
 /* table.stats {
   font-family: "Comic Sans MS", cursive, sans-serif;

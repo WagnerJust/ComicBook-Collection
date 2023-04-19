@@ -1,11 +1,10 @@
 <template>
 	<section class="container">
 		<div class="home">
+			<aggregate-statistics/>
 			<div class="image-container">
-				<!-- <img class="image-fit" src="https://w0.peakpx.com/wallpaper/691/675/HD-wallpaper-marvel-comics-marvel-logo.jpg" alt="Marvel iamge" /> -->
 			</div>
 			<div class="components">
-				<aggregate-statistics/>
 				<public-collections />
 				<characters-list />
 			
