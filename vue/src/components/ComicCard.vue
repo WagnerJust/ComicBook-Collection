@@ -36,7 +36,7 @@ export default {
     height: 25%;
     display: flex;
     flex-direction: column;
-    justify-content: space-between;
+    justify-content: flex-start;
     text-align: center;
     font-family: 'Montserrat', Helvetica, sans-serif;
 }
