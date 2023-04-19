@@ -168,7 +168,7 @@ export default {
         ". options-bar options-bar marvel-toggle ."
         ". search-box search-box search-box ."
         ". search-boxTwo search-boxTwo . ."
-        ". comics-list comics-list . .";
+        "comics-list comics-list comics-list comics-list comics-list";
 
     font-family: 'Montserrat', Helvetica, sans-serif;
 }
