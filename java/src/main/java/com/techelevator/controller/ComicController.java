@@ -43,7 +43,7 @@ public class ComicController {
         } else return comicsList;
     }
 
-    @PreAuthorize("hasAnyRole('USER','PREMIUM')")
+    @PreAuthorize("permitAll")
     @GetMapping("/comics/upc/{upc}")
     public Comic getComicByUpc(@PathVariable String upc){
         Comic comic = comicDao.getComicByUpc(upc);
