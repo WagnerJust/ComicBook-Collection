@@ -1,5 +1,9 @@
 <template>
     <div class="container">
+        <div v-if="!$store.state.token">
+            <button class="not-logged-in" disabled="true">Please log in to add comics to your collection</button>
+        </div>
+        <div v-else>
         <div class="collection-box" v-if="showCollections === true">
             <h5>Which collection?</h5>
             <ul>
@@ -8,6 +12,7 @@
             <button id="cancel-button" v-on:click.prevent="showCollections = false">Cancel</button>
         </div>
         <button v-if="showCollections === false" v-on:click.prevent="showCollections = true">Add To Collection</button>
+        </div>
     </div>
 </template>
 
@@ -61,6 +66,10 @@ export default {
     justify-content: flex-end;
     margin-top: 1rem;
     margin-bottom: 1rem;
+}
+
+.not-logged-in {
+    width: 100%;
 }
 
 .collection-box {
