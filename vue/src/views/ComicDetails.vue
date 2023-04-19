@@ -5,13 +5,14 @@
                 <img class="comic-image" v-bind:src="'http://i.annihil.us/u/prod/marvel/i/mg/' + comic.imageURL + '/detail.jpg'" >
             </div>
             <div class="comic-details">
+                <div class="add-button">
+                    <add-comic v-bind:comic="comic"/>
+                </div>
                 <h3 class="series-name">{{ comic.seriesName }}</h3>
                 <p class="issue-number">Issue Number: {{ comic.issueNumber }}</p>
                 <p class="writer">Writer: {{ comic.author }}</p>
                 <p class="penciler">Penciler: {{ comic.artist }}</p>
-                <div class="add-button">
-                    <add-comic v-bind:comic="comic"/>
-                </div>
+                <p class="penciler">UPC: {{ comic.upc }}</p>
             </div>
         </div>
 
@@ -59,10 +60,11 @@ export default {
     display: flex;
     flex-direction: column;
     justify-content: flex-start;
-    align-items: center;
+    align-items: left;
     font-size: 3vh;
     padding: 3rem;
     font-family: 'Montserrat', Helvetica, sans-serif;
+    margin-left: 100px;
 }
 
 .comic-image-div {
@@ -76,8 +78,9 @@ export default {
 }
 
 .add-button {
-    display: inline;
-    margin-top: 5%;
+    display: flex;
+    margin-top: 1px;
+    margin-bottom: 5%;
     height: 5rem;
     width: 100%;
 }
