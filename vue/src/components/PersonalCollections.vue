@@ -36,8 +36,6 @@ export default {
     methods: {
 
         getRandomImages() {
-            console.log("IMAGES")
-            console.log(this.images.keys())
             const imgs = this.images.keys().map(key => this.images(key))
             const randomIndex = Math.floor(Math.random() * imgs.length)
             return imgs[randomIndex]
@@ -57,9 +55,7 @@ export default {
     created() {
 
         collectionService.listByUserId(this.$store.state.user.id).then(response => {
-            this.myCollections = response.data;
-            console.log("My Collections");
-            console.log(this.myCollections);         
+            this.myCollections = response.data;    
         })
 
     }

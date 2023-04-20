@@ -42,8 +42,6 @@ export default {
 
         collectionService.getCollectionByCollectionId(this.$route.params.id).then(response => {
             this.collection = response.data;
-            console.log("TEST");
-            console.log(this.collection)
         });
 
     },

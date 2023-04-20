@@ -38,8 +38,6 @@ export default {
                 publish_date: this.comic.publish_date,
                 imageURL: this.comic.imageURL,
             };
-            console.log("COLLECTION ID");
-            console.log(collectionId);
             comicService.addComicToCollection(collectionId, comic).then(response => {
                 if (response.status === 200) {
                     this.$router.push("/collection/" + collectionId);
@@ -49,8 +47,6 @@ export default {
     },
     created() {
         collectionService.getCollectionsByUserIdWithoutComicId(this.$store.state.user.id, this.comic.upc).then(response => {
-            console.log("TEST")
-            console.log(this.comic)
             this.myCollections = response.data;       
         });
     }

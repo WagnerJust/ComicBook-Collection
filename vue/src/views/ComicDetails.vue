@@ -13,16 +13,12 @@
                     <p class="penciler">UPC: {{ comic.upc }}</p>
                     
                 </div>
-                <div class="add-button">
-                    <add-comic :comic="comic"/>
-                </div>
             </div>
         </div>
 	</section>
 </template>
 
 <script>
-import AddComic from '../components/AddComic.vue';
 import comicService from '../services/ComicService.js';
 
 export default {
@@ -36,15 +32,9 @@ export default {
         
         comicService.getComicByUpc(this.$route.params.id).then(response => {
             this.comic = response.data;
-            console.log("DETAILS TEST");
-            console.log(this.test);
-            console.log(this.comic)
         });
         
-    },
-	components: {
-        AddComic
-	},
+    }
 }
 </script>
 
@@ -56,7 +46,7 @@ export default {
 }
 
 .card-container {
-    display: flex
+    display: flex;
 }
 
 .comic-details {

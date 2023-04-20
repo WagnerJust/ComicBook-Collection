@@ -23,8 +23,6 @@ export default {
             let comicId = this.comic.comicId;
             comicService.removeComicFromCollection(collectionId, comicId).then(response => {
                 if (response.status === 200) {
-                    console.log("Delete Status")
-                    console.log(response.status);
                     this.$router.go("/collection/" + collectionId);
                 }
             })

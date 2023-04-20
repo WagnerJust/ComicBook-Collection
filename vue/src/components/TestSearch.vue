@@ -84,13 +84,6 @@ export default {
             
         }
     },
-	created() {
-        console.log("TEST");
-		console.log(this.$store.state.comics);
-        console.log("NEXT");
-        console.log(this.comics)
-	},
-
     computed: {
         comics() {
             return this.searchResults
