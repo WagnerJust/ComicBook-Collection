@@ -10,6 +10,7 @@ public interface CollectionDao {
     ComicCollection getCollectionByCollectionId(int id);
     List<ComicCollection> listAllCollections();
     List<ComicCollection> listCollectionsByUser(int id);
+    List<ComicCollection> listCollectionsByUserWithoutSpecifiedComic(int userId, String comicId);
     ComicCollection updateCollectionName(int collectionId, ComicCollection comicCollectionName);
     void deleteCollection(int userId, int collectionId);
 
