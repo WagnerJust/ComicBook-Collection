@@ -21,7 +21,6 @@ export default {
         StatsService.getSiteStats()
         .then(response => {
             this.comicStats = response.data;
-            console.log("stats", this.comicStats);
         })
     }
 

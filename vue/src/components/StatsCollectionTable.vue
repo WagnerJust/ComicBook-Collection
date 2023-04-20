@@ -85,24 +85,18 @@ export default {
             statsService.getCharactersStats(this.$route.params.id)
         .then(response => {
             this.collectionStats = response.data;
-            console.log('character stats');
-            console.log(this.collectionStats);
         });},
 
         authorStats(){
             statsService.getAuthorStats(this.$route.params.id)
         .then(response => {
             this.collectionStats = response.data;
-            console.log('author stats');
-            console.log(this.collectionStats);
         });},
 
         seriesStats(){
             statsService.getSeriesStats(this.$route.params.id)
         .then(response => {
             this.collectionStats = response.data;
-            console.log('series stats');
-            console.log(this.collectionStats);
         });}
     },
 
@@ -111,8 +105,6 @@ export default {
         .then(response => {
             this.collectionStats = response.data;
         })
-        console.log('stats');
-        console.log(this.collectionStats);
     }
 
 }

@@ -14,7 +14,7 @@
                     
                 </div>
                 <div class="add-button">
-                    <add-comic v-bind:comic="comic"/>
+                    <add-comic :comic="comic"/>
                 </div>
             </div>
         </div>
@@ -23,7 +23,7 @@
 
 <script>
 import AddComic from '../components/AddComic.vue';
-import ComicService from '../services/ComicService.js';
+import comicService from '../services/ComicService.js';
 
 export default {
 	name: "comic-details",
@@ -32,14 +32,15 @@ export default {
             comic: [],
         }
     },
-
     created() {
         
-            ComicService.getComicByUpc(this.$route.params.id).then(response => {
+        comicService.getComicByUpc(this.$route.params.id).then(response => {
             this.comic = response.data;
-            console.log("ID")
-            console.log(this.$route.params.id)
+            console.log("DETAILS TEST");
+            console.log(this.test);
+            console.log(this.comic)
         });
+        
     },
 	components: {
         AddComic

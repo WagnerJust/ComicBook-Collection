@@ -24,7 +24,7 @@ export default {
         }
     },
     props: {
-        comic: Object,
+        comic: Object
     },
     methods: {
         addComic(collectionId) {
@@ -48,9 +48,10 @@ export default {
         }
     },
     created() {
-         collectionService.getCollectionsByUserIdWithoutComicId(this.$store.state.user.id, this.comic.upc).then(response => {
-            console.log(this.comic.upc)
-        this.myCollections = response.data;       
+        collectionService.getCollectionsByUserIdWithoutComicId(this.$store.state.user.id, this.comic.upc).then(response => {
+            console.log("TEST")
+            console.log(this.comic)
+            this.myCollections = response.data;       
         });
     }
 }

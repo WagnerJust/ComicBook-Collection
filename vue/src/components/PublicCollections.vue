@@ -53,8 +53,6 @@ export default {
 
         collectionService.listAllPublic().then(response => {
             this.publicCollections = response.data;
-            console.log("Public Collections");
-            console.log(this.publicCollections);
         })
 
     }
