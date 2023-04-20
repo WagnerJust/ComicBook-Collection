@@ -7,7 +7,7 @@
             <div>
                 <div class="comic-details">
                     <h3 class="series-name">{{ comic.seriesName }}</h3>
-                    <p class="issue-number">Issue Number: {{ comic.issueNumber }}</p>
+                    <p class="issue-number">#{{ comic.issueNumber }}</p>
                     <p class="writer">Writer: {{ comic.author }}</p>
                     <p class="penciler">Penciler: {{ comic.artist }}</p>
                     <p class="penciler">UPC: {{ comic.upc }}</p>
