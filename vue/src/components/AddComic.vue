@@ -40,7 +40,7 @@ export default {
             };
             comicService.addComicToCollection(collectionId, comic).then(response => {
                 if (response.status === 200) {
-                    this.$router.push("/collection/" + collectionId);
+                    this.showCollections = false;
                 }
             })
         }

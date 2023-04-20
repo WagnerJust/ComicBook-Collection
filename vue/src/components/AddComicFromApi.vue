@@ -37,10 +37,21 @@ export default {
             //this.comic.comicId = comicService.addComic(comic).comicId;
             comicService.addComicToCollection(collectionId, comic).then(response => {
                 if (response.status === 200) {
-                    this.$router.push("/collection/" + collectionId);
+                    this.$router.go(this.$route.path)
+                    // collectionService.getCollectionsByUserIdWithoutComicId(this.$store.state.user.id, this.comic.upc).then(response => {
+                    //     console.log(this.comic.upc)
+                    // this.myCollections = response.data;       
+                    // });
+                    // this.showCollections = false;
+                    // alert("works");
+                    // comicService.getComicByUpc(this.comic.upc).then(response => {
+                    // this.comicNew = response.data;
+                    // });
                 }
             })
         }
+
+        
     },
     created() {
         collectionService.getCollectionsByUserIdWithoutComicId(this.$store.state.user.id, this.comic.upc).then(response => {

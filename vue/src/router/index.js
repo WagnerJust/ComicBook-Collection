@@ -93,11 +93,6 @@ const router = new Router({
       }
     },
     {
-      path: "/:pathMatch(.*)*",
-      name: "NotFound",
-      component: NotFound
-    },
-    {
       path: "/newcomics",
       name: "newcomics",
       component: NewComics,
@@ -109,6 +104,14 @@ const router = new Router({
       path: "/comic/:id",
       name: "comicdetails",
       component: ComicDetails,
+      meta: {
+        requiresAuth: false
+      }
+    },
+    {
+      path: "/:pathMatch(.*)*",
+      name: "NotFound",
+      component: NotFound,
       meta: {
         requiresAuth: false
       }
