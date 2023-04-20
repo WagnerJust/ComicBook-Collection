@@ -86,22 +86,22 @@ button {
   width: 5rem;
   box-shadow: 0 0 10px rgba(0, 0, 0, 0.15);
   transition: 0.4s;
-  color: black;
-  background-color: white;
+  color: white;
+  background-color: rgba(255, 0, 0, 1);
   border: 1px solid black;
   font-family: 'Montserrat', Helvetica, sans-serif;
 }
 
 #delete-button {
-    width: 13rem;
-    height: 2.2rem;
-    font-size: 1rem;
+    width: 10.5rem;
+    height: 1.6rem;
+    font-size: .8rem;
 }
 
 button:hover {
-  color: white;
+  color: black;
   box-shadow: 0 0 20px rgba(0, 0, 0, 0.15);
-  background-color: black;
+  background-color: red;
 }
 
 h5 {
