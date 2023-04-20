@@ -82,6 +82,27 @@ public class JdbcCollectionDao implements CollectionDao {
     }
 
     @Override
+    public List<ComicCollection> listCollectionsByUserWithoutSpecifiedComic(int userId, String comicId) {
+        List<ComicCollection> collections = new ArrayList<>();
+        String sql = "SELECT * FROM collection\n" +
+                "WHERE user_id = ? AND collection_id NOT IN\n" +
+                "(SELECT collection.collection_id FROM collection\n" +
+                "JOIN comic_collection ON collection.collection_id = comic_collection.collection_id\n" +
+                "JOIN comic_data ON comic_data.comic_data_id = comic_collection.comic_data_id\n" +
+                "WHERE collection.user_id = ? AND comic_data.upc = ?)";
+        SqlRowSet results = jdbcTemplate.queryForRowSet(sql, userId, userId, comicId);
+        while (results.next()) {
+            collections.add(mapRowToCollection(results));
+        }
+        if (collections.size() == 0) {
+            return null;
+        }
+
+        return collections;
+
+    }
+
+    @Override
     public ComicCollection updateCollectionName(int collectionId, ComicCollection comicCollectionName) {
 
         String sql = "UPDATE collection SET collection_name = ?, public = ? WHERE collection_id = ?;";

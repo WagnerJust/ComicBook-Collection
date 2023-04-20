@@ -41,6 +41,10 @@ export default{
 
     deleteCollection(userId, collectionId) {
         return http.delete(`/user/${userId}/collections/${collectionId}`);
-    }
+    },
+
+    getCollectionsByUserIdWithoutComicId(userId, comicId){
+        return http.get(`user/${userId}/collections/${comicId}`);
+    },
     
 }

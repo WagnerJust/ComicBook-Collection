@@ -73,4 +73,13 @@ public class CollectionController {
         collectionDao.deleteCollection(userId, collectionId);
     }
 
+    @PreAuthorize("hasAnyRole('USER','PREMIUM')")
+    @GetMapping("/user/{userId}/collections/{comicId}")
+    public List<ComicCollection> getCollectionsByUserIdWithoutComicId(@PathVariable int userId, @PathVariable String comicId){
+        List<ComicCollection> collection = collectionDao.listCollectionsByUserWithoutSpecifiedComic(userId, comicId);
+        if(collection == null || collection.size() == 0){
+            throw new ResponseStatusException(HttpStatus.NOT_FOUND, "Collection not found");
+        } else return collection;
+    }
+
 }

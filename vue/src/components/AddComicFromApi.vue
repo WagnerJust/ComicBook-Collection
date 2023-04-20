@@ -43,7 +43,8 @@ export default {
         }
     },
     created() {
-        collectionService.listByUserId(this.$store.state.user.id).then(response => {
+        collectionService.getCollectionsByUserIdWithoutComicId(this.$store.state.user.id, this.comic.upc).then(response => {
+            console.log(this.comic.upc)
         this.myCollections = response.data;       
         });
         comicService.getComicByUpc(this.comic.upc).then(response => {
