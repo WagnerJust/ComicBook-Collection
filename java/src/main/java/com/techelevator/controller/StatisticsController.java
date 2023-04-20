@@ -22,7 +22,7 @@ public class StatisticsController {
         this.statsDao = statsDao;
     }
 
-    @PreAuthorize("hasAnyRole('USER','PREMIUM')")
+    @PreAuthorize("permitAll")
     @GetMapping("/{collectionId}/character")
     public List<Statistics> getCollectionCharacterStats(@PathVariable int collectionId) {
       List<Statistics> statisticsList = null;
@@ -34,7 +34,7 @@ public class StatisticsController {
         else return statisticsList;
     }
 
-    @PreAuthorize("hasAnyRole('USER','PREMIUM')")
+    @PreAuthorize("permitAll")
     @GetMapping("/{collectionId}/author")
     public List<Statistics> getCollectionAuthorStats(@PathVariable int collectionId) {
         List<Statistics> statisticsList = null;
@@ -46,7 +46,7 @@ public class StatisticsController {
         else return statisticsList;
     }
 
-    @PreAuthorize("hasAnyRole('USER','PREMIUM')")
+    @PreAuthorize("permitAll")
     @GetMapping("/{collectionId}/series")
     public List<Statistics> getCollectionSeriesStats(@PathVariable int collectionId) {
         List<Statistics> statisticsList = null;
