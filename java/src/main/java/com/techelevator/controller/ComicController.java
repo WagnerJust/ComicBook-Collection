@@ -76,7 +76,7 @@ public class ComicController {
         }
     }
 
-    @PreAuthorize("hasAnyRole('USER','PREMIUM')")
+    @PreAuthorize("permitAll")
     @PostMapping("/comics")
     public Comic addComic(@RequestBody Comic comic) throws JsonProcessingException {
         Comic newComic = null;
