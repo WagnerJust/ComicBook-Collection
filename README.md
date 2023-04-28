@@ -1,6 +1,6 @@
 # Sample Deployment
 
-https://adorable-bienenstitch-cc84e3.netlify.app/
+https://manage-my-comics-ogteam-capstone.netlify.app/
 
 # Final Capstone
 
